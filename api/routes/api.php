@@ -8,8 +8,17 @@ $routes = [
     Route::get('/status')->controller('IndexController')->action('status'),
 ];
 
+$privateRoutes = [
+    Route::crud('/posts'),
+];
+
 $routeGroup = RouteGroup::from($routes)
                 ->defaultNamespace('Gewaer\Api\Controllers')
                 ->defaultPrefix('/v1');
 
-return $routeGroup->toCollections();
+$privateRoutesGroup = RouteGroup::from($privateRoutes)
+                ->defaultNamespace('Gewaer\Api\Controllers')
+                ->addMiddlewares('auth.jwt@before', 'auth.acl@before')
+                ->defaultPrefix('/v1');
+
+return array_merge($publicRoutesGroup->toCollections(), $privateRoutesGroup->toCollections());
