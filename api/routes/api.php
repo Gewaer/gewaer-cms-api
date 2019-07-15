@@ -21,4 +21,4 @@ $privateRoutesGroup = RouteGroup::from($privateRoutes)
                 ->addMiddlewares('auth.jwt@before', 'auth.acl@before')
                 ->defaultPrefix('/v1');
 
-return array_merge($publicRoutesGroup->toCollections(), $privateRoutesGroup->toCollections());
+return array_merge($routeGroup->toCollections(), $privateRoutesGroup->toCollections());
