@@ -151,9 +151,9 @@ class Posts extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->addColumn('id', 'biginteger', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
-                'limit' => MysqlAdapter::INT_BIG,
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
             ->addColumn('users_id', 'integer', [
@@ -222,10 +222,10 @@ class Posts extends AbstractMigration
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'media_url',
             ])
-            ->addColumn('post_parent_id', 'biginteger', [
+            ->addColumn('post_parent_id', 'integer', [
                 'null' => false,
                 'default' => '0',
-                'limit' => MysqlAdapter::INT_BIG,
+                'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'likes_count',
             ])
             ->addColumn('shares_count', 'integer', [
