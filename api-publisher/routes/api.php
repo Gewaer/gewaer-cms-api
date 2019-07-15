@@ -16,9 +16,9 @@ $routeGroup = RouteGroup::from($routes)
                 ->defaultNamespace('Gewaer\Api\Publisher\Controllers')
                 ->defaultPrefix('/v1');
 
-$routeGroup = RouteGroup::from($routesSite)
+$privateRoutesGroup = RouteGroup::from($routesSite)
                 ->defaultNamespace('Gewaer\Api\Publisher\Controllers')
                 ->addMiddlewares('auth.site@before')
                 ->defaultPrefix('/v1');
 
-return $routeGroup->toCollections();
+return array_merge($routeGroup->toCollections(), $privateRoutesGroup->toCollections());
