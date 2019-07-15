@@ -61,6 +61,13 @@ class Teams extends BaseModel
     public function initialize()
     {
         $this->setSource('teams');
+
+        $this->belongsTo(
+            'games_id',
+            'Canvas\Models\Games',
+            'id',
+            ['alias' => 'games']
+        );
     }
     /**
      * Returns table name mapped in the model.

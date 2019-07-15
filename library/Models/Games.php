@@ -61,6 +61,13 @@ class Games extends BaseModel
     public function initialize()
     {
         $this->setSource('games');
+
+        $this->hasMany(
+            'id',
+            'Gewaer\Models\Teams',
+            'games_id',
+            ['alias' => 'teams']
+        );
     }
     /**
      * Returns table name mapped in the model.
