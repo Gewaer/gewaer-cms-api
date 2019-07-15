@@ -7,6 +7,7 @@
 use Canvas\Providers\CacheDataProvider;
 use Gewaer\Providers\ConfigProvider;
 use Gewaer\Providers\DatabaseProvider;
+use Gewaer\Providers\DatabaseLocalProvider;
 use Gewaer\Providers\ErrorHandlerProvider;
 use Canvas\Providers\LoggerProvider;
 use Gewaer\Providers\ModelsMetadataProvider;
@@ -32,6 +33,7 @@ return [
     LoggerProvider::class,
     ErrorHandlerProvider::class,
     DatabaseProvider::class,
+    DatabaseLocalProvider::class,
     ModelsMetadataProvider::class,
     RequestProvider::class,
     RouterPublisherProvider::class,

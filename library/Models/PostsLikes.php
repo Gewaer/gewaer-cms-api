@@ -40,6 +40,8 @@ class PostsLikes extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+
         $this->setSource('posts_likes');
 
         $this->belongsTo(
