@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Gewaer\Models;
 
-class Tags extends BaseModel
+class Sites extends BaseModel
 {
     /**
      * @var integer
@@ -13,7 +13,7 @@ class Tags extends BaseModel
     /**
      * @var integer
      */
-    public $sites_id;
+    public $users_id;
 
     /**
      * @var string
@@ -23,8 +23,23 @@ class Tags extends BaseModel
     /**
      * @var string
      */
-    public $slug;
+    public $key;
 
+    /**
+     * @var string
+     */
+    public $description;
+
+    /**
+     * @var string
+     */
+    public $domain;
+
+    /**
+     * @var integer
+     */
+    public $status;
+    
     /**
      * @var datetime
      */
@@ -47,7 +62,7 @@ class Tags extends BaseModel
     {
         parent::initialize();
 
-        $this->setSource('tags');
+        $this->setSource('sites');
     }
     /**
      * Returns table name mapped in the model.
@@ -56,7 +71,7 @@ class Tags extends BaseModel
      */
     public function getSource(): string
     {
-        return 'tags';
+        return 'sites';
     }
 
 }

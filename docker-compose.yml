@@ -11,12 +11,13 @@ services:
       - ../../baka:/baka
     depends_on:
       - 'redis'
-      - 'mysql'
+      - 'dblocal'
     tty: true
     ports:
       - "9000:9000"
     networks:
       - local-network
+      - my-proxy-net
 
   nginx:
     image: nginx:latest
@@ -47,22 +48,7 @@ services:
     networks:
       - local-network
 
-  elasticsearch: # Elasticsearch Instance
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.0
-    volumes: # Persist ES data in seperate "esdata" volume
-      - esdata:/usr/share/elasticsearch/data
-    environment:
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.type=single-node
-    #command: ./bin/elasticsearch-plugin install https://github.com/NLPchina/elasticsearch-sql/releases/download/6.7.0.0/elasticsearch-sql-6.7.0.0.zip #install sql plugin
-    ports: # Expose Elasticsearch ports
-      - "9300:9300"
-      - "9200:9200"
-    networks:
-      - local-network
-
-  mysql:
+  dblocal:
     image: mariadb:10.4
     restart: always
     ports:
@@ -73,22 +59,6 @@ services:
       - "db-data:/var/lib/mysql"
     networks:
         - local-network
-        - canvasproxynet
-  
-  rabbitmq:
-    image: rabbitmq:3.7
-    hostname: "rabbit"
-    env_file:
-      - '.env'
-    labels:
-      NAME: "rabbitmq1"
-    volumes:
-      - "rabbit:/var/lib/rabbitmq"
-    ports:
-      - "15672:15672"
-      - "5672:5672"
-    networks:
-      - local-network
 
   beanstalkd:
     image: schickling/beanstalkd:latest
@@ -107,5 +77,6 @@ volumes:
 networks:
   local-network:
   public-network:
-  canvasproxynet:
-    name: canvas_network
+  my-proxy-net:
+    external:
+      name: canvas_network

@@ -35,6 +35,8 @@ class PostsTypes extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+
         $this->setSource('posts_types');
     }
     /**

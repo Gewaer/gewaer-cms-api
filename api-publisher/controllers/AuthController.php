@@ -7,7 +7,7 @@ namespace Gewaer\Api\Publisher\Controllers;
 use Canvas\Api\Controllers\AuthController as CanvasAuthController;
 
 /**
- * Class AuthController
+ * Class AuthController.
  *
  * @package Gewaer\Api\Controllers
  *
@@ -19,5 +19,4 @@ use Canvas\Api\Controllers\AuthController as CanvasAuthController;
  */
 class AuthController extends CanvasAuthController
 {
-    
 }

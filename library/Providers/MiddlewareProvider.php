@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gewaer\Providers;
 
 use Canvas\Providers\MiddlewareProvider as CanvasMiddlewareProvider;
+use Gewaer\Middleware\SiteMiddleware;
 
 class MiddlewareProvider extends CanvasMiddlewareProvider
 {
@@ -21,5 +22,6 @@ class MiddlewareProvider extends CanvasMiddlewareProvider
      * @var array
      */
     protected $routeMiddlewares = [
+        'auth.site' => SiteMiddleware::class,
     ];
 }
