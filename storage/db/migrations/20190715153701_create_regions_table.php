@@ -2,7 +2,7 @@
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class Regions extends AbstractMigration
+class CreateRegionsTable extends AbstractMigration
 {
     public function change()
     {

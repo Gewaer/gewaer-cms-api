@@ -2,7 +2,7 @@
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class Organizations extends AbstractMigration
+class CreateOrganizationsTable extends AbstractMigration
 {
     public function change()
     {

@@ -2,7 +2,7 @@
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class Posts extends AbstractMigration
+class CreatePostsTables extends AbstractMigration
 {
     public function change()
     {

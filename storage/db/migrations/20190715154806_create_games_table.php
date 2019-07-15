@@ -2,7 +2,7 @@
 use Phinx\Migration\AbstractMigration;
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class Games extends AbstractMigration
+class CreateGamesTable extends AbstractMigration
 {
     public function change()
     {
