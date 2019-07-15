@@ -41,6 +41,13 @@ class PostsShares extends BaseModel
     public function initialize()
     {
         $this->setSource('posts_shares');
+
+        $this->belongsTo(
+            'posts_id',
+            'Canvas\Models\Posts',
+            'id',
+            ['alias' => 'posts']
+        );
     }
     /**
      * Returns table name mapped in the model.

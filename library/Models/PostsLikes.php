@@ -41,6 +41,13 @@ class PostsLikes extends BaseModel
     public function initialize()
     {
         $this->setSource('posts_likes');
+
+        $this->belongsTo(
+            'posts_id',
+            'Canvas\Models\Posts',
+            'id',
+            ['alias' => 'posts']
+        );
     }
     /**
      * Returns table name mapped in the model.

@@ -41,6 +41,13 @@ class Tags extends BaseModel
     public function initialize()
     {
         $this->setSource('tags');
+
+        $this->hasMany(
+            'id',
+            'Gewaer\Models\PostsTags',
+            'tags_id',
+            ['alias' => 'postsTags']
+        );
     }
     /**
      * Returns table name mapped in the model.
