@@ -40,6 +40,8 @@ class PostsTags extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+
         $this->setSource('posts_tags');
     }
     /**

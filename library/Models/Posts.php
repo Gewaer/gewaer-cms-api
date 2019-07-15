@@ -3,8 +3,13 @@ declare(strict_types=1);
 
 namespace Gewaer\Models;
 
+use Baka\Support\Arr;
+use Canvas\Traits\FileSystemModelTrait;
+
 class Posts extends BaseModel
 {
+    use FileSystemModelTrait;
+
     /**
      * @var integer
      */
@@ -13,7 +18,17 @@ class Posts extends BaseModel
     /**
      * @var integer
      */
-    public $author;
+    public $sites_id;
+
+    /**
+     * @var integer
+     */
+    public $companies_id;
+
+    /**
+     * @var integer
+     */
+    public $users_id;
 
     /**
      * @var integer
@@ -23,12 +38,17 @@ class Posts extends BaseModel
     /**
      * @var integer
      */
-    public $games_id;
+    public $category_id;
 
     /**
      * @var string
      */
     public $title;
+
+    /**
+     * @var string
+     */
+    public $slug;
 
     /**
      * @var string
@@ -58,7 +78,37 @@ class Posts extends BaseModel
     /**
      * @var integer
      */
+    public $post_parent_id;
+
+    /**
+     * @var integer
+     */
     public $views_count;
+
+    /**
+     * @var integer
+     */
+    public $comment_count;
+
+    /**
+     * @var integer
+     */
+    public $status;
+
+    /**
+     * @var integer
+     */
+    public $featured;
+
+    /**
+     * @var integer
+     */
+    public $weight;
+
+    /**
+     * @var integer
+     */
+    public $premium;
 
     /**
      * @var integer
@@ -90,6 +140,8 @@ class Posts extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('posts');
     }
     /**
@@ -100,6 +152,29 @@ class Posts extends BaseModel
     public function getSource(): string
     {
         return 'posts';
+    }
+    
+    /**
+     *
+     *
+     * @return bool
+     */
+    public function publish(): bool
+    {
+        $this->status = Status::PUBLISHED;
+        $this->published_at = date('Y-m-d H:i:s');
+
+        return $this->updateOrFail();
+    }
+
+    /**
+     * Events after save
+     * 
+     * @return void
+     */
+    public function afterSave()
+    {
+        $this->associateFileSystem();
     }
 
 }
