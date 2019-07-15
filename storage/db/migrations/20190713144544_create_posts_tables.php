@@ -133,14 +133,6 @@ class CreatePostsTables extends AbstractMigration
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-        ->addIndex(['slug'], [
-                'name' => 'slug',
-                'unique' => false,
-            ])
-        ->addIndex(['sites_id'], [
-                'name' => 'sites_id',
-                'unique' => false,
-            ])
             ->create();
         $this->table('posts', [
                 'id' => false,
@@ -301,66 +293,6 @@ class CreatePostsTables extends AbstractMigration
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-        ->addIndex(['slug'], [
-                'name' => 'slug',
-                'unique' => true,
-            ])
-        ->addIndex(['is_published'], [
-                'name' => 'is_published',
-                'unique' => false,
-            ])
-        ->addIndex(['featured'], [
-                'name' => 'featured',
-                'unique' => false,
-            ])
-        ->addIndex(['weight'], [
-                'name' => 'weight',
-                'unique' => false,
-            ])
-        ->addIndex(['premium'], [
-                'name' => 'premium',
-                'unique' => false,
-            ])
-        ->addIndex(['published_at'], [
-                'name' => 'published_at',
-                'unique' => false,
-            ])
-        ->addIndex(['is_deleted'], [
-                'name' => 'is_deleted',
-                'unique' => false,
-            ])
-        ->addIndex(['post_types_id'], [
-                'name' => 'post_types_id',
-                'unique' => false,
-            ])
-        ->addIndex(['category_id'], [
-                'name' => 'category_id',
-                'unique' => false,
-            ])
-        ->addIndex(['status'], [
-                'name' => 'status',
-                'unique' => false,
-            ])
-        ->addIndex(['comment_status'], [
-                'name' => 'comment_status',
-                'unique' => false,
-            ])
-        ->addIndex(['companies_id'], [
-                'name' => 'companies_id',
-                'unique' => false,
-            ])
-        ->addIndex(['companies_id', 'slug'], [
-                'name' => 'companies_id_slug',
-                'unique' => false,
-            ])
-        ->addIndex(['sites_id'], [
-                'name' => 'sites_id',
-                'unique' => false,
-            ])
-        ->addIndex(['sites_id', 'slug'], [
-                'name' => 'sites_id_slug',
-                'unique' => false,
-            ])
             ->create();
         $this->table('posts_likes', [
                 'id' => false,
@@ -510,26 +442,6 @@ class CreatePostsTables extends AbstractMigration
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_TINY,
                 'after' => 'updated_at',
-            ])
-        ->addIndex(['key'], [
-                'name' => 'siteuuid',
-                'unique' => true,
-            ])
-        ->addIndex(['companies_id'], [
-                'name' => 'companies_id',
-                'unique' => false,
-            ])
-        ->addIndex(['users_id'], [
-                'name' => 'users_id',
-                'unique' => false,
-            ])
-        ->addIndex(['status'], [
-                'name' => 'status',
-                'unique' => false,
-            ])
-        ->addIndex(['key'], [
-                'name' => 'key',
-                'unique' => false,
             ])
             ->create();
     }
