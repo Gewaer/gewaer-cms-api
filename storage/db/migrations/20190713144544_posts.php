@@ -190,7 +190,6 @@ class Posts extends AbstractMigration
             ])
             ->addColumn('slug', 'string', [
                 'null' => false,
-                'default' => '\'\'\'0\'\'\'',
                 'limit' => 255,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
@@ -466,7 +465,6 @@ class Posts extends AbstractMigration
             ])
             ->addColumn('title', 'string', [
                 'null' => false,
-                'default' => '\'0\'',
                 'limit' => 200,
                 'collation' => 'utf8mb4_unicode_520_ci',
                 'encoding' => 'utf8mb4',
@@ -481,7 +479,6 @@ class Posts extends AbstractMigration
             ])
             ->addColumn('description', 'text', [
                 'null' => false,
-                'default' => '\'0\'',
                 'limit' => 65535,
                 'collation' => 'utf8mb4_unicode_520_ci',
                 'encoding' => 'utf8mb4',
@@ -489,7 +486,6 @@ class Posts extends AbstractMigration
             ])
             ->addColumn('domain', 'string', [
                 'null' => false,
-                'default' => '\'0\'',
                 'limit' => 200,
                 'collation' => 'utf8mb4_unicode_520_ci',
                 'encoding' => 'utf8mb4',

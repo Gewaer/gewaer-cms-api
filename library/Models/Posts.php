@@ -3,8 +3,13 @@ declare(strict_types=1);
 
 namespace Gewaer\Models;
 
+use Baka\Support\Arr;
+use Canvas\Traits\FileSystemModelTrait;
+
 class Posts extends BaseModel
 {
+    use FileSystemModelTrait;
+
     /**
      * @var integer
      */
@@ -147,6 +152,29 @@ class Posts extends BaseModel
     public function getSource(): string
     {
         return 'posts';
+    }
+    
+    /**
+     *
+     *
+     * @return bool
+     */
+    public function publish(): bool
+    {
+        $this->status = Status::PUBLISHED;
+        $this->published_at = date('Y-m-d H:i:s');
+
+        return $this->updateOrFail();
+    }
+
+    /**
+     * Events after save
+     * 
+     * @return void
+     */
+    public function afterSave()
+    {
+        $this->associateFileSystem();
     }
 
 }
