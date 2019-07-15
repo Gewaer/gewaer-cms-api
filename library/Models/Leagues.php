@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Gewaer\Models;
 
-class Tags extends BaseModel
+class Leagues extends BaseModel
 {
     /**
      * @var integer
@@ -13,17 +13,27 @@ class Tags extends BaseModel
     /**
      * @var integer
      */
-    public $sites_id;
+    public $regions_id;
 
     /**
      * @var string
      */
-    public $title;
+    public $name;
 
     /**
      * @var string
      */
-    public $slug;
+    public $shortname;
+
+        /**
+     * @var datetime
+     */
+    public $founded_date;
+
+        /**
+     * @var integer
+     */
+    public $is_active;
 
     /**
      * @var datetime
@@ -45,15 +55,20 @@ class Tags extends BaseModel
      */
     public function initialize()
     {
-        parent::initialize();
-
-        $this->setSource('tags');
+        $this->setSource('leagues');
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\PostsTags',
-            'tags_id',
-            ['alias' => 'postsTags']
+            'Gewaer\Models\Teams',
+            'leagues_id',
+            ['alias' => 'leagues']
+        );
+
+        $this->belongsTo(
+            'regions_id',
+            'Canvas\Models\Regions',
+            'id',
+            ['alias' => 'regions']
         );
     }
     /**
@@ -63,7 +78,7 @@ class Tags extends BaseModel
      */
     public function getSource(): string
     {
-        return 'tags';
+        return 'leagues';
     }
 
 }

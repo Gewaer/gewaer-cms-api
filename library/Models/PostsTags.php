@@ -43,6 +43,20 @@ class PostsTags extends BaseModel
         parent::initialize();
 
         $this->setSource('posts_tags');
+
+        $this->belongsTo(
+            'posts_id',
+            'Canvas\Models\Posts',
+            'id',
+            ['alias' => 'posts']
+        );
+
+        $this->belongsTo(
+            'tags_id',
+            'Canvas\Models\Tags',
+            'id',
+            ['alias' => 'tags']
+        );
     }
     /**
      * Returns table name mapped in the model.

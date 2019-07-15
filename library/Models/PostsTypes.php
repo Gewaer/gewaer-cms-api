@@ -38,6 +38,13 @@ class PostsTypes extends BaseModel
         parent::initialize();
 
         $this->setSource('posts_types');
+
+        $this->hasMany(
+            'id',
+            'Gewaer\Models\Posts',
+            'post_types_id',
+            ['alias' => 'posts']
+        );
     }
     /**
      * Returns table name mapped in the model.

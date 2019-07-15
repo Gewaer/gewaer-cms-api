@@ -143,6 +143,34 @@ class Posts extends BaseModel
         parent::initialize();
         
         $this->setSource('posts');
+
+        $this->hasMany(
+            'id',
+            'Gewaer\Models\PostsTags',
+            'posts_id',
+            ['alias' => 'postsTags']
+        );
+
+        $this->hasMany(
+            'id',
+            'Gewaer\Models\PostsShares',
+            'posts_id',
+            ['alias' => 'postsShares']
+        );
+
+        $this->hasMany(
+            'id',
+            'Gewaer\Models\PostsLikes',
+            'posts_id',
+            ['alias' => 'postsLikes']
+        );
+
+        $this->belongsTo(
+            'post_types_id',
+            'Canvas\Models\PostsTypes',
+            'id',
+            ['alias' => 'postsTypes']
+        );
     }
     /**
      * Returns table name mapped in the model.

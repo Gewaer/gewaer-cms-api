@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Gewaer\Models;
 
-class Tags extends BaseModel
+class Countries extends BaseModel
 {
     /**
      * @var integer
@@ -13,17 +13,17 @@ class Tags extends BaseModel
     /**
      * @var integer
      */
-    public $sites_id;
+    public $regions_id;
 
     /**
      * @var string
      */
-    public $title;
+    public $name;
 
     /**
      * @var string
      */
-    public $slug;
+    public $flag;
 
     /**
      * @var datetime
@@ -45,15 +45,20 @@ class Tags extends BaseModel
      */
     public function initialize()
     {
-        parent::initialize();
-
-        $this->setSource('tags');
+        $this->setSource('countries');
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\PostsTags',
-            'tags_id',
-            ['alias' => 'postsTags']
+            'Gewaer\Models\Organizations',
+            'countries_id',
+            ['alias' => 'organizations']
+        );
+
+        $this->belongsTo(
+            'regions_id',
+            'Canvas\Models\Regions',
+            'id',
+            ['alias' => 'regions']
         );
     }
     /**
@@ -63,7 +68,7 @@ class Tags extends BaseModel
      */
     public function getSource(): string
     {
-        return 'tags';
+        return 'countries';
     }
 
 }

@@ -43,6 +43,13 @@ class PostsShares extends BaseModel
         parent::initialize();
 
         $this->setSource('posts_shares');
+
+        $this->belongsTo(
+            'posts_id',
+            'Canvas\Models\Posts',
+            'id',
+            ['alias' => 'posts']
+        );
     }
     /**
      * Returns table name mapped in the model.
