@@ -26,6 +26,11 @@ class Tags extends BaseModel
     public $slug;
 
     /**
+     * @var json
+     */
+    public $metadata;
+
+    /**
      * @var datetime
      */
     public $created_at;
@@ -51,7 +56,7 @@ class Tags extends BaseModel
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\PostsTags',
+            PostsTags::class,
             'tags_id',
             ['alias' => 'postsTags']
         );

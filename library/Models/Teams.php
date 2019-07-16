@@ -64,7 +64,7 @@ class Teams extends BaseModel
 
         $this->belongsTo(
             'games_id',
-            'Canvas\Models\Games',
+            Games::class,
             'id',
             ['alias' => 'games']
         );

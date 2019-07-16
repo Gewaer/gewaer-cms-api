@@ -111,6 +111,11 @@ class Posts extends BaseModel
     public $premium;
 
     /**
+     * @var json
+     */
+    public $metadata;
+
+    /**
      * @var integer
      */
     public $is_published;
@@ -146,28 +151,28 @@ class Posts extends BaseModel
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\PostsTags',
+            PostsTags::class,
             'posts_id',
             ['alias' => 'postsTags']
         );
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\PostsShares',
+            PostsShares::class,
             'posts_id',
             ['alias' => 'postsShares']
         );
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\PostsLikes',
+            PostsLikes::class,
             'posts_id',
             ['alias' => 'postsLikes']
         );
 
         $this->belongsTo(
             'post_types_id',
-            'Canvas\Models\PostsTypes',
+            PostsTypes::class,
             'id',
             ['alias' => 'postsTypes']
         );

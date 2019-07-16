@@ -46,7 +46,7 @@ class PostsLikes extends BaseModel
 
         $this->belongsTo(
             'posts_id',
-            'Canvas\Models\Posts',
+            Posts::class,
             'id',
             ['alias' => 'posts']
         );

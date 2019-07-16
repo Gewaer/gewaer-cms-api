@@ -59,14 +59,14 @@ class Leagues extends BaseModel
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\Teams',
+            Teams::class,
             'leagues_id',
             ['alias' => 'leagues']
         );
 
         $this->belongsTo(
             'regions_id',
-            'Canvas\Models\Regions',
+            Regions::class,
             'id',
             ['alias' => 'regions']
         );

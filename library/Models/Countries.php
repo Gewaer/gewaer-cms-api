@@ -49,16 +49,23 @@ class Countries extends BaseModel
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\Organizations',
+            Organizations::class,
             'countries_id',
             ['alias' => 'organizations']
         );
 
         $this->belongsTo(
             'regions_id',
-            'Canvas\Models\Regions',
+            Regions::class,
             'id',
             ['alias' => 'regions']
+        );
+
+        $this->hasMany(
+            'id',
+            RegionsCountries::class,
+            'countries_id',
+            ['alias' => 'regionsCountries']
         );
     }
     /**

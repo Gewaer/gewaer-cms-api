@@ -11,24 +11,14 @@ class Regions extends BaseModel
     public $id;
 
     /**
-     * @var string
+     * @var integer
      */
-    public $name;
+    public $regions_id;
 
     /**
-     * @var string
+     * @var integer
      */
-    public $shortname;
-
-    /**
-     * @var string
-     */
-    public $slug;
-
-    /**
-     * @var string
-     */
-    public $icon;
+    public $countries_id;
 
     /**
      * @var datetime
@@ -50,27 +40,20 @@ class Regions extends BaseModel
      */
     public function initialize()
     {
-        $this->setSource('regions');
+        $this->setSource('regions_countries');
 
-        $this->hasMany(
-            'id',
-            RegionsCountries::class,
+        $this->belongsTo(
             'regions_id',
-            ['alias' => 'regionCountries']
+            Regions::class,
+            'id',
+            ['alias' => 'posts']
         );
 
-        $this->hasMany(
+        $this->belongsTo(
+            'countries_id',
+            Countries::class,
             'id',
-            Leagues::class,
-            'regions_id',
-            ['alias' => 'leagues']
-        );
-
-        $this->hasOne(
-            'id',
-            Organizations::class,
-            'regions_id',
-            ['alias' => 'organizations']
+            ['alias' => 'posts']
         );
     }
     /**
@@ -80,7 +63,7 @@ class Regions extends BaseModel
      */
     public function getSource(): string
     {
-        return 'regions';
+        return 'regions_countries';
     }
 
 }
