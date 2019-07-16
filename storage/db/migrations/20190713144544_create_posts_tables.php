@@ -276,7 +276,7 @@ class CreatePostsTables extends AbstractMigration
                 'after' => 'weight',
             ])
             ->addColumn('published_at', 'datetime', [
-                'null' => false,
+                'null' => true,
                 'after' => 'premium',
             ])
             ->addColumn('created_at', 'datetime', [
