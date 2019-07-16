@@ -55,6 +55,8 @@
     "optimize-autoloader": true
   },
   "scripts": {
-    "phpcs": "phpcs --standard=PSR2"
+    "phpcs": "phpcs --standard=PSR2",
+    "migrate": "./vendor/bin/phinx migrate",
+    "seed": "./vendor/bin/phinx seed:run"
   }
 }
