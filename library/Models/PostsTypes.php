@@ -41,7 +41,7 @@ class PostsTypes extends BaseModel
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\Posts',
+            Posts::class,
             'post_types_id',
             ['alias' => 'posts']
         );

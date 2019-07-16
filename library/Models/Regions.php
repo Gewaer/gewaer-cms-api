@@ -54,21 +54,21 @@ class Regions extends BaseModel
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\Countries',
+            Countries::class,
             'regions_id',
             ['alias' => 'countries']
         );
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\Leagues',
+            Leagues::class,
             'regions_id',
             ['alias' => 'leagues']
         );
 
         $this->hasOne(
             'id',
-            'Canvas\Models\Organizations',
+            Organizations::class,
             'regions_id',
             ['alias' => 'organizations']
         );

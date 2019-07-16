@@ -79,21 +79,21 @@ class Organizations extends BaseModel
 
         $this->hasOne(
             'id',
-            'Canvas\Models\Teams',
+            Teams::class,
             'organizations_id',
             ['alias' => 'teams']
         );
 
         $this->belongsTo(
             'countries_id',
-            'Canvas\Models\Countries',
+            Countries::class,
             'id',
             ['alias' => 'countries']
         );
 
         $this->belongsTo(
             'regions_id',
-            'Canvas\Models\Regions',
+            Regions::class,
             'id',
             ['alias' => 'regions']
         );

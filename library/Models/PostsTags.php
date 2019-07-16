@@ -46,14 +46,14 @@ class PostsTags extends BaseModel
 
         $this->belongsTo(
             'posts_id',
-            'Canvas\Models\Posts',
+            Posts::class,
             'id',
             ['alias' => 'posts']
         );
 
         $this->belongsTo(
             'tags_id',
-            'Canvas\Models\Tags',
+            Tags::class,
             'id',
             ['alias' => 'tags']
         );

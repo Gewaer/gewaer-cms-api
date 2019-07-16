@@ -64,7 +64,7 @@ class Games extends BaseModel
 
         $this->hasMany(
             'id',
-            'Gewaer\Models\Teams',
+            Teams::class,
             'games_id',
             ['alias' => 'teams']
         );

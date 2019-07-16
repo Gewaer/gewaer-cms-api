@@ -119,9 +119,14 @@ class CreatePostsTables extends AbstractMigration
                 'encoding' => 'utf8mb4',
                 'after' => 'sites_id',
             ])
+            ->addColumn('metadata', 'text', [
+                'null' => true,
+                'limit' => MysqlAdapter::TEXT_REGULAR,
+                'after' => 'slug',
+            ])
             ->addColumn('created_at', 'datetime', [
                 'null' => false,
-                'after' => 'slug',
+                'after' => 'metadata',
             ])
             ->addColumn('updated_at', 'datetime', [
                 'null' => true,
@@ -275,9 +280,14 @@ class CreatePostsTables extends AbstractMigration
                 'limit' => MysqlAdapter::INT_TINY,
                 'after' => 'weight',
             ])
+            ->addColumn('metadata', 'text', [
+                'null' => true,
+                'limit' => MysqlAdapter::TEXT_REGULAR,
+                'after' => 'premium',
+            ])
             ->addColumn('published_at', 'datetime', [
                 'null' => true,
-                'after' => 'premium',
+                'after' => 'metadata',
             ])
             ->addColumn('created_at', 'datetime', [
                 'null' => false,
