@@ -60,6 +60,13 @@ class Countries extends BaseModel
             'id',
             ['alias' => 'regions']
         );
+
+        $this->hasMany(
+            'id',
+            RegionsCountries::class,
+            'countries_id',
+            ['alias' => 'regionsCountries']
+        );
     }
     /**
      * Returns table name mapped in the model.
