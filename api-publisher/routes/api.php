@@ -18,6 +18,7 @@ $routeGroup = RouteGroup::from($routes)
 
 $privateRoutesGroup = RouteGroup::from($routesSite)
                 ->defaultNamespace('Gewaer\Api\Publisher\Controllers')
+                ->addMiddlewares('auth.jwt@before', 'auth.acl@before')
                 ->addMiddlewares('auth.site@before')
                 ->defaultPrefix('/v1');
 
