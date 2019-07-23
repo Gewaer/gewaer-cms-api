@@ -10,6 +10,8 @@ $routes = [
 
 $privateRoutes = [
     Route::crud('/posts'),
+    Route::crud('/tags'),
+    Route::crud('/status'),
 ];
 
 $routeGroup = RouteGroup::from($routes)

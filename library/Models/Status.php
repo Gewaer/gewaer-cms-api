@@ -19,7 +19,25 @@ class Status extends BaseModel
      *
      * @var string
      */
-    public $name;
+    public $title;
+
+    /**
+     *
+     * @var datetime
+     */
+    public $created_at;
+
+    /**
+     *
+     * @var datetime
+     */
+    public $updated_at;
+
+    /**
+     *
+     * @var integer
+     */
+    public $is_deleted;
 
     /**
      * Returns table name mapped in the model.
