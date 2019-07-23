@@ -444,7 +444,7 @@ class CreatePostsTables extends AbstractMigration
                 'after' => 'status',
             ])
             ->addColumn('updated_at', 'datetime', [
-                'null' => false,
+                'null' => true,
                 'after' => 'created_at',
             ])
             ->addColumn('is_deleted', 'boolean', [
