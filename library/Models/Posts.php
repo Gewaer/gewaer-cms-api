@@ -187,6 +187,13 @@ class Posts extends BaseModel
             ['alias' => 'tags']
         );
 
+        $this->hasMany(
+            'id',
+            PostsTags::class,
+            'posts_id',
+            ['alias' => 'postTags']
+        );
+
         $this->belongsTo(
             'users_id',
             Users::class,
@@ -243,17 +250,18 @@ class Posts extends BaseModel
      */
     public function addTags(array $tags): bool
     {
-        if ($this->tags) {
-            $this->tags->delete();
+        if ($this->postTags) {
+            $this->postTags->delete();
         }
 
         foreach ($tags as $tag) {
-            if (PostsTags::findFirst($tag)) {
-                $postTag = new PostsTags();
-                $postTag->posts_id = $this->getId();
-                $postTag->tags_id = $tag;
-                $postTag->saveOrFail();
-            }
+            /**
+             * @todo check they exist
+             */
+            $postTag = new PostsTags();
+            $postTag->posts_id = $this->getId();
+            $postTag->tags_id = $tag;
+            $postTag->saveOrFail();
         }
 
         return true;
