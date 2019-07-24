@@ -75,7 +75,7 @@ class PostsController extends CanvasBaseController
      * @return Response
      * @throws Exception
      */
-    public function addOrRemoveLike(int $id): Response
+    public function like(int $id): Response
     {
         $post =  Posts::findFirstOrFail($id);
 

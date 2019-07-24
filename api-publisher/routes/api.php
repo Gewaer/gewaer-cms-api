@@ -12,7 +12,7 @@ $routes = [
 
 $routesSite = [
     Route::get('/posts')->action('index'),
-    Route::post('/posts/{id}/like')->controller('PostsController')->action('addOrRemoveLike')
+    Route::post('/posts/{id}/like')->controller('PostsController')->action('like')
 ];
 
 $routeGroup = RouteGroup::from($routes)
