@@ -37,6 +37,7 @@ class CategoriesController extends CanvasBaseController
     public function onConstruct()
     {
         $this->model = new Categories();
+        $this->model->sites_id = $this->site->getId();
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0']

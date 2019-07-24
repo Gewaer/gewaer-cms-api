@@ -23,7 +23,7 @@ $routeGroup = RouteGroup::from($routes)
 
 $privateRoutesGroup = RouteGroup::from($privateRoutes)
                 ->defaultNamespace('Gewaer\Api\Controllers')
-                ->addMiddlewares('auth.jwt@before', 'auth.acl@before')
+                ->addMiddlewares('auth.jwt@before', 'auth.acl@before', 'cms.site@before')
                 ->defaultPrefix('/v1');
 
 return array_merge($routeGroup->toCollections(), $privateRoutesGroup->toCollections());

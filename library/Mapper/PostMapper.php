@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gewaer\Mapper;
 
 use AutoMapperPlus\CustomMapper\CustomMapper;
+use Phalcon\Mvc\Model\Resultset;
 use Gewaer\Models\PostsLikes;
 
 class PostMapper extends CustomMapper
@@ -31,7 +32,8 @@ class PostMapper extends CustomMapper
         $postDto->slug = $post->slug;
         $postDto->summary = $post->summary;
         $postDto->content = $post->content;
-        $postDto->tags = $post->getTags(['columns' => 'id, title']);
+        
+        $postDto->tags = $this->getTags($post->getTags(['columns' => 'id']));
         $postDto->media_url = $post->media_url;
         $postDto->likes_count = $post->likes_count;
         $postDto->users_likes = PostsLikes::getAllByPostId($post->getId())->toArray();
@@ -52,5 +54,22 @@ class PostMapper extends CustomMapper
         $postDto->is_deleted = $post->is_deleted;
 
         return $postDto;
+    }
+
+    /**
+     * Get the new tag list only ids
+     *
+     * @param array $tags
+     * @return array
+     */
+    private function getTags($tags): array
+    {
+        $newTags = [];
+        foreach($tags as $tag)
+        {
+            $newTags[] = $tag->id;
+        }
+
+        return $newTags;
     }
 }

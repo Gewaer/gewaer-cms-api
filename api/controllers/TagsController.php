@@ -42,6 +42,7 @@ class TagsController extends CanvasBaseController
     public function onConstruct()
     {
         $this->model = new Tags();
+        $this->model->sites_id = $this->site->getId();
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0']
