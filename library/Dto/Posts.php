@@ -90,6 +90,12 @@ class Posts
 
     /**
      *
+     * @var array
+     */
+    public $users_likes;
+
+    /**
+     *
      * @var int
      */
     public $post_parent_id;

@@ -7,10 +7,12 @@ $routes = [
     Route::get('/')->controller('IndexController'),
     Route::get('/status')->controller('IndexController')->action('status'),
     Route::post('/auth')->controller('AuthController')->action('login')
+
 ];
 
 $routesSite = [
-    Route::get('/posts')->action('index')
+    Route::get('/posts')->action('index'),
+    Route::post('/posts/{id}/like')->controller('PostsController')->action('addOrRemoveLike')
 ];
 
 $routeGroup = RouteGroup::from($routes)

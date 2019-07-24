@@ -6,6 +6,7 @@ namespace Gewaer\Mapper;
 
 use AutoMapperPlus\CustomMapper\CustomMapper;
 use Phalcon\Mvc\Model\Resultset;
+use Gewaer\Models\PostsLikes;
 
 class PostMapper extends CustomMapper
 {
@@ -35,6 +36,7 @@ class PostMapper extends CustomMapper
         $postDto->tags = $this->getTags($post->getTags(['columns' => 'id']));
         $postDto->media_url = $post->media_url;
         $postDto->likes_count = $post->likes_count;
+        $postDto->users_likes = PostsLikes::getAllByPostId($post->getId())->toArray();
         $postDto->post_parent_id = $post->post_parent_id;
         $postDto->shares_count = $post->shares_count;
         $postDto->views_count = $post->views_count;

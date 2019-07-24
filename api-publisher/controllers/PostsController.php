@@ -8,6 +8,8 @@ use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Posts;
 use Gewaer\Dto\Posts as PostDto;
 use Gewaer\Mapper\PostMapper;
+use Gewaer\Models\PostsLikes;
+use Phalcon\Http\Response;
 
 /**
  * Class BaseController.
@@ -65,5 +67,37 @@ class PostsController extends CanvasBaseController
         return is_iterable($results) ?
             $this->mapper->mapMultiple($results, PostDto::class)
             : $this->mapper->map($results, PostDto::class);
+    }
+
+    /**
+     * Add or Remove a like from a post
+     *
+     * @return Response
+     * @throws Exception
+     */
+    public function addOrRemoveLike(int $id): Response
+    {
+        $post =  Posts::findFirstOrFail($id);
+
+        //If posts like already exists then it counts as an unlike
+        if ($postLike = PostsLikes::getByPostsId((int)$post->id)) {
+            $post->likes_count  = $post->likes_count != 0 ? $post->likes_count - 1 : 0;
+            $post->updateOrFail();
+
+            $postLike->is_deleted = 1;
+            $postLike->updateOrFail();
+
+            return $this->response($postLike);
+        }
+
+        $postLike =  new PostsLikes();
+        $postLike->posts_id = $id;
+        $postLike->users_id = $this->userData->getId();
+        $postLike->saveOrFail();
+
+        $post->likes_count += 1;
+        $post->updateOrFail();
+
+        return $this->response($postLike);
     }
 }

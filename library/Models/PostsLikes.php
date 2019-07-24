@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Gewaer\Models;
 
+use Phalcon\Di;
+
 class PostsLikes extends BaseModel
 {
     /**
@@ -55,5 +57,30 @@ class PostsLikes extends BaseModel
     public function getSource(): string
     {
         return 'posts_likes';
+    }
+
+    /**
+     * Get Posts Like by posts id
+     * @param int $postsId
+     */
+    public static function getByPostsId(int $postsId)
+    {
+        return PostsLikes::findFirst([
+            'conditions'=>'posts_id = ?0 and users_id = ?1 and is_deleted = 0',
+            'bind'=>[$postsId,Di::getDefault()->get('userData')->getId()]
+        ]);
+    }
+
+    /**
+     * Get a group of records by posts_id
+     * @param int $postsId
+     * @return void
+     */
+    public static function getAllByPostId(int $postsId): PostsLikes
+    {
+        return PostsLikes::findFirst([
+            'conditions'=>'posts_id = ?0 and is_deleted = 0',
+            'bind'=>[$postsId]
+        ]);
     }
 }
