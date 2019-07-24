@@ -2,7 +2,7 @@
 
 namespace Gewaer\Dto;
 
-class Posts
+class PublisherPosts
 {
     /**
      *
@@ -32,13 +32,13 @@ class Posts
      *
      * @var object
      */
-    public $types_id;
+    public $type;
 
     /**
      *
      * @var
      */
-    public $categories_id;
+    public $category;
 
     /**
      *
