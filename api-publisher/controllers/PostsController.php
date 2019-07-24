@@ -57,8 +57,13 @@ class PostsController extends CanvasBaseController
         $this->dtoConfig->registerMapping(Posts::class, PostDto::class)
             ->useCustomMapper(new PostMapper());
 
-        return $results instanceof \Phalcon\Mvc\Model\Resultset\Simple ?
-            $this->mapper->mapMultiple(iterator_to_array($results), PostDto::class)
+        if (is_array($results) && isset($results['data'])) {
+            $results['data'] = $this->mapper->mapMultiple($results['data'], PostDto::class);
+            return  $results;
+        }
+
+        return is_iterable($results) ?
+            $this->mapper->mapMultiple($results, PostDto::class)
             : $this->mapper->map($results, PostDto::class);
     }
 }
