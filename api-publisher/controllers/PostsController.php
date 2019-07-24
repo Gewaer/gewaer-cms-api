@@ -7,7 +7,7 @@ namespace Gewaer\Api\Publisher\Controllers;
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Posts;
 use Gewaer\Dto\Posts as PostDto;
-use Gewaer\Mapper\PostMapper;
+use Gewaer\Mapper\PublisherPostMapper;
 use Gewaer\Models\PostsLikes;
 use Phalcon\Http\Response;
 
@@ -57,7 +57,7 @@ class PostsController extends CanvasBaseController
     {
         //add a mapper
         $this->dtoConfig->registerMapping(Posts::class, PostDto::class)
-            ->useCustomMapper(new PostMapper());
+            ->useCustomMapper(new PublisherPostMapper());
 
         if (is_array($results) && isset($results['data'])) {
             $results['data'] = $this->mapper->mapMultiple($results['data'], PostDto::class);
