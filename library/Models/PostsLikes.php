@@ -72,17 +72,17 @@ class PostsLikes extends BaseModel
     }
 
     /**
-     * Get a group of records by posts_id
+     * Get the currents user's post like if it exists
      * @param int $postsId
      * @return array
      */
-    public static function getAllByPostId(int $postsId): array
+    public static function getCurrentUsersLike(int $postsId): array
     {
-        $postLikes = PostsLikes::findFirst([
-            'conditions'=>'posts_id = ?0 and is_deleted = 0',
-            'bind'=>[$postsId]
+        $userPostLike = PostsLikes::findFirst([
+            'conditions'=>'posts_id = ?0 and users_id = ?1',
+            'bind'=>[$postsId,Di::getDefault()->get('userData')->getId()]
         ]);
 
-        return $postLikes ? $postLikes->toArray() : [];
+        return $userPostLike ? $userPostLike->toArray() : [];
     }
 }
