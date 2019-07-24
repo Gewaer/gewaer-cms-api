@@ -78,7 +78,7 @@ class PostsLikes extends BaseModel
      */
     public static function getAllByPostId(int $postsId): array
     {
-        $postLikes = PostsLikes::findFirst([
+        $postLikes = PostsLikes::find([
             'conditions'=>'posts_id = ?0 and is_deleted = 0',
             'bind'=>[$postsId]
         ]);
