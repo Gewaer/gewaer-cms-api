@@ -74,13 +74,15 @@ class PostsLikes extends BaseModel
     /**
      * Get a group of records by posts_id
      * @param int $postsId
-     * @return void
+     * @return array
      */
-    public static function getAllByPostId(int $postsId): PostsLikes
+    public static function getAllByPostId(int $postsId): array
     {
-        return PostsLikes::findFirst([
+        $postLikes = PostsLikes::findFirst([
             'conditions'=>'posts_id = ?0 and is_deleted = 0',
             'bind'=>[$postsId]
         ]);
+
+        return $postLikes ? $postLikes->toArray() : [];
     }
 }
