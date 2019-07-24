@@ -8,7 +8,7 @@ use AutoMapperPlus\CustomMapper\CustomMapper;
 use Phalcon\Mvc\Model\Resultset;
 use Gewaer\Models\PostsLikes;
 
-class PostMapper extends CustomMapper
+class PublisherPostMapper extends CustomMapper
 {
     /**
      * @param Canvas\Models\FileSystem $file
@@ -26,14 +26,14 @@ class PostMapper extends CustomMapper
             'lastname' => $user->lastname,
         ];
         $postDto->sites_id = $post->sites_id;
-        $postDto->types_id = $post->types_id;
-        $postDto->categories_id = $post->categories_id;
+        $postDto->type = $post->getTypes(['columns' => 'id','title']);
+        $postDto->category = $post->getCategory(['columns' => 'id','title']);
         $postDto->title = $post->title;
         $postDto->slug = $post->slug;
         $postDto->summary = $post->summary;
         $postDto->content = $post->content;
         
-        $postDto->tags = $this->getTags($post->getTags(['columns' => 'id']));
+        $postDto->tags = $post->getTags(['columns' => 'id' , 'title']);
         $postDto->media_url = $post->media_url;
         $postDto->likes_count = $post->likes_count;
         $postDto->users_likes = PostsLikes::getCurrentUsersLike($post->getId());
