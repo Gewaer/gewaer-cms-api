@@ -6,7 +6,7 @@ namespace Gewaer\Api\Publisher\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Posts;
-use Gewaer\Dto\Posts as PostDto;
+use Gewaer\Dto\PublisherPosts as PostDto;
 use Gewaer\Mapper\PublisherPostMapper;
 use Gewaer\Models\PostsLikes;
 use Phalcon\Http\Response;
