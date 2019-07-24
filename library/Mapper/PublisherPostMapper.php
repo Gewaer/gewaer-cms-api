@@ -33,7 +33,7 @@ class PublisherPostMapper extends CustomMapper
         $postDto->summary = $post->summary;
         $postDto->content = $post->content;
         
-        $postDto->tags = $this->getTags($post->getTags(['columns' => 'id']));
+        $postDto->tags = $post->getTags(['columns' => 'id' , 'title']);
         $postDto->media_url = $post->media_url;
         $postDto->likes_count = $post->likes_count;
         $postDto->users_likes = PostsLikes::getCurrentUsersLike($post->getId());

@@ -26,14 +26,14 @@ class PostMapper extends CustomMapper
             'lastname' => $user->lastname,
         ];
         $postDto->sites_id = $post->sites_id;
-        $postDto->types_id = $post->getTypes(['columns' => 'id']);
-        $postDto->categories_id = $post->getCategory(['columns' => 'id']);
+        $postDto->types_id = $post->types_id;
+        $postDto->categories_id = $post->categories_id;
         $postDto->title = $post->title;
         $postDto->slug = $post->slug;
         $postDto->summary = $post->summary;
         $postDto->content = $post->content;
         
-        $postDto->tags = $post->getTags();
+        $postDto->tags = $this->getTags($post->getTags(['columns' => 'id']));
         $postDto->media_url = $post->media_url;
         $postDto->likes_count = $post->likes_count;
         $postDto->users_likes = PostsLikes::getCurrentUsersLike($post->getId());
