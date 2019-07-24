@@ -90,24 +90,6 @@ class AddCategories extends AbstractMigration
             'comment' => '',
             'row_format' => 'DYNAMIC',
         ])
-        ->changeColumn('id', 'biginteger', [
-            'null' => false,
-            'limit' => MysqlAdapter::INT_BIG,
-            'identity' => 'enable',
-        ])
-        ->changeColumn('slug', 'string', [
-            'null' => false,
-            'limit' => 255,
-            'collation' => 'utf8mb4_unicode_ci',
-            'encoding' => 'utf8mb4',
-            'after' => 'title',
-        ])
-        ->changeColumn('post_parent_id', 'biginteger', [
-            'null' => false,
-            'default' => '0',
-            'limit' => MysqlAdapter::INT_BIG,
-            'after' => 'likes_count',
-        ])
         ->addIndex(['sites_id', 'slug'], [
             'name' => 'sluguniq',
             'unique' => true,

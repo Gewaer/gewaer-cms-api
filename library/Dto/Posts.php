@@ -72,6 +72,12 @@ class Posts
 
     /**
      *
+     * @var array
+     */
+    public $files;
+
+    /**
+     *
      * @var string
      */
     public $media_url;

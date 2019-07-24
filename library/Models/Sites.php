@@ -16,6 +16,11 @@ class Sites extends BaseModel
     public $users_id;
 
     /**
+     * @var integer
+     */
+    public $companies_id;
+
+    /**
      * @var string
      */
     public $title;
@@ -63,6 +68,13 @@ class Sites extends BaseModel
         parent::initialize();
 
         $this->setSource('sites');
+
+        $this->belongsTo(
+            'users_id',
+            Users::class,
+            'id',
+            ['alias' => 'user']
+        );
     }
     /**
      * Returns table name mapped in the model.

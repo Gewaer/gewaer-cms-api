@@ -47,6 +47,13 @@ class SiteMiddleware implements MiddlewareInterface
             }
         );
 
+        $api->getDI()->setShared(
+            'userData',
+            function () use ($site) {
+                return $site->user;
+            }
+        );
+
         return true;
     }
 }
