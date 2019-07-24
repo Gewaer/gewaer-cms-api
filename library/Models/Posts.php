@@ -180,7 +180,8 @@ class Posts extends BaseModel
         $this->hasManyToMany(
             'id',
             PostsTags::class,
-            'posts_id', 'tags_id',
+            'posts_id',
+            'tags_id',
             Tags::class,
             'id',
             ['alias' => 'tags']
@@ -232,5 +233,29 @@ class Posts extends BaseModel
     public function afterSave()
     {
         $this->associateFileSystem();
+    }
+
+    /**
+     * Given an array of tags, add it to the specific post.
+     *
+     * @param array $tags
+     * @return bool
+     */
+    public function addTags(array $tags): bool
+    {
+        if ($this->tags) {
+            $this->tags->delete();
+        }
+
+        foreach ($tags as $tag) {
+            if (PostsTags::findFirst($tag)) {
+                $postTag = new PostsTags();
+                $postTag->posts_id = $this->getId();
+                $postTag->tags_id = $tag;
+                $postTag->saveOrFail();
+            }
+        }
+
+        return true;
     }
 }

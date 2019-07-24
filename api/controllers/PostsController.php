@@ -8,7 +8,7 @@ use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Posts;
 use Gewaer\Dto\Posts as PostDto;
 use Gewaer\Mapper\PostMapper;
-use Phalcon\Http\Request;
+use Canvas\Http\Request;
 use Phalcon\Mvc\ModelInterface;
 
 /**
@@ -26,7 +26,7 @@ class PostsController extends CanvasBaseController
        */
     protected $createFields = [
         'sites_id', 'post_types_id', 'category_id', 'title', 'slug', 'summary', 'content', 'media_url', 'likes_count', 'post_parent_id',
-        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium'
+        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at'
     ];
 
     /*
@@ -36,7 +36,7 @@ class PostsController extends CanvasBaseController
      */
     protected $updateFields = [
         'sites_id', 'post_types_id', 'category_id', 'title', 'slug', 'summary', 'content', 'media_url', 'likes_count', 'post_parent_id',
-        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium'
+        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at',
     ];
 
     /**
@@ -83,14 +83,12 @@ class PostsController extends CanvasBaseController
      */
     protected function processEdit(Request $request, ModelInterface $record): ModelInterface
     {
-        //process the input
+        $post = parent::processEdit($request, $record);
         $request = $this->processInput($request->getPutData());
 
-        $record->updateOrFail($request, $this->updateFields);
+        $post->addTags($request['tags']);
 
-        //en base a la lista de tags lo agrego
-
-        return $record;
+        return $post;
     }
 
     /**
@@ -101,11 +99,11 @@ class PostsController extends CanvasBaseController
      */
     protected function processCreate(Request $request): ModelInterface
     {
-        //process the input
+        $post = parent::processCreate($request);
         $request = $this->processInput($request->getPostData());
 
-        $this->model->saveOrFail($request, $this->createFields);
+        $post->addTags($request['tags']);
 
-        return $this->model;
+        return $post;
     }
 }
