@@ -8,6 +8,8 @@ use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Posts;
 use Gewaer\Dto\Posts as PostDto;
 use Gewaer\Mapper\PostMapper;
+use Phalcon\Http\Request;
+use Phalcon\Mvc\ModelInterface;
 
 /**
  * Class BaseController.
@@ -85,6 +87,8 @@ class PostsController extends CanvasBaseController
         $request = $this->processInput($request->getPutData());
 
         $record->updateOrFail($request, $this->updateFields);
+
+        //en base a la lista de tags lo agrego
 
         return $record;
     }
