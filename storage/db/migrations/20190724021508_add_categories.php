@@ -7,75 +7,22 @@ class AddCategories extends AbstractMigration
 {
     public function change()
     {
-        $this->table('posts_shares', [
-            'id' => false,
-            'primary_key' => ['posts_id', 'users_id'],
-            'engine' => 'InnoDB',
-            'encoding' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'comment' => '',
-            'row_format' => 'DYNAMIC',
-        ])
-        ->changeColumn('posts_id', 'integer', [
-            'null' => false,
-            'limit' => MysqlAdapter::INT_REGULAR,
-        ])
-        ->changeColumn('users_id', 'integer', [
-            'null' => false,
-            'limit' => MysqlAdapter::INT_REGULAR,
-            'after' => 'posts_id',
-        ])
-        ->changeColumn('created_at', 'datetime', [
-            'null' => false,
-            'after' => 'users_id',
-        ])
-        ->changeColumn('updated_at', 'datetime', [
-            'null' => true,
-            'after' => 'created_at',
-        ])
-        ->changeColumn('is_deleted', 'integer', [
-            'null' => false,
-            'default' => '0',
-            'limit' => '3',
-            'after' => 'updated_at',
-        ])
-            ->removeColumn('id')
-            ->save();
+      
+        $this->execute("ALTER TABLE `posts_tags`
+        DROP COLUMN `id`,
+        DROP PRIMARY KEY,
+        ADD PRIMARY KEY (`posts_id`, `tags_id`);");
 
-        $this->table('posts_tags', [
-            'id' => false,
-            'primary_key' => ['posts_id', 'tags_id'],
-            'engine' => 'InnoDB',
-            'encoding' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'comment' => '',
-            'row_format' => 'DYNAMIC',
-        ])
-        ->changeColumn('posts_id', 'integer', [
-            'null' => false,
-            'limit' => MysqlAdapter::INT_REGULAR,
-        ])
-        ->changeColumn('tags_id', 'integer', [
-            'null' => false,
-            'limit' => MysqlAdapter::INT_REGULAR,
-            'after' => 'posts_id',
-        ])
-        ->changeColumn('created_at', 'datetime', [
-            'null' => false,
-            'after' => 'tags_id',
-        ])
-        ->changeColumn('updated_at', 'datetime', [
-            'null' => true,
-            'after' => 'created_at',
-        ])
-        ->changeColumn('is_deleted', 'integer', [
-            'null' => false,
-            'default' => '0',
-            'limit' => '3',
-            'after' => 'updated_at',
-        ])
-            ->removeColumn('id')
-            ->save();
+        $this->execute("ALTER TABLE `posts_shares`
+        DROP COLUMN `id`,
+        DROP PRIMARY KEY,
+        ADD PRIMARY KEY (`posts_id`, `users_id`);");
+
+        $this->execute("ALTER TABLE `posts_likes`
+        DROP COLUMN `id`,
+        DROP PRIMARY KEY,
+        ADD PRIMARY KEY (`posts_id`, `users_id`);");
+
         $this->table('categories', [
             'id' => false,
             'primary_key' => ['id'],
@@ -167,40 +114,6 @@ class AddCategories extends AbstractMigration
         ])
             ->removeIndexByName('slug')
             ->save();
-        $this->table('posts_likes', [
-            'id' => false,
-            'primary_key' => ['posts_id', 'users_id'],
-            'engine' => 'InnoDB',
-            'encoding' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'comment' => '',
-            'row_format' => 'DYNAMIC',
-        ])
-        ->changeColumn('posts_id', 'integer', [
-            'null' => false,
-            'limit' => MysqlAdapter::INT_REGULAR,
-        ])
-        ->changeColumn('users_id', 'integer', [
-            'null' => false,
-            'limit' => MysqlAdapter::INT_REGULAR,
-            'after' => 'posts_id',
-        ])
-        ->changeColumn('created_at', 'datetime', [
-            'null' => false,
-            'after' => 'users_id',
-        ])
-        ->changeColumn('updated_at', 'datetime', [
-            'null' => true,
-            'after' => 'created_at',
-        ])
-        ->changeColumn('is_deleted', 'integer', [
-            'null' => false,
-            'default' => '0',
-            'limit' => '3',
-            'after' => 'updated_at',
-        ])
-            ->removeColumn('id')
-            ->save();
 
         $this->table('status', [
             'id' => false,
@@ -219,6 +132,7 @@ class AddCategories extends AbstractMigration
             'after' => 'id',
         ])
             ->save();
+
         $this->table('sites', [
             'id' => false,
             'primary_key' => ['id'],
