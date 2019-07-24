@@ -49,6 +49,7 @@ class PostsController extends CanvasBaseController
         $this->model = new Posts();
         $this->model->users_id = $this->userData->getId();
         $this->model->companies_id = $this->userData->currentCompanyId();
+        $this->model->sites_id = $this->site->getId();
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0'],
