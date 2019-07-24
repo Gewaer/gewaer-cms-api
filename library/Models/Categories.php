@@ -3,17 +3,32 @@ declare(strict_types=1);
 
 namespace Gewaer\Models;
 
-class PostsTags extends BaseModel
+class Categories extends BaseModel
 {
     /**
      * @var integer
      */
-    public $posts_id;
+    public $id;
 
     /**
      * @var integer
      */
-    public $tags_id;
+    public $sites_id;
+
+    /**
+     * @var string
+     */
+    public $title;
+
+    /**
+     * @var string
+     */
+    public $slug;
+
+    /**
+     * @var json
+     */
+    public $metadata;
 
     /**
      * @var datetime
@@ -37,21 +52,7 @@ class PostsTags extends BaseModel
     {
         parent::initialize();
 
-        $this->setSource('posts_tags');
-
-        $this->belongsTo(
-            'posts_id',
-            Posts::class,
-            'id',
-            ['alias' => 'posts']
-        );
-
-        $this->belongsTo(
-            'tags_id',
-            Tags::class,
-            'id',
-            ['alias' => 'tags']
-        );
+        $this->setSource('categories');
     }
 
     /**
@@ -61,6 +62,6 @@ class PostsTags extends BaseModel
      */
     public function getSource(): string
     {
-        return 'posts_tags';
+        return 'categories';
     }
 }

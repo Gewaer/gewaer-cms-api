@@ -6,6 +6,8 @@ namespace Gewaer\Api\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Posts;
+use Gewaer\Dto\Posts as PostDto;
+use Gewaer\Mapper\PostMapper;
 
 /**
  * Class BaseController.
@@ -50,5 +52,22 @@ class PostsController extends CanvasBaseController
             ['is_deleted', ':', '0'],
             ['companies_id', ':', $this->userData->currentCompanyId()],
         ];
+    }
+
+    /**
+     * Format output.
+     *
+     * @param mixed $results
+     * @return void
+     */
+    protected function processOutput($results)
+    {
+        //add a mapper
+        $this->dtoConfig->registerMapping(Posts::class, PostDto::class)
+            ->useCustomMapper(new PostMapper());
+
+        return $results instanceof \Phalcon\Mvc\Model\Resultset\Simple ?
+            $this->mapper->mapMultiple(iterator_to_array($results), PostDto::class)
+            : $this->mapper->map($results, PostDto::class);
     }
 }

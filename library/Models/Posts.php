@@ -146,37 +146,61 @@ class Posts extends BaseModel
     public function initialize()
     {
         parent::initialize();
-        
+
         $this->setSource('posts');
 
         $this->hasMany(
             'id',
             PostsTags::class,
             'posts_id',
-            ['alias' => 'postsTags']
+            ['alias' => 'tags']
         );
 
         $this->hasMany(
             'id',
             PostsShares::class,
             'posts_id',
-            ['alias' => 'postsShares']
+            ['alias' => 'shares']
         );
 
         $this->hasMany(
             'id',
             PostsLikes::class,
             'posts_id',
-            ['alias' => 'postsLikes']
+            ['alias' => 'likes']
         );
 
         $this->belongsTo(
             'post_types_id',
             PostsTypes::class,
             'id',
-            ['alias' => 'postsTypes']
+            ['alias' => 'types']
+        );
+
+        $this->hasManyToMany(
+            'id',
+            PostsTags::class,
+            'posts_id', 'tags_id',
+            Tags::class,
+            'id',
+            ['alias' => 'tags']
+        );
+
+        $this->belongsTo(
+            'users_id',
+            Users::class,
+            'id',
+            ['alias' => 'user']
+        );
+
+        $this->belongsTo(
+            'category_id',
+            Categories::class,
+            'id',
+            ['alias' => 'category']
         );
     }
+
     /**
      * Returns table name mapped in the model.
      *
@@ -186,7 +210,7 @@ class Posts extends BaseModel
     {
         return 'posts';
     }
-    
+
     /**
      *
      *
@@ -201,13 +225,12 @@ class Posts extends BaseModel
     }
 
     /**
-     * Events after save
-     * 
+     * Events after save.
+     *
      * @return void
      */
     public function afterSave()
     {
         $this->associateFileSystem();
     }
-
 }

@@ -8,11 +8,6 @@ class PostsShares extends BaseModel
     /**
      * @var integer
      */
-    public $id;
-
-    /**
-     * @var integer
-     */
     public $posts_id;
 
     /**
@@ -51,6 +46,7 @@ class PostsShares extends BaseModel
             ['alias' => 'posts']
         );
     }
+
     /**
      * Returns table name mapped in the model.
      *
@@ -60,5 +56,4 @@ class PostsShares extends BaseModel
     {
         return 'posts_shares';
     }
-
 }

@@ -8,11 +8,6 @@ class PostsLikes extends BaseModel
     /**
      * @var integer
      */
-    public $id;
-
-    /**
-     * @var integer
-     */
     public $posts_id;
 
     /**
@@ -51,6 +46,7 @@ class PostsLikes extends BaseModel
             ['alias' => 'posts']
         );
     }
+
     /**
      * Returns table name mapped in the model.
      *
@@ -60,5 +56,4 @@ class PostsLikes extends BaseModel
     {
         return 'posts_likes';
     }
-
 }
