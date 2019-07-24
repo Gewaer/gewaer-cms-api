@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gewaer\Mapper;
 
 use AutoMapperPlus\CustomMapper\CustomMapper;
+use Gewaer\Models\PostsLikes;
 
 class PostMapper extends CustomMapper
 {
@@ -33,6 +34,7 @@ class PostMapper extends CustomMapper
         $postDto->tags = $post->getTags(['columns' => 'id, title']);
         $postDto->media_url = $post->media_url;
         $postDto->likes_count = $post->likes_count;
+        $postDto->users_likes = PostsLikes::getAllByPostId($post->getId())->toArray();
         $postDto->post_parent_id = $post->post_parent_id;
         $postDto->shares_count = $post->shares_count;
         $postDto->views_count = $post->views_count;

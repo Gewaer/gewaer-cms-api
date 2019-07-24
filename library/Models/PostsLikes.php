@@ -70,4 +70,17 @@ class PostsLikes extends BaseModel
             'bind'=>[$postsId,Di::getDefault()->get('userData')->getId()]
         ]);
     }
+
+    /**
+     * Get a group of records by posts_id
+     * @param int $postsId
+     * @return void
+     */
+    public static function getAllByPostId(int $postsId): PostsLikes
+    {
+        return PostsLikes::findFirst([
+            'conditions'=>'posts_id = ?0 and is_deleted = 0',
+            'bind'=>[$postsId]
+        ]);
+    }
 }
