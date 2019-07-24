@@ -26,7 +26,7 @@ class PostsController extends CanvasBaseController
        */
     protected $createFields = [
         'sites_id', 'post_types_id', 'category_id', 'title', 'slug', 'summary', 'content', 'media_url', 'likes_count', 'post_parent_id',
-        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at'
+        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at', 'sites_id'
     ];
 
     /*
@@ -36,7 +36,7 @@ class PostsController extends CanvasBaseController
      */
     protected $updateFields = [
         'sites_id', 'post_types_id', 'category_id', 'title', 'slug', 'summary', 'content', 'media_url', 'likes_count', 'post_parent_id',
-        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at',
+        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at', 'sites_id'
     ];
 
     /**
@@ -68,11 +68,10 @@ class PostsController extends CanvasBaseController
         $this->dtoConfig->registerMapping(Posts::class, PostDto::class)
             ->useCustomMapper(new PostMapper());
 
-        if(is_array($results) && isset($results['data'])){
+        if (is_array($results) && isset($results['data'])) {
             $results['data'] = $this->mapper->mapMultiple($results['data'], PostDto::class);
             return  $results;
         }
-
 
         return is_iterable($results) ?
             $this->mapper->mapMultiple($results, PostDto::class)

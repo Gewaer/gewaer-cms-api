@@ -13,7 +13,8 @@ $privateRoutes = [
     Route::crud('/tags'),
     Route::crud('/status'),
     Route::crud('/categories'),
-    Route::crud('/posts-tags')->controller('PostsTagsController')
+    Route::crud('/posts-tags')->controller('PostsTagsController'),
+    Route::crud('/posts-types')->controller('PostsTypesController')
 ];
 
 $routeGroup = RouteGroup::from($routes)
