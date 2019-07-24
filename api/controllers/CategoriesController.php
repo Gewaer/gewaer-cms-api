@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Gewaer\Api\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
-use Gewaer\Models\Tags;
-use Gewaer\Models\Sites;
+use Gewaer\Models\Categories;
 
 /**
  * Class BaseController.
@@ -14,25 +13,21 @@ use Gewaer\Models\Sites;
  * @package Gewaer\Api\Controllers
  *
  */
-class TagsController extends CanvasBaseController
+class CategoriesController extends CanvasBaseController
 {
     /*
        * fields we accept to create
        *
        * @var array
        */
-    protected $createFields = [
-        'title', 'slug', 'metadata'
-    ];
+    protected $createFields = ['title','slug'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = [
-        'title', 'slug', 'metadata'
-    ];
+    protected $updateFields = ['posts_id','slug'];
 
     /**
      * set objects.
@@ -41,7 +36,7 @@ class TagsController extends CanvasBaseController
      */
     public function onConstruct()
     {
-        $this->model = new Tags();
+        $this->model = new Categories();
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0']
