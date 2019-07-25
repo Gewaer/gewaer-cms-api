@@ -11,7 +11,7 @@ $routes = [
 $privateRoutes = [
     Route::crud('/posts'),
     Route::crud('/tags'),
-    Route::crud('/status'),
+    Route::crud('/posts-status')->controller('StatusController'),
     Route::crud('/categories'),
     Route::crud('/posts-tags')->controller('PostsTagsController'),
     Route::crud('/posts-types')->controller('PostsTypesController')
