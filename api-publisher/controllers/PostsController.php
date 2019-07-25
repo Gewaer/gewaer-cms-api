@@ -80,9 +80,6 @@ class PostsController extends CanvasBaseController
         $request = $this->processInput($this->request->getPostData());
         $post =  Posts::findFirstOrFail($id);
 
-        print_r($post->getTypes());
-        die();
-
         $postLike = PostsLikes::findFirst([
             'conditions' => 'posts_id = ?0 and users_id = ?1 and is_deleted = 0',
             'bind'=>[(int)$post->id,$request['users_id']]
