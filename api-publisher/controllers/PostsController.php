@@ -77,10 +77,19 @@ class PostsController extends CanvasBaseController
      */
     public function like(int $id): Response
     {
+        $request = $this->processInput($this->request->getPostData());
         $post =  Posts::findFirstOrFail($id);
 
+        print_r($post->getTypes());
+        die();
+
+        $postLike = PostsLikes::findFirst([
+            'conditions' => 'posts_id = ?0 and users_id = ?1 and is_deleted = 0',
+            'bind'=>[(int)$post->id,$request['users_id']]
+        ]);
+
         //If posts like already exists then it counts as an unlike
-        if ($postLike = PostsLikes::getByPostsId((int)$post->id)) {
+        if ($postLike) {
             $post->likes_count  = $post->likes_count != 0 ? $post->likes_count - 1 : 0;
             $post->updateOrFail();
 
@@ -92,7 +101,7 @@ class PostsController extends CanvasBaseController
 
         $postLike =  new PostsLikes();
         $postLike->posts_id = $id;
-        $postLike->users_id = $this->userData->getId();
+        $postLike->users_id = 2;
         $postLike->saveOrFail();
 
         $post->likes_count += 1;
