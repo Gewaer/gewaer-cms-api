@@ -25,7 +25,7 @@ class PublisherPostMapper extends CustomMapper
             'firstname' => $user->firstname,
             'lastname' => $user->lastname,
         ];
-        
+
         $postDto->sites_id = $post->sites_id;
         $postDto->type = $post->getTypes(['columns' => 'id, title']);
         $postDto->category = $post->getCategory(['columns' => 'id, title']);
@@ -33,8 +33,8 @@ class PublisherPostMapper extends CustomMapper
         $postDto->slug = $post->slug;
         $postDto->summary = $post->summary;
         $postDto->content = $post->content;
-        
-        $postDto->tags = $post->getTags(['columns' => 'id' , 'title']);
+
+        $postDto->tags = $post->getTags(['columns' => 'id, title']);
         $postDto->media_url = $post->media_url;
         $postDto->likes_count = $post->likes_count;
         $postDto->users_likes = PostsLikes::getCurrentUsersLike($post->getId());
@@ -58,7 +58,7 @@ class PublisherPostMapper extends CustomMapper
     }
 
     /**
-     * Get the new tag list only ids
+     * Get the new tag list only ids.
      *
      * @param array $tags
      * @return array
@@ -66,8 +66,7 @@ class PublisherPostMapper extends CustomMapper
     private function getTags($tags): array
     {
         $newTags = [];
-        foreach($tags as $tag)
-        {
+        foreach ($tags as $tag) {
             $newTags[] = $tag->id;
         }
 
