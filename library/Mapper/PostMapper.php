@@ -26,7 +26,7 @@ class PostMapper extends CustomMapper
             'lastname' => $user->lastname,
         ];
         $postDto->sites_id = $post->sites_id;
-        $postDto->types_id = $post->post_types_id;
+        $postDto->post_types_id = $post->post_types_id;
         $postDto->category_id = $post->category_id;
         $postDto->title = $post->title;
         $postDto->slug = $post->slug;

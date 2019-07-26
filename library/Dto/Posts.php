@@ -32,13 +32,13 @@ class Posts
      *
      * @var object
      */
-    public $types_id;
+    public $post_types_id;
 
     /**
      *
      * @var
      */
-    public $categories_id;
+    public $category_id;
 
     /**
      *
@@ -177,5 +177,4 @@ class Posts
      * @var string
      */
     public $is_deleted;
-
 }
