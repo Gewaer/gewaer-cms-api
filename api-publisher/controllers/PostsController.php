@@ -82,7 +82,7 @@ class PostsController extends CanvasBaseController
 
         $postLike = PostsLikes::findFirst([
             'conditions' => 'posts_id = ?0 and users_id = ?1 and is_deleted = 0',
-            'bind'=>[(int)$post->id,$request['users_id']]
+            'bind'=>[(int)$post->id,$this->userData->getId()]
         ]);
 
         //If posts like already exists then it counts as an unlike
