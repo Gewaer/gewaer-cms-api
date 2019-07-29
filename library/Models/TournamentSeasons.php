@@ -44,6 +44,16 @@ class TournamentSeasons extends BaseModel
 
         $this->setSource('tournament_seasons');
 
+        $this->hasManyToMany(
+            'id',
+            TournamentSeasonsVersions::class,
+            'seasons_id',
+            'versions_id',
+            TournamentVersions::class,
+            'id',
+            ['alias' => 'versions']
+        );
+
     }
     /**
      * Returns table name mapped in the model.

@@ -60,6 +60,20 @@ class TournamentSeries extends BaseModel
 
         $this->setSource('tournament_series');
 
+        $this->hasMany(
+            'id',
+            TournamentVersions::class,
+            'series_id',
+            ['alias' => 'versions']
+        );
+
+        $this->belongsTo(
+            'games_id',
+            Games::class,
+            'id',
+            ['alias' => 'games']
+        );
+
     }
     /**
      * Returns table name mapped in the model.

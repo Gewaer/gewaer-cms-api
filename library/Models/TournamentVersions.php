@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Gewaer\Models;
 
+use Canvas\Models\Currencies;
+
 class TournamentVersions extends BaseModel
 {
     /**
@@ -98,6 +100,51 @@ class TournamentVersions extends BaseModel
         parent::initialize();
 
         $this->setSource('tournament_versions');
+
+        $this->hasMany(
+            'id',
+            TournamentStages::class,
+            'versions_id',
+            ['alias' => 'stages']
+        );
+
+        $this->hasMany(
+            'id',
+            TournamentGroups::class,
+            'versions_id',
+            ['alias' => 'groups']
+        );
+
+        $this->hasManyToMany(
+            'id',
+            TournamentTeams::class,
+            'versions_id',
+            'teams_id',
+            Teams::class,
+            'id',
+            ['alias' => 'tournamentTeams']
+        );
+
+        $this->belongsTo(
+            'types_id',
+            TournamentTypes::class,
+            'id',
+            ['alias' => 'types']
+        );
+
+        $this->belongsTo(
+            'series_id',
+            TournamentSeries::class,
+            'id',
+            ['alias' => 'series']
+        );
+
+        $this->belongsTo(
+            'currencies_id',
+            Currencies::class,
+            'id',
+            ['alias' => 'currencies']
+        );
 
     }
     /**
