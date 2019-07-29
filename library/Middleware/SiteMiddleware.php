@@ -73,7 +73,7 @@ class SiteMiddleware implements MiddlewareInterface
                 function () use ($config, $token, $request) {
                     $session = new Sessions();
                     //all is empty and is dev, ok take use the first user
-                    if (empty($token->getClaim('sessionId')) && strtolower($config->app->env) == Flags::DEVELOPMENT) {
+                    if (empty($token->getClaim('sessionId')) || strtolower($config->app->env) == Flags::DEVELOPMENT) {
                         return Users::findFirst(1);
                     }
                     if (!empty($token->getClaim('sessionId'))) {
