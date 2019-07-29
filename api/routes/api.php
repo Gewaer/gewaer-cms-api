@@ -15,7 +15,6 @@ $privateRoutes = [
     Route::crud('/categories'),
     Route::crud('/posts-tags')->controller('PostsTagsController'),
     Route::crud('/posts-types')->controller('PostsTypesController'),
-
     Route::crud('/tournaments-groups')->controller('TournamentGroupsController'),
     Route::crud('/tournaments-groups-teams')->controller('TournamentGroupsTeamsController'),
     Route::crud('/tournaments-matches')->controller('TournamentMatchesController'),

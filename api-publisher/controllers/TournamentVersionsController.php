@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gewaer\Api\Controllers;
+namespace Gewaer\Api\Publisher\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\TournamentVersions;
