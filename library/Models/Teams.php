@@ -68,6 +68,30 @@ class Teams extends BaseModel
             'id',
             ['alias' => 'games']
         );
+
+        $this->hasMany(
+            'id',
+            TournamentMatches::class,
+            'team_a',
+            ['alias' => 'matchesA']
+        );
+
+        $this->hasMany(
+            'id',
+            TournamentMatches::class,
+            'team_b',
+            ['alias' => 'matchesB']
+        );
+
+        $this->hasMany(
+            'id',
+            TournamentMatches::class,
+            'winning_team',
+            ['alias' => 'matchesWin']
+        );
+
+
+
     }
     /**
      * Returns table name mapped in the model.
