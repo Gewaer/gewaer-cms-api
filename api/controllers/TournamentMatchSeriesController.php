@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Gewaer\Api\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
-use Gewaer\Models\TournamentMatchesSources;
+use Gewaer\Models\TournamentMatchSeries;
 
 /**
  * Class BaseController.
@@ -13,21 +13,21 @@ use Gewaer\Models\TournamentMatchesSources;
  * @package Gewaer\Api\Controllers
  *
  */
-class TournamentMatchesSourcesController extends CanvasBaseController
+class TournamentMatchSeriesController extends CanvasBaseController
 {
     /*
        * fields we accept to create
        *
        * @var array
        */
-    protected $createFields = ['matches_id','sources_id','url'];
+    protected $createFields = ['name','game_date'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['matches_id','sources_id','url'];
+    protected $updateFields = ['name','game_date'];
 
     /**
      * set objects.
@@ -36,7 +36,7 @@ class TournamentMatchesSourcesController extends CanvasBaseController
      */
     public function onConstruct()
     {
-        $this->model = new TournamentMatchesSources();
+        $this->model = new TournamentMatchSeries();
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0']
