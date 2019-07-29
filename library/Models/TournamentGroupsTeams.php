@@ -54,6 +54,20 @@ class TournamentGroupsTeams extends BaseModel
 
         $this->setSource('tournament_groups_teams');
 
+        $this->belongsTo(
+            'groups_id',
+            TournamentGroups::class,
+            'id',
+            ['alias' => 'groups']
+        );
+
+        $this->belongsTo(
+            'teams_id',
+            Teams::class,
+            'id',
+            ['alias' => 'teams']
+        );
+
     }
     /**
      * Returns table name mapped in the model.

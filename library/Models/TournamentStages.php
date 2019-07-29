@@ -48,6 +48,20 @@ class TournamentStages extends BaseModel
         parent::initialize();
 
         $this->setSource('tournament_stages');
+        
+        $this->hasMany(
+            'id',
+            TournamentMatches::class,
+            'stages_id',
+            ['alias' => 'matches']
+        );
+
+        $this->belongsTo(
+            'versions_id',
+            TournamentVersions::class,
+            'id',
+            ['alias' => 'versions']
+        );
 
     }
     /**

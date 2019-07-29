@@ -49,6 +49,27 @@ class TournamentGroups extends BaseModel
 
         $this->setSource('tournament_groups');
 
+        $this->hasMany(
+            'id',
+            TournamentMatches::class,
+            'groups_id',
+            ['alias' => 'matches']
+        );
+
+        $this->hasMany(
+            'id',
+            TournamentGroupsTeams::class,
+            'groups_id',
+            ['alias' => 'groupsTeams']
+        );
+
+        $this->belongsTo(
+            'versions_id',
+            TournamentVersions::class,
+            'id',
+            ['alias' => 'versions']
+        );
+
     }
     /**
      * Returns table name mapped in the model.

@@ -89,6 +89,58 @@ class TournamentMatches extends BaseModel
 
         $this->setSource('tournament_matches');
 
+        $this->hasManyToMany(
+            'id',
+            TournamentMatchesSources::class,
+            'matches_id',
+            'sources_id',
+            Sources::class,
+            'id',
+            ['alias' => 'matchSources']
+        );
+
+        $this->belongsTo(
+            'stages_id',
+            TournamentStages::class,
+            'id',
+            ['alias' => 'stages']
+        );
+
+        $this->belongsTo(
+            'groups_id',
+            TournamentGroups::class,
+            'id',
+            ['alias' => 'groups']
+        );
+
+        $this->belongsTo(
+            'match_series_id',
+            TournamentMatchSeries::class,
+            'id',
+            ['alias' => 'matchSeries']
+        );
+
+        $this->belongsTo(
+            'team_a',
+            Teams::class,
+            'id',
+            ['alias' => 'teamA']
+        );
+
+        $this->belongsTo(
+            'team_b',
+            Teams::class,
+            'id',
+            ['alias' => 'teamB']
+        );
+
+        $this->belongsTo(
+            'winning_team',
+            Teams::class,
+            'id',
+            ['alias' => 'winningTeam']
+        );
+
     }
     /**
      * Returns table name mapped in the model.
