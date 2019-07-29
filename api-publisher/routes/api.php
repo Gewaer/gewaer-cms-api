@@ -11,7 +11,7 @@ $routes = [
 ];
 
 $routesSite = [
-    Route::get('/users/{id}')->action('getById'),
+    Route::get('/users/{id}')->controller('UsersController')->action('getById'),
     Route::get('/posts')->action('index'),
     Route::post('/posts/{id}/like')->controller('PostsController')->action('like'),
     Route::get('/tournaments-groups')->controller('TournamentGroupsController')->action('index'),
