@@ -13,11 +13,6 @@ class Organizations extends BaseModel
     /**
      * @var integer
      */
-    public $regions_id;
-
-    /**
-     * @var integer
-     */
     public $countries_id;
 
     /**

@@ -13,6 +13,11 @@ class Teams extends BaseModel
     /**
      * @var integer
      */
+    public $regions_id;
+
+    /**
+     * @var integer
+     */
     public $games_id;
 
         /**

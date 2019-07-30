@@ -20,14 +20,14 @@ class OrganizationsController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['regions_id','countries_id','name','slug','shortname','logo','icon','founded_date','is_active'];
+    protected $createFields = ['countries_id','name','slug','shortname','logo','icon','founded_date','is_active'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['regions_id','countries_id','name','slug','shortname','logo','icon','founded_date','is_active'];
+    protected $updateFields = ['countries_id','name','slug','shortname','logo','icon','founded_date','is_active'];
 
     /**
      * set objects.
