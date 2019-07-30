@@ -71,14 +71,6 @@ class AddCategories extends AbstractMigration
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-        ->addIndex(['slug'], [
-            'name' => 'slug',
-            'unique' => false,
-        ])
-        ->addIndex(['sites_id'], [
-            'name' => 'sites_id',
-            'unique' => false,
-        ])
             ->create();
 
         $this->table('posts', [
@@ -90,12 +82,7 @@ class AddCategories extends AbstractMigration
             'comment' => '',
             'row_format' => 'DYNAMIC',
         ])
-        ->addIndex(['sites_id', 'slug'], [
-            'name' => 'sluguniq',
-            'unique' => true,
-        ])
-            ->removeIndexByName('slug')
-            ->save();
+        ->save();
 
         $this->table('status', [
             'id' => false,

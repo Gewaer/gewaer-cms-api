@@ -29,6 +29,7 @@ $privateRoutes = [
     Route::crud('/tournaments-versions')->controller('TournamentVersionsController'),
     Route::crud('/currencies')->controller('CurrenciesController'),
     Route::crud('/sources')->controller('SourcesController'),
+    Route::crud('/teams')->controller('TeamsController')
 ];
 
 $routeGroup = RouteGroup::from($routes)

@@ -6,7 +6,9 @@ use Baka\Router\Route;
 $routes = [
     Route::get('/')->controller('IndexController'),
     Route::get('/status')->controller('IndexController')->action('status'),
-    Route::post('/auth')->controller('AuthController')->action('login')
+    Route::post('/auth')->controller('AuthController')->action('login'),
+    Route::get('/teams')->controller('TeamsController')->action('index'),
+    Route::get('/teams/{id}')->controller('TeamsController')->action('getById')
 
 ];
 

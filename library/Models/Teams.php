@@ -60,6 +60,8 @@ class Teams extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('teams');
 
         $this->belongsTo(
