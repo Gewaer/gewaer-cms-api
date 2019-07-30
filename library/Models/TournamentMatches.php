@@ -30,6 +30,16 @@ class TournamentMatches extends BaseModel
      */
     public $team_b;
 
+    /**
+     * @var integer
+     */
+    public $team_a_score;
+
+    /**
+     * @var integer
+     */
+    public $team_b_score;
+
         /**
      * @var date
      */
