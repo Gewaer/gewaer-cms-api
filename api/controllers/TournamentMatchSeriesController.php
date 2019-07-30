@@ -6,6 +6,8 @@ namespace Gewaer\Api\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\TournamentMatchSeries;
+use Gewaer\Dto\TournamentMatchSeries as TournamentMatchSeriesDto;
+use Gewaer\Mapper\TournamentMatchSeriesMapper;
 
 /**
  * Class BaseController.
@@ -41,5 +43,27 @@ class TournamentMatchSeriesController extends CanvasBaseController
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0']
         ];
+    }
+
+    /**
+     * Format output.
+     *
+     * @param mixed $results
+     * @return void
+     */
+    protected function processOutput($results)
+    {
+        //add a mapper
+        $this->dtoConfig->registerMapping(TournamentMatchSeries::class, TournamentMatchSeriesDto::class)
+            ->useCustomMapper(new TournamentMatchSeriesMapper());
+
+        if (is_array($results) && isset($results['data'])) {
+            $results['data'] = $this->mapper->mapMultiple($results['data'], TournamentMatchSeriesDto::class);
+            return  $results;
+        }
+
+        return is_iterable($results) ?
+            $this->mapper->mapMultiple($results, TournamentMatchSeriesDto::class)
+            : $this->mapper->map($results, TournamentMatchSeriesDto::class);
     }
 }
