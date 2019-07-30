@@ -11,6 +11,7 @@ use Gewaer\Models\Sites;
 use Canvas\Traits\TokenTrait;
 use Baka\Auth\Models\Sessions;
 use Canvas\Models\Users;
+use Canvas\Constants\Flags;
 
 /**
  * Class AclMiddleware.
@@ -74,6 +75,8 @@ class SiteMiddleware implements MiddlewareInterface
                     $session = new Sessions();
                     //all is empty and is dev, ok take use the first user
                     if (empty($token->getClaim('sessionId')) || strtolower($config->app->env) == Flags::DEVELOPMENT) {
+                        print_r('hello');
+                        die();
                         return Users::findFirst(1);
                     }
                     if (!empty($token->getClaim('sessionId'))) {
