@@ -50,6 +50,8 @@ class Regions extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('regions');
 
         $this->hasMany(

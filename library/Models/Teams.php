@@ -13,6 +13,11 @@ class Teams extends BaseModel
     /**
      * @var integer
      */
+    public $regions_id;
+
+    /**
+     * @var integer
+     */
     public $games_id;
 
         /**
@@ -60,6 +65,8 @@ class Teams extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('teams');
 
         $this->belongsTo(

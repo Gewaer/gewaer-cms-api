@@ -16,7 +16,7 @@ class CreateGamesTable extends AbstractMigration
             ->addColumn('slug', 'string', ['null' => false, 'limit' => 128, 'collation' => 'utf8mb4_unicode_ci', 'encoding' => 'utf8mb4', 'after' => 'title'])
             ->addColumn('logo', 'string', ['null' => true, 'limit' => 128, 'collation' => 'utf8mb4_unicode_ci', 'encoding' => 'utf8mb4', 'after' => 'slug'])
             ->addColumn('icon', 'string', ['null' => true, 'limit' => 128, 'collation' => 'utf8mb4_unicode_ci', 'encoding' => 'utf8mb4', 'after' => 'logo'])
-            ->addColumn('release_date', 'date', ['null' => false, 'after' => 'icon'])
+            ->addColumn('release_date', 'date', ['null' => true, 'after' => 'icon'])
             ->addColumn('created_at', 'datetime', ['null' => false, 'after' => 'release_date'])
             ->addColumn('updated_at', 'datetime', ['null' => true, 'after' => 'created_at'])
             ->addColumn('is_deleted', 'integer', ['null' => false, 'default' => '0', 'limit' => MysqlAdapter::INT_TINY, 'precision' => 3, 'after' => 'updated_at'])

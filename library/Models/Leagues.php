@@ -55,6 +55,8 @@ class Leagues extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('leagues');
 
         $this->hasMany(

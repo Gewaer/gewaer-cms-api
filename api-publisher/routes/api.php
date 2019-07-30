@@ -6,7 +6,21 @@ use Baka\Router\Route;
 $routes = [
     Route::get('/')->controller('IndexController'),
     Route::get('/status')->controller('IndexController')->action('status'),
-    Route::post('/auth')->controller('AuthController')->action('login')
+    Route::post('/auth')->controller('AuthController')->action('login'),
+    Route::get('/teams')->controller('TeamsController')->action('index'),
+    Route::get('/teams/{id}')->controller('TeamsController')->action('getById'),
+    Route::get('/games')->controller('GamesController')->action('index'),
+    Route::get('/games/{id}')->controller('GamesController')->action('getById'),
+    Route::get('/countries')->controller('CountriesController')->action('index'),
+    Route::get('/countries/{id}')->controller('CountriesController')->action('getById'),
+    Route::get('/regions-countries')->controller('RegionsCountriesController')->action('index'),
+    Route::get('/regions-countries/{id}')->controller('RegionsCountriesController')->action('getById'),
+    Route::get('/regions')->controller('RegionsController')->action('index'),
+    Route::get('/regions/{id}')->controller('RegionsController')->action('getById'),
+    Route::get('/leagues')->controller('LeaguesController')->action('index'),
+    Route::get('/leagues/{id}')->controller('LeaguesController')->action('getById'),
+    Route::get('/organizations')->controller('OrganizationsController')->action('index'),
+    Route::get('/organizations/{id}')->controller('OrganizationsController')->action('getById')
 
 ];
 

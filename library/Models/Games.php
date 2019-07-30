@@ -60,6 +60,8 @@ class Games extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+    
         $this->setSource('games');
 
         $this->hasMany(
