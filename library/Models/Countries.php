@@ -45,6 +45,8 @@ class Countries extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('countries');
 
         $this->hasMany(

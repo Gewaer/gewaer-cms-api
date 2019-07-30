@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Gewaer\Api\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
-use Gewaer\Models\Teams;
+use Gewaer\Models\Countries;
 
 /**
  * Class BaseController.
@@ -13,21 +13,21 @@ use Gewaer\Models\Teams;
  * @package Gewaer\Api\Controllers
  *
  */
-class TeamsController extends CanvasBaseController
+class CountriesController extends CanvasBaseController
 {
     /*
        * fields we accept to create
        *
        * @var array
        */
-    protected $createFields = ['regions_id','games_id','organizations_id','leagues_id','name','founded_date','is_active'];
+    protected $createFields = ['name','flag'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['regions_id','games_id','organizations_id','leagues_id','name','founded_date','is_active'];
+    protected $updateFields = ['name','flag'];
 
     /**
      * set objects.
@@ -36,7 +36,7 @@ class TeamsController extends CanvasBaseController
      */
     public function onConstruct()
     {
-        $this->model = new Teams();
+        $this->model = new Countries();
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0']

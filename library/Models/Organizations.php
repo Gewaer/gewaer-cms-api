@@ -75,6 +75,8 @@ class Organizations extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('organizations');
 
         $this->hasOne(
