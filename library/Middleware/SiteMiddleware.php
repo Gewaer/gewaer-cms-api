@@ -11,6 +11,7 @@ use Gewaer\Models\Sites;
 use Canvas\Traits\TokenTrait;
 use Baka\Auth\Models\Sessions;
 use Canvas\Models\Users;
+use Canvas\Constants\Flags;
 
 /**
  * Class AclMiddleware.
