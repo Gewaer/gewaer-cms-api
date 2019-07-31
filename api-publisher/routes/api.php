@@ -20,7 +20,8 @@ $routes = [
     Route::get('/leagues')->controller('LeaguesController')->action('index'),
     Route::get('/leagues/{id}')->controller('LeaguesController')->action('getById'),
     Route::get('/organizations')->controller('OrganizationsController')->action('index'),
-    Route::get('/organizations/{id}')->controller('OrganizationsController')->action('getById')
+    Route::get('/organizations/{id}')->controller('OrganizationsController')->action('getById'),
+    Route::post('/users')->controller('AuthController')->action('signup')
 
 ];
 
