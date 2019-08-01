@@ -26,14 +26,14 @@ class PostMapper extends CustomMapper
             'lastname' => $user->lastname,
         ];
         $postDto->sites_id = $post->sites_id;
-        $postDto->post_types_id = $post->post_types_id;
-        $postDto->category_id = $post->category_id;
+        $postDto->type = $post->getTypes(['columns' => 'id, title']);
+        $postDto->category = $post->getCategory(['columns' => 'id, title']);
         $postDto->title = $post->title;
         $postDto->slug = $post->slug;
         $postDto->summary = $post->summary;
         $postDto->content = $post->content;
 
-        $postDto->tags = $this->getTags($post->getTags(['columns' => 'id']));
+        $postDto->tags = $post->getTags(['columns' => 'id, title,slug']);
         $postDto->media_url = $post->media_url;
         $postDto->likes_count = $post->likes_count;
         $postDto->users_likes = PostsLikes::getCurrentUsersLike($post->getId());
@@ -42,7 +42,7 @@ class PostMapper extends CustomMapper
         $postDto->views_count = $post->views_count;
         $postDto->comment_count = $post->comment_count;
         $postDto->status = $post->status;
-        $postDto->files = $post->getFiles();
+        // $postDto->files = $post->getFiles();
         $postDto->comment_status = $post->comment_status;
         $postDto->is_published = $post->is_published;
         $postDto->featured = $post->featured;
