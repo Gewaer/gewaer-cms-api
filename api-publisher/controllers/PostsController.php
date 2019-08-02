@@ -6,6 +6,8 @@ namespace Gewaer\Api\Publisher\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Posts;
+use Gewaer\Models\Teams;
+use Gewaer\Models\Organizations;
 use Gewaer\Dto\PublisherPosts as PostDto;
 use Gewaer\Mapper\PublisherPostMapper;
 use Gewaer\Models\PostsLikes;
@@ -113,11 +115,26 @@ class PostsController extends CanvasBaseController
      */
     public function getCurrentLivePost(): Response
     {
+        $livePostArray = [];
+
         $livePost = $this->model::findFirst([
             'conditions'=> 'is_live = 1',
             'order'=>'is_live DESC'
         ]);
 
-        return $this->response($livePost);
+        $livePostArray[] = $livePost;
+
+        $postMatch = $livePost->getPostsMatches();
+
+        if ($postMatch) {
+            $livePostArray['team_a'] = Teams::findFirst($postMatch->team_a);
+            $livePostArray['team_b'] = Teams::findFirst($postMatch->team_b);
+            $livePostArray['team_a_organization'] = Organizations::findFirst($livePostArray['team_a']->organizations_id);
+            $livePostArray['team_b_organization'] = Organizations::findFirst($livePostArray['team_b']->organizations_id);
+        };
+
+        $livePostArray['match'] = $postMatch;
+
+        return $this->response($livePostArray);
     }
 }
