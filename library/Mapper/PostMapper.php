@@ -49,6 +49,7 @@ class PostMapper extends CustomMapper
         $postDto->weight = $post->weight;
         $postDto->premium = $post->premium;
         $postDto->published_at = $post->published_at;
+        $postDto->is_live = $post->is_live;
         $postDto->created_at = $post->created_at;
         $postDto->updated_at = $post->updated_at;
         $postDto->is_deleted = $post->is_deleted;
