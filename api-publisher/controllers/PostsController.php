@@ -13,7 +13,7 @@ use Gewaer\Mapper\PublisherPostMapper;
 use Gewaer\Models\PostsLikes;
 use Phalcon\Http\Response;
 use Gewaer\Models\PostsTournamentMatches;
-use Gewaer\Dto\TournamentMatches;
+use Gewaer\Models\TournamentMatches;
 
 /**
  * Class BaseController.
@@ -132,7 +132,7 @@ class PostsController extends CanvasBaseController
         $postMatch = PostsTournamentMatches::findFirst($livePost->id);
 
         if ($postMatch) {
-            $tournamentMatch = TournamentMatches($postMatch->id);
+            $tournamentMatch = TournamentMatches::findFirst($postMatch->id);
             if ($tournamentMatch) {
                 $livePostArray['team_a'] = Teams::findFirst($tournamentMatch->team_a);
                 $livePostArray['team_b'] = Teams::findFirst($tournamentMatch->team_b);
