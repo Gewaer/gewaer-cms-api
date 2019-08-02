@@ -122,7 +122,7 @@ class PostsController extends CanvasBaseController
             'order'=>'is_live DESC'
         ]);
 
-        $livePostArray[] = $livePost;
+        $livePostArray['post'] = $livePost;
 
         $postMatch = $livePost->getPostsMatches();
 
