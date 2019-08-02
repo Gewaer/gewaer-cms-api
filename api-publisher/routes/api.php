@@ -29,6 +29,7 @@ $routesSite = [
     Route::get('/users/{id}')->controller('UsersController')->action('getById'),
     Route::get('/posts')->action('index'),
     Route::post('/posts/{id}/like')->controller('PostsController')->action('like'),
+    Route::get('/posts/live')->controller('PostsController')->action('getCurrentLivePost'),
     Route::get('/tournaments-groups')->controller('TournamentGroupsController')->action('index'),
     Route::get('/tournaments-groups/{id}')->controller('TournamentGroupsController')->action('getById'),
     Route::get('/tournaments-groups-teams')->controller('TournamentGroupsTeamsController')->action('index'),
