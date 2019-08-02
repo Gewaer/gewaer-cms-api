@@ -168,6 +168,36 @@ class PublisherPosts
 
     /**
      *
+     * @var int
+     */
+    public $match;
+
+    /**
+     *
+     * @var int
+     */
+    public $match_team_a;
+
+    /**
+     *
+     * @var int
+     */
+    public $match_team_b;
+
+    /**
+     *
+     * @var int
+     */
+    public $team_a_organization;
+
+    /**
+     *
+     * @var int
+     */
+    public $team_b_organization;
+
+    /**
+     *
      * @var string
      */
     public $created_at;

@@ -35,7 +35,8 @@ $privateRoutes = [
     Route::crud('/regions-countries')->controller('RegionsCountriesController'),
     Route::crud('/regions')->controller('RegionsController'),
     Route::crud('/leagues')->controller('LeaguesController'),
-    Route::crud('/organizations')->controller('OrganizationsController')
+    Route::crud('/organizations')->controller('OrganizationsController'),
+    Route::crud('/posts-tournament-matches')->controller('PostsTournamentMatchesController')
 ];
 
 $routeGroup = RouteGroup::from($routes)

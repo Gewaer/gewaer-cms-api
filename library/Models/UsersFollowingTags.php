@@ -1,49 +1,36 @@
 <?php
 declare(strict_types=1);
 
-namespace Gewaer\Models;
+namespace Canvas\Models;
 
-use Canvas\Listener\User;
-use Canvas\Models\Users;
-
-class Tags extends BaseModel
+class UsersFollowingTags extends AbstractModel
 {
     /**
+     *
      * @var integer
      */
-    public $id;
+    public $users_id;
 
     /**
+     *
      * @var integer
      */
-    public $sites_id;
+    public $tags_id;
 
     /**
+     *
      * @var string
-     */
-    public $title;
-
-    /**
-     * @var string
-     */
-    public $slug;
-
-    /**
-     * @var json
-     */
-    public $metadata;
-
-    /**
-     * @var datetime
      */
     public $created_at;
 
     /**
-     * @var datetime
+     *
+     * @var string
      */
     public $updated_at;
 
     /**
+     *
      * @var integer
      */
     public $is_deleted;
@@ -55,25 +42,19 @@ class Tags extends BaseModel
     {
         parent::initialize();
 
-        $this->setSource('tags');
-
-        $this->hasMany(
-            'id',
-            PostsTags::class,
-            'tags_id',
-            ['alias' => 'postsTags']
-        );
-
         $this->hasManyToMany(
             'id',
-            PostsTags::class,
-            'tags_id',
-            'users_id',
             Users::class,
+            'users_id',
+            'tags_id',
+            Tags::class,
             'id',
             ['alias' => 'usersTags']
         );
+
+        $this->setSource('users_following_tags');
     }
+
     /**
      * Returns table name mapped in the model.
      *
@@ -81,7 +62,6 @@ class Tags extends BaseModel
      */
     public function getSource(): string
     {
-        return 'tags';
+        return 'users_following_tags';
     }
-
 }

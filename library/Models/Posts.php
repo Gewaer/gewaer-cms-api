@@ -193,6 +193,16 @@ class Posts extends BaseModel
             ['alias' => 'tags']
         );
 
+        $this->hasManyToMany(
+            'id',
+            PostsTournamentMatches::class,
+            'posts_id',
+            'tournament_matches_id',
+            TournamentMatches::class,
+            'id',
+            ['alias' => 'postsMatches']
+        );
+
         $this->hasMany(
             'id',
             PostsTags::class,
