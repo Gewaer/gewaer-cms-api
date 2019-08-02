@@ -12,6 +12,8 @@ use Gewaer\Dto\PublisherPosts as PostDto;
 use Gewaer\Mapper\PublisherPostMapper;
 use Gewaer\Models\PostsLikes;
 use Phalcon\Http\Response;
+use Gewaer\Models\PostsTournamentMatches;
+use Gewaer\Dto\TournamentMatches;
 
 /**
  * Class BaseController.
@@ -124,17 +126,22 @@ class PostsController extends CanvasBaseController
 
         $livePostArray['post'] = $livePost;
 
-        $postMatch = $livePost->getPostsMatches();
+        /**
+         * @todo Find out why many to many relationships information does not work
+         */
+        $postMatch = PostsTournamentMatches::findFirst($livePost->id);
 
         if ($postMatch) {
-            $livePostArray['team_a'] = Teams::findFirst($postMatch->team_a);
-            $livePostArray['team_b'] = Teams::findFirst($postMatch->team_b);
-            $livePostArray['team_a_organization'] = Organizations::findFirst($livePostArray['team_a']->organizations_id);
-            $livePostArray['team_b_organization'] = Organizations::findFirst($livePostArray['team_b']->organizations_id);
-        };
-
-        $livePostArray['match'] = $postMatch;
-
+            $tournamentMatch = TournamentMatches($postMatch->id);
+            if ($tournamentMatch) {
+                $livePostArray['team_a'] = Teams::findFirst($tournamentMatch->team_a);
+                $livePostArray['team_b'] = Teams::findFirst($tournamentMatch->team_b);
+                $livePostArray['team_a_organization'] = Organizations::findFirst($livePostArray['team_a']->organizations_id);
+                $livePostArray['team_b_organization'] = Organizations::findFirst($livePostArray['team_b']->organizations_id);
+            };
+    
+            $livePostArray['match'] = $tournamentMatch;
+        }
         return $this->response($livePostArray);
     }
 }
