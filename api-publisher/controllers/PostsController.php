@@ -114,8 +114,8 @@ class PostsController extends CanvasBaseController
     public function getCurrentLivePost(): Response
     {
         $livePost = $this->model::findFirst([
-            'conditions'=> 'featured = 1',
-            'order'=>'featured DESC'
+            'conditions'=> 'is_live = 1',
+            'order'=>'is_live DESC'
         ]);
 
         return $this->response($livePost);
