@@ -126,6 +126,12 @@ class Posts extends BaseModel
     public $published_at;
 
     /**
+     *
+     * @var int
+     */
+    public $is_live;
+
+    /**
      * @var datetime
      */
     public $created_at;

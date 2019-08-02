@@ -26,7 +26,7 @@ class PostsController extends CanvasBaseController
        */
     protected $createFields = [
         'sites_id', 'post_types_id', 'category_id', 'title', 'slug', 'summary', 'content', 'media_url', 'likes_count', 'post_parent_id',
-        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at', 'sites_id'
+        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at','is_live'
     ];
 
     /*
@@ -36,7 +36,7 @@ class PostsController extends CanvasBaseController
      */
     protected $updateFields = [
         'sites_id', 'post_types_id', 'category_id', 'title', 'slug', 'summary', 'content', 'media_url', 'likes_count', 'post_parent_id',
-        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at', 'sites_id'
+        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at','is_live'
     ];
 
     /**

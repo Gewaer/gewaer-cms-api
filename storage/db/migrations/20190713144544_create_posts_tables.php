@@ -261,11 +261,17 @@ class CreatePostsTables extends AbstractMigration
                 'limit' => '3',
                 'after' => 'comment_status',
             ])
+            ->addColumn('is_live', 'integer', [
+                'null' => false,
+                'default' => '0',
+                'limit' => '3',
+                'after' => 'is_published',
+            ])
             ->addColumn('featured', 'boolean', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_TINY,
-                'after' => 'is_published',
+                'after' => 'is_live',
             ])
             ->addColumn('weight', 'decimal', [
                 'null' => false,

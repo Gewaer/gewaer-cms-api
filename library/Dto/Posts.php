@@ -162,6 +162,12 @@ class Posts
 
     /**
      *
+     * @var int
+     */
+    public $is_live;
+
+    /**
+     *
      * @var string
      */
     public $created_at;
