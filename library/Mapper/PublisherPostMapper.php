@@ -7,6 +7,8 @@ namespace Gewaer\Mapper;
 use AutoMapperPlus\CustomMapper\CustomMapper;
 use Phalcon\Mvc\Model\Resultset;
 use Gewaer\Models\PostsLikes;
+use Gewaer\Models\Teams;
+use Gewaer\Models\Organizations;
 
 class PublisherPostMapper extends CustomMapper
 {
@@ -33,7 +35,6 @@ class PublisherPostMapper extends CustomMapper
         $postDto->slug = $post->slug;
         $postDto->summary = $post->summary;
         $postDto->content = $post->content;
-
         $postDto->tags = $post->getTags(['columns' => 'id, title']);
         $postDto->media_url = $post->media_url;
         $postDto->likes_count = $post->likes_count;
@@ -51,6 +52,20 @@ class PublisherPostMapper extends CustomMapper
         $postDto->premium = $post->premium;
         $postDto->published_at = $post->published_at;
         $postDto->is_live = $post->is_live;
+
+        if ($postDto->is_live) {
+
+            $postDto->match = $post->getPostsMatches();
+
+            if ($postDto->match) {
+                $postDto->match_team_a = Teams::findFirst($postDto->match->team_a);
+                $postDto->match_team_b = Teams::findFirst($postDto->match->team_b);
+                $postDto->team_a_organization = Organizations::findFirst($postDto->match_team_a->organizations_id);
+                $postDto->team_b_organization = Organizations::findFirst($postDto->match_team_b->organizations_id);
+            }
+        }
+        
+
         $postDto->created_at = $post->created_at;
         $postDto->updated_at = $post->updated_at;
         $postDto->is_deleted = $post->is_deleted;

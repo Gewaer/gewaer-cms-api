@@ -21,7 +21,9 @@ $routes = [
     Route::get('/leagues/{id}')->controller('LeaguesController')->action('getById'),
     Route::get('/organizations')->controller('OrganizationsController')->action('index'),
     Route::get('/organizations/{id}')->controller('OrganizationsController')->action('getById'),
-    Route::post('/users')->controller('AuthController')->action('signup')
+    Route::post('/users')->controller('AuthController')->action('signup'),
+    Route::get('/posts-tournament-matches')->controller('PostsTournamentMatchesController')->action('index'),
+    Route::get('/posts-tournament-matches/{id}')->controller('PostsTournamentMatchesController')->action('getById')
 
 ];
 
