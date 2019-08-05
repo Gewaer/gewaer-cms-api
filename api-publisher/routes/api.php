@@ -24,12 +24,12 @@ $routes = [
     Route::post('/users')->controller('AuthController')->action('signup'),
     Route::get('/posts-tournament-matches')->controller('PostsTournamentMatchesController')->action('index'),
     Route::get('/posts-tournament-matches/{id}')->controller('PostsTournamentMatchesController')->action('getById')
-
 ];
 
 $routesSite = [
     Route::get('/users/{id}')->controller('UsersController')->action('getById'),
     Route::get('/posts')->action('index'),
+    Route::get('/posts/{id}')->action('getById'),
     Route::post('/posts/{id}/like')->controller('PostsController')->action('like'),
     Route::get('/posts/live')->controller('PostsController')->action('getCurrentLivePost'),
     Route::get('/tournaments-groups')->controller('TournamentGroupsController')->action('index'),

@@ -54,7 +54,6 @@ class PublisherPostMapper extends CustomMapper
         $postDto->is_live = $post->is_live;
 
         if ($postDto->is_live) {
-
             $postDto->match = $post->getPostsMatches();
 
             if ($postDto->match) {
@@ -64,7 +63,6 @@ class PublisherPostMapper extends CustomMapper
                 $postDto->team_b_organization = Organizations::findFirst($postDto->match_team_b->organizations_id);
             }
         }
-        
 
         $postDto->created_at = $post->created_at;
         $postDto->updated_at = $post->updated_at;

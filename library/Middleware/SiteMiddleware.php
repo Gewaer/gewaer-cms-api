@@ -39,7 +39,7 @@ class SiteMiddleware implements MiddlewareInterface
         }
 
         //get site
-        $site =  Sites::findFirstOrFail([
+        $site = Sites::findFirstOrFail([
             'conditions' => 'key = ?0 and is_deleted = 0',
             'bind' => [$request->getHeader('SITE-KEY')]
         ]);
@@ -62,7 +62,6 @@ class SiteMiddleware implements MiddlewareInterface
         );
 
         if ($request->getBearerTokenFromHeader()) {
-
             /**
             * This is where we will find if the user exists based on
             * the token passed using Bearer Authentication.
