@@ -40,11 +40,6 @@ class TournamentMatches extends BaseModel
      */
     public $team_b_score;
 
-        /**
-     * @var date
-     */
-    public $game_date;
-
     /**
      * @var time
      */
@@ -73,7 +68,22 @@ class TournamentMatches extends BaseModel
     /**
      * @var integer
      */
-    public $match_series;
+    public $match_series_id;
+
+    /**
+     * @var integer
+     */
+    public $duration;
+
+    /**
+     * @var integer
+     */
+    public $third_party_id;
+
+    /**
+     * @var integer
+     */
+    public $games_id;
 
     /**
      * @var datetime
