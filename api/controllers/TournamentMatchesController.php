@@ -122,11 +122,11 @@ class TournamentMatchesController extends CanvasBaseController
 
         $request['winning_team'] = $teamA->third_party_id == $request['winning_team'] ? $teamA->id : $teamB->id;
 
-        if (!strpos($request['start_time'], ':')) {
+        if (!strpos($request['start_time'], '/')) {
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
         }
 
-        if (!strpos($request['end_time'], ':')) {
+        if (!strpos($request['end_time'], '/')) {
             $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
         }
 
@@ -168,11 +168,11 @@ class TournamentMatchesController extends CanvasBaseController
 
         $request['winning_team'] = $teamA->third_party_id == $request['winning_team'] ? $teamA->id : $teamB->id;
 
-        if (!strpos($request['start_time'], ':')) {
+        if (!strpos($request['start_time'], '/')) {
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
         }
 
-        if (!strpos($request['end_time'], ':')) {
+        if (!strpos($request['end_time'], '/')) {
             $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
         }
 
