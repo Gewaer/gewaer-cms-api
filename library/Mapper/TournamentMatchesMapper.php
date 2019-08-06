@@ -27,7 +27,6 @@ class TournamentMatchesMapper extends CustomMapper
         $matchesDto->id = $matches->getId();
         $matchesDto->stages_id = $matches->stages_id;
         $matchesDto->groups_id = $matches->groups_id;
-        $matchesDto->game_date = $matches->game_date;
         $matchesDto->start_time = $matches->start_time;
         $matchesDto->end_time = $matches->end_time;
         $matchesDto->is_tiebreaker = $matches->is_tiebreaker;

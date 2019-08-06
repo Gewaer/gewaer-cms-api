@@ -22,14 +22,14 @@ class TournamentMatchesController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series'];
+    protected $createFields = ['third_party_id','games_id','stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series_id'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series'];
+    protected $updateFields = ['third_party_id','games_id','stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series_id'];
 
     /**
      * set objects.
