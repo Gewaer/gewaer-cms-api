@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Canvas\Models;
+namespace Gewaer\Models;
 
-class UsersFollowingTags extends AbstractModel
+class UsersFollowingTags extends BaseModel
 {
     /**
      *
