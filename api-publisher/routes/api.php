@@ -59,7 +59,8 @@ $routesSite = [
     Route::get('/currencies')->controller('CurrenciesController'),
     Route::get('/currencies/{id}')->controller('CurrenciesController')->action('getById'),
     Route::get('/sources')->controller('SourcesController'),
-    Route::get('/sources/{id}')->controller('SourcesController')->action('getById')
+    Route::get('/sources/{id}')->controller('SourcesController')->action('getById'),
+    Route::crud('/users-tags')->controller('UsersFollowingTagsController')
 ];
 
 $routeGroup = RouteGroup::from($routes)
