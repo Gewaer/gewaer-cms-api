@@ -26,6 +26,7 @@ use Canvas\Providers\MapperProvider;
 use Canvas\Providers\ElasticProvider;
 use Canvas\Providers\SocialLoginProvider;
 use Gewaer\Providers\MiddlewareProvider;
+use Gewaer\Providers\RegistryProvider;
 
 return [
     ConfigProvider::class,
@@ -49,5 +50,6 @@ return [
     FileSystemProvider::class,
     MapperProvider::class,
     ElasticProvider::class,
-    SocialLoginProvider::class
+    SocialLoginProvider::class,
+    RegistryProvider::class
 ];
