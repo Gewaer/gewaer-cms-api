@@ -18,4 +18,28 @@ use Canvas\Models\Users as CanvasUsers;
  */
 class Users extends CanvasUsers
 {
+    /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->hasMany(
+            'id',
+            UsersFollowingTags::class,
+            'users_id',
+            ['alias' => 'userFollowingTags']
+        );
+
+        $this->hasManyToMany(
+            'id',
+            UsersFollowingTags::class,
+            'users_id',
+            'tags_id',
+            Tags::class,
+            'id',
+            ['alias' => 'tags']
+        );
+    }
 }

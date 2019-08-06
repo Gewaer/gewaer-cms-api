@@ -63,16 +63,6 @@ class Tags extends BaseModel
             'tags_id',
             ['alias' => 'postsTags']
         );
-
-        $this->hasManyToMany(
-            'id',
-            PostsTags::class,
-            'tags_id',
-            'users_id',
-            Users::class,
-            'id',
-            ['alias' => 'usersTags']
-        );
     }
     /**
      * Returns table name mapped in the model.
