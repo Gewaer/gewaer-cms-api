@@ -20,14 +20,14 @@ class TeamsController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['regions_id','games_id','organizations_id','leagues_id','name','founded_date','is_active'];
+    protected $createFields = ['regions_id','games_id','organizations_id','leagues_id','third_party_id','name','founded_date','is_active'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['regions_id','games_id','organizations_id','leagues_id','name','founded_date','is_active'];
+    protected $updateFields = ['regions_id','games_id','organizations_id','leagues_id','third_party_id','name','founded_date','is_active'];
 
     /**
      * set objects.
