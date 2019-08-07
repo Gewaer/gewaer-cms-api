@@ -115,6 +115,12 @@ class PublisherPosts
      *
      * @var int
      */
+    public $shares_url;
+
+    /**
+     *
+     * @var int
+     */
     public $views_count;
 
     /**
