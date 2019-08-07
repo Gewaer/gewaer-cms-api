@@ -107,9 +107,29 @@ class PostsController extends CanvasBaseController
     {
         $post = parent::processCreate($request);
         $request = $this->processInput($request->getPostData());
-
+        
         $post->addTags($request['tags']);
 
         return $post;
+    }
+
+    /**
+     * Process the input data.
+     *
+     * @param array $request
+     * @return array
+     */
+    protected function processInput(array $request): array
+    {
+        //encode the attribute field from #teamfrontend
+        if (!empty($request['attributes']) && is_array($request['attributes'])) {
+            $request['attributes'] = json_encode($request['attributes']);
+        }
+
+        if ($request['status'] == 3) {
+            $request['is_published'] = 1;
+        }
+
+        return $request;
     }
 }

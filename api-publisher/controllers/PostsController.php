@@ -144,4 +144,24 @@ class PostsController extends CanvasBaseController
         }
         return $this->response($livePostArray);
     }
+
+    /**
+     * Process the input data.
+     *
+     * @param array $request
+     * @return array
+     */
+    protected function processInput(array $request): array
+    {
+        //encode the attribute field from #teamfrontend
+        if (!empty($request['attributes']) && is_array($request['attributes'])) {
+            $request['attributes'] = json_encode($request['attributes']);
+        }
+
+        if ($request['status'] == 3) {
+            $request['is_published'] = 1;
+        }
+
+        return $request;
+    }
 }
