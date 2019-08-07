@@ -244,6 +244,7 @@ class Posts extends BaseModel
     {
         $this->status = Status::PUBLISHED;
         $this->published_at = date('Y-m-d H:i:s');
+        $this->is_published = 1;
 
         return $this->updateOrFail();
     }
