@@ -73,6 +73,11 @@ class TournamentMatches extends BaseModel
     /**
      * @var integer
      */
+    public $game_date;
+
+    /**
+     * @var integer
+     */
     public $duration;
 
     /**
@@ -170,6 +175,17 @@ class TournamentMatches extends BaseModel
     public function getSource(): string
     {
         return 'tournament_matches';
+    }
+
+
+    /**
+     * Events after save.
+     *
+     * @return void
+     */
+    public function beforeSave()
+    {
+        $this->game_date = date('Y-m-d', strtotime($this->start_time));
     }
 
 }
