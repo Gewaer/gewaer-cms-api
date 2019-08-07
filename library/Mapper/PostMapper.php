@@ -40,10 +40,11 @@ class PostMapper extends CustomMapper
         $postDto->users_likes = PostsLikes::getCurrentUsersLike($post->getId());
         $postDto->post_parent_id = $post->post_parent_id;
         $postDto->shares_count = $post->shares_count;
+        $postDto->shares_url = $post->shares_url;
         $postDto->views_count = $post->views_count;
         $postDto->comment_count = $post->comment_count;
         $postDto->status = $post->status;
-        $postDto->files = $post->getFiles();
+        // $postDto->files = $post->getFiles();
         $postDto->comment_status = $post->comment_status;
         $postDto->is_published = $post->is_published;
         $postDto->featured = $post->featured;

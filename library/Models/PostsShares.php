@@ -16,6 +16,11 @@ class PostsShares extends BaseModel
     public $users_id;
 
     /**
+     * @var string
+     */
+    public $shares_url;
+
+    /**
      * @var datetime
      */
     public $created_at;

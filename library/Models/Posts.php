@@ -6,6 +6,7 @@ namespace Gewaer\Models;
 use Baka\Support\Arr;
 use Canvas\Traits\FileSystemModelTrait;
 use Gewaer\Models\PostsTypes;
+use Phalcon\Di;
 
 class Posts extends BaseModel
 {
@@ -80,6 +81,11 @@ class Posts extends BaseModel
      * @var integer
      */
     public $shares_count;
+
+    /**
+     * @var integer
+     */
+    public $shares_url;
 
     /**
      * @var integer
@@ -268,9 +274,11 @@ class Posts extends BaseModel
      *
      * @return void
      */
-    public function afterSave()
+    public function afterCreate()
     {
         $this->associateFileSystem();
+        $this->shares_url = Di::getDefault()->getConfig()->app->frontEndUrl . '/posts/' .$this->id;
+        $this->update();
     }
 
     /**
