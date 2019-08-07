@@ -52,6 +52,13 @@ class UsersFollowingTags extends BaseModel
             ['alias' => 'usersTags']
         );
 
+        $this->belongsTo(
+            'tags_id',
+            Tags::class,
+            'id',
+            ['alias' => 'tags']
+        );
+
         $this->setSource('users_following_tags');
     }
 
