@@ -83,6 +83,11 @@ class PublisherPosts
     public $media_url;
 
     /**
+     * @var string
+     */
+    public $media_source;
+
+    /**
      *
      * @var int
      */

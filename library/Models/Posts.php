@@ -5,6 +5,7 @@ namespace Gewaer\Models;
 
 use Baka\Support\Arr;
 use Canvas\Traits\FileSystemModelTrait;
+use Gewaer\Models\PostsTypes;
 
 class Posts extends BaseModel
 {
@@ -64,6 +65,11 @@ class Posts extends BaseModel
      * @var string
      */
     public $media_url;
+
+    /**
+     * @var string
+     */
+    public $media_source;
 
     /**
      * @var integer
@@ -247,6 +253,17 @@ class Posts extends BaseModel
     }
 
     /**
+     * Get Media Source from Media Url
+     *
+     * @param string $mediaUrl
+     * @return void
+     */
+    public function setMediaSource(string $mediaUrl): void
+    {
+        $this->media_source = strpos($mediaUrl, 'youtube') ? 'youtube' : 'twitch';
+    }
+
+    /**
      * Events after save.
      *
      * @return void
@@ -265,6 +282,10 @@ class Posts extends BaseModel
     {
         if ($this->status == Status::PUBLISHED) {
             $this->publish();
+        }
+
+        if ($this->post_types_id == PostsTypes::VIDEO && isset($this->media_url)) {
+            $this->setMediaSource($this->media_url);
         }
     }
 
