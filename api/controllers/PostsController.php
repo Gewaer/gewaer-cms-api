@@ -6,6 +6,7 @@ namespace Gewaer\Api\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Posts;
+use Gewaer\Models\Status;
 use Gewaer\Dto\Posts as PostDto;
 use Gewaer\Mapper\PostMapper;
 use Canvas\Http\Request;
@@ -90,6 +91,10 @@ class PostsController extends CanvasBaseController
     protected function processEdit(Request $request, ModelInterface $record): ModelInterface
     {
         $post = parent::processEdit($request, $record);
+
+        if ($post->status == Status::PUBLISHED) {
+            $post->publish();
+        }
         $request = $this->processInput($request->getPutData());
 
         $post->addTags($request['tags']);
@@ -106,30 +111,14 @@ class PostsController extends CanvasBaseController
     protected function processCreate(Request $request): ModelInterface
     {
         $post = parent::processCreate($request);
+
+        if ($post->status == Status::PUBLISHED) {
+            $post->publish();
+        }
         $request = $this->processInput($request->getPostData());
         
         $post->addTags($request['tags']);
 
         return $post;
-    }
-
-    /**
-     * Process the input data.
-     *
-     * @param array $request
-     * @return array
-     */
-    protected function processInput(array $request): array
-    {
-        //encode the attribute field from #teamfrontend
-        if (!empty($request['attributes']) && is_array($request['attributes'])) {
-            $request['attributes'] = json_encode($request['attributes']);
-        }
-
-        if ($request['status'] == 3) {
-            $request['is_published'] = 1;
-        }
-
-        return $request;
     }
 }
