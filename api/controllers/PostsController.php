@@ -79,46 +79,4 @@ class PostsController extends CanvasBaseController
             $this->mapper->mapMultiple($results, PostDto::class)
             : $this->mapper->map($results, PostDto::class);
     }
-
-    /**
-     * Process the update request and return the object.
-     *
-     * @param Request $request
-     * @param ModelInterface $record
-     * @throws Exception
-     * @return ModelInterface
-     */
-    protected function processEdit(Request $request, ModelInterface $record): ModelInterface
-    {
-        $post = parent::processEdit($request, $record);
-
-        if ($post->status == Status::PUBLISHED) {
-            $post->publish();
-        }
-        $request = $this->processInput($request->getPutData());
-
-        $post->addTags($request['tags']);
-
-        return $post;
-    }
-
-    /**
-     * Process the create request and trecurd the boject.
-     *
-     * @return ModelInterface
-     * @throws Exception
-     */
-    protected function processCreate(Request $request): ModelInterface
-    {
-        $post = parent::processCreate($request);
-
-        if ($post->status == Status::PUBLISHED) {
-            $post->publish();
-        }
-        $request = $this->processInput($request->getPostData());
-        
-        $post->addTags($request['tags']);
-
-        return $post;
-    }
 }

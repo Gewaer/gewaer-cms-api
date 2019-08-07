@@ -14,7 +14,6 @@ use Gewaer\Models\PostsLikes;
 use Phalcon\Http\Response;
 use Gewaer\Models\PostsTournamentMatches;
 use Gewaer\Models\TournamentMatches;
-use Gewaer\Models\Status;
 
 /**
  * Class BaseController.
@@ -147,44 +146,18 @@ class PostsController extends CanvasBaseController
     }
 
     /**
-     * Process the update request and return the object.
+     * Process the input data.
      *
-     * @param Request $request
-     * @param ModelInterface $record
-     * @throws Exception
-     * @return ModelInterface
+     * @param array $request
+     * @return array
      */
-    protected function processEdit(Request $request, ModelInterface $record): ModelInterface
+    protected function processInput(array $request): array
     {
-        $post = parent::processEdit($request, $record);
-
-        if ($post->status == Status::PUBLISHED) {
-            $post->publish();
+        //encode the attribute field from #teamfrontend
+        if (!empty($request['attributes']) && is_array($request['attributes'])) {
+            $request['attributes'] = json_encode($request['attributes']);
         }
-        $request = $this->processInput($request->getPutData());
 
-        $post->addTags($request['tags']);
-
-        return $post;
-    }
-
-    /**
-     * Process the create request and trecurd the boject.
-     *
-     * @return ModelInterface
-     * @throws Exception
-     */
-    protected function processCreate(Request $request): ModelInterface
-    {
-        $post = parent::processCreate($request);
-
-        if ($post->status == Status::PUBLISHED) {
-            $post->publish();
-        }
-        $request = $this->processInput($request->getPostData());
-        
-        $post->addTags($request['tags']);
-
-        return $post;
+        return $request;
     }
 }
