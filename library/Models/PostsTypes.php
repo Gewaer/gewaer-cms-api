@@ -5,6 +5,10 @@ namespace Gewaer\Models;
 
 class PostsTypes extends BaseModel
 {
+    const ARTICLE = 1;
+    const VIDEO = 2;
+    const PODCAST = 3;
+
     /**
      * @var integer
      */
