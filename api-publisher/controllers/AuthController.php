@@ -43,8 +43,8 @@ class AuthController extends CanvasAuthController
 
         $user->email = $this->request->getPost('email', 'email');
         $firstname = explode('@', $user->email);
-        $user->firstname = $firstname;
-        $user->lastname = $firstname;
+        $user->firstname = $firstname[0] ?? null;
+        $user->lastname = $firstname[0] ?? null;
         $user->password = ltrim(trim($this->request->getPost('password', 'string', '')));
         $userIp = $this->request->getClientAddress(); //help getting the client ip on scrutinizer :(
         $user->displayname = ltrim(trim($this->request->getPost('displayname', 'string', '')));
