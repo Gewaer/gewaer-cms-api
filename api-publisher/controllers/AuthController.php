@@ -5,24 +5,16 @@ declare(strict_types=1);
 namespace Gewaer\Api\Publisher\Controllers;
 
 use Canvas\Api\Controllers\AuthController as CanvasAuthController;
-
-use Baka\Auth\Models\UserLinkedSources;
 use Baka\Auth\Models\Users;
 use Exception;
 use Phalcon\Http\Response;
-use Phalcon\Validation;
 use Phalcon\Validation\Validator\Confirmation;
 use Phalcon\Validation\Validator\Email as EmailValidator;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\StringLength;
-use Baka\Http\Api\BaseController;
 use Baka\Auth\Models\Sessions;
-use Canvas\Models\Sources;
-use Canvas\Exception\ServerErrorHttpException;
-use Canvas\Exception\ModelException;
 use Baka\Auth\Models\Users as BakaUsers;
-use Canvas\Traits\AuthTrait;
-use Canvas\Traits\SocialLoginTrait;
+use Canvas\Validation as CanvasValidation;
 
 /**
  * Class AuthController.
@@ -37,7 +29,85 @@ use Canvas\Traits\SocialLoginTrait;
  */
 class AuthController extends CanvasAuthController
 {
-        /**
+    /**
+    * User Signup.
+    *
+    * @method POST
+    * @url /v1/users
+    *
+    * @return Response
+    */
+    public function signup() : Response
+    {
+        $user = $this->userModel;
+
+        $user->email = $this->request->getPost('email', 'email');
+        $firstname = explode('@', $user->email);
+        $user->firstname = $firstname[0] ?? null;
+        $user->lastname = $firstname[0] ?? null;
+        $user->password = ltrim(trim($this->request->getPost('password', 'string', '')));
+        $userIp = $this->request->getClientAddress(); //help getting the client ip on scrutinizer :(
+        $user->displayname = ltrim(trim($this->request->getPost('displayname', 'string', '')));
+        $user->defaultCompanyName = ltrim(trim($this->request->getPost('default_company', 'string', '')));
+
+        //Ok let validate user password
+        $validation = new CanvasValidation();
+        $validation->add('password', new PresenceOf(['message' => _('The password is required.')]));
+        $validation->add('firstname', new PresenceOf(['message' => _('The firstname is required.')]));
+        $validation->add('email', new EmailValidator(['message' => _('The email is not valid.')]));
+
+        $validation->add(
+            'password',
+            new StringLength([
+                'min' => 8,
+                'messageMinimum' => _('Password is too short. Minimum 8 characters.'),
+            ])
+        );
+
+        $validation->add('password', new Confirmation([
+            'message' => _('Password and confirmation do not match.'),
+            'with' => 'verify_password',
+        ]));
+
+        //validate this form for password
+        $validation->validate($user->toArray());
+
+        //user registration
+        try {
+            $this->db->begin();
+
+            $user->signup();
+
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+
+            throw new Exception($e->getMessage());
+        }
+
+        $token = $user->getToken();
+
+        //start session
+        $session = new Sessions();
+        $session->start($user, $token['sessionId'], $token['token'], $userIp, 1);
+
+        $authSession = [
+            'token' => $token['token'],
+            'time' => date('Y-m-d H:i:s'),
+            'expires' => date('Y-m-d H:i:s', time() + $this->config->jwt->payload->exp),
+            'id' => $user->getId(),
+        ];
+
+        $user->password = null;
+        $this->sendEmail($user, 'signup');
+
+        return $this->response([
+            'user' => $user,
+            'session' => $authSession
+        ]);
+    }
+
+    /**
      * Reset the user password.
      * @method PUT
      * @url /v1/reset
@@ -56,7 +126,7 @@ class AuthController extends CanvasAuthController
         $verifyPassword = trim($this->request->getPost('verify_password', 'string'));
 
         //Ok let validate user password
-        $validation = new Validation();
+        $validation = new CanvasValidation();
         $validation->add('new_password', new PresenceOf(['message' => _('The password is required.')]));
         $validation->add('new_password', new StringLength(['min' => 8, 'messageMinimum' => _('Password is too short. Minimum 8 characters.')]));
 
@@ -66,16 +136,10 @@ class AuthController extends CanvasAuthController
         ]));
 
         //validate this form for password
-        $messages = $validation->validate($this->request->getPost());
-        if (count($messages)) {
-            foreach ($messages as $message) {
-                throw new Exception($message);
-            }
-        }
+        $validation->validate($this->request->getPost());
 
         // Check that they are the same
         if ($newPassword == $verifyPassword) {
-
             // Has the password and set it
             // $userData->user_activation_forgot = '';
             $userData->user_active = 1;
@@ -83,7 +147,6 @@ class AuthController extends CanvasAuthController
 
             // Update
             if ($userData->update()) {
-
                 //log the user out of the site from all devices
                 $session = new Sessions();
                 $session->end($userData);
@@ -99,7 +162,7 @@ class AuthController extends CanvasAuthController
         }
     }
 
-        /**
+    /**
     * Set the email config array we are going to be sending.
     *
     * @param String $emailAction
@@ -121,8 +184,8 @@ class AuthController extends CanvasAuthController
             case 'reset':
                 $activationUrl = $this->config->app->frontEndUrl . '/user/activate/' . $user->user_activation_key;
                 $subject = _('Reset Password');
-                $body = sprintf(_('Hey '.$user->displayname .",\n".
-                                  "Follow the link below to reset your password: %sReset Password%s." . PHP_EOL ."If you didn't request to reset your password, ignore and delete this email."), '<a href="' . $activationUrl . '">', '</a>');
+                $body = sprintf(_('Hey ' . $user->displayname . ",\n" .
+                                  'Follow the link below to reset your password: %sReset Password%s.' . PHP_EOL . "If you didn't request to reset your password, ignore and delete this email."), '<a href="' . $activationUrl . '">', '</a>');
                 // send email that password was update
                 break;
             case 'email-change':
