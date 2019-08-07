@@ -61,4 +61,20 @@ class PostsShares extends BaseModel
     {
         return 'posts_shares';
     }
+
+    /**
+     * Events after save.
+     *
+     * @return void
+     */
+    public function afterCreate()
+    {
+        $post = Posts::findFirst($this->posts_id);
+        $post->shares_count += 1;
+        
+        if ($post->update()) {
+            $this->shares_url = $post->shares_url;
+            $this->update();
+        }
+    }
 }

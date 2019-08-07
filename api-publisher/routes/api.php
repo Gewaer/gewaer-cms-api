@@ -62,6 +62,7 @@ $routesSite = [
     Route::get('/sources/{id}')->controller('SourcesController')->action('getById'),
     Route::crud('/users-tags')->controller('UsersFollowingTagsController'),
     Route::delete('/users/{id}/tags/{tagsId}')->controller('UsersFollowingTagsController')->action('delete'),
+    Route::post('/posts-shares')->controller('PostsSharesController')
 ];
 
 $routeGroup = RouteGroup::from($routes)
