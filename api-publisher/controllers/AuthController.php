@@ -70,7 +70,7 @@ class AuthController extends CanvasAuthController
         ]));
 
         //validate this form for password
-        $validation->validate($this->request->getPost());
+        $validation->validate($user->toArray());
 
         //user registration
         try {
