@@ -6,7 +6,10 @@ namespace Gewaer\Api\Publisher\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\UsersFollowingTags;
+use Gewaer\Dto\UsersFollowingTags as UsersFollowingTagsDto;
+use Gewaer\Mapper\UsersFollowingTagsMapper;
 use Phalcon\Http\Response;
+use Canvas\Contracts\Controllers\ProcessOutputMapperTrait;
 
 /**
  * Class BaseController.
@@ -16,6 +19,7 @@ use Phalcon\Http\Response;
  */
 class UsersFollowingTagsController extends CanvasBaseController
 {
+    use ProcessOutputMapperTrait;
     /*
        * fields we accept to create
        *
@@ -38,6 +42,8 @@ class UsersFollowingTagsController extends CanvasBaseController
     public function onConstruct()
     {
         $this->model = new UsersFollowingTags();
+        $this->dto = UsersFollowingTagsDto::class;
+        $this->dtoMapper = new UsersFollowingTagsMapper();
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0']

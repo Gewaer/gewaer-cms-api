@@ -5,6 +5,7 @@ namespace Gewaer\Models;
 
 use Canvas\Listener\User;
 use Canvas\Models\Users;
+use Gewaer\Dto\UsersFollowingTags;
 
 class Tags extends BaseModel
 {
@@ -62,6 +63,13 @@ class Tags extends BaseModel
             PostsTags::class,
             'tags_id',
             ['alias' => 'postsTags']
+        );
+
+        $this->hasMany(
+            'id',
+            UsersFollowingTags::class,
+            'tags_id',
+            ['alias' => 'usersFollowingTags']
         );
     }
     /**
