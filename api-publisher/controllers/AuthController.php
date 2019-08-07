@@ -70,7 +70,9 @@ class AuthController extends CanvasAuthController
         ]));
 
         //validate this form for password
-        $validation->validate($user->toArray());
+        $userArray = $user->toArray();
+        $userArray['verify_password'] = $this->request->getPost('verify_password');
+        $validation->validate($userArray);
 
         //user registration
         try {
@@ -105,61 +107,6 @@ class AuthController extends CanvasAuthController
             'user' => $user,
             'session' => $authSession
         ]);
-    }
-
-    /**
-     * Reset the user password.
-     * @method PUT
-     * @url /v1/reset
-     *
-     * @return Response
-     */
-    public function reset(string $key) : Response
-    {
-        //is the key empty or does it existe?
-        if (empty($key) || !$userData = Users::findFirst(['user_activation_forgot = :key:', 'bind' => ['key' => $key]])) {
-            throw new Exception(_('This Key to reset password doesn\'t exist'));
-        }
-
-        // Get the new password and the verify
-        $newPassword = trim($this->request->getPost('new_password', 'string'));
-        $verifyPassword = trim($this->request->getPost('verify_password', 'string'));
-
-        //Ok let validate user password
-        $validation = new CanvasValidation();
-        $validation->add('new_password', new PresenceOf(['message' => _('The password is required.')]));
-        $validation->add('new_password', new StringLength(['min' => 8, 'messageMinimum' => _('Password is too short. Minimum 8 characters.')]));
-
-        $validation->add('new_password', new Confirmation([
-            'message' => _('Passwords do not match.'),
-            'with' => 'verify_password',
-        ]));
-
-        //validate this form for password
-        $validation->validate($this->request->getPost());
-
-        // Check that they are the same
-        if ($newPassword == $verifyPassword) {
-            // Has the password and set it
-            // $userData->user_activation_forgot = '';
-            $userData->user_active = 1;
-            $userData->password = Users::passwordHash($newPassword);
-
-            // Update
-            if ($userData->update()) {
-                //log the user out of the site from all devices
-                $session = new Sessions();
-                $session->end($userData);
-
-                $this->sendEmail($userData, 'reset');
-
-                return $this->response(_('Congratulations! You\'ve successfully changed your password.'));
-            } else {
-                throw new Exception(current($userData->getMessages()));
-            }
-        } else {
-            throw new Exception(_('Password are not the same'));
-        }
     }
 
     /**
