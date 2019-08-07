@@ -6,6 +6,7 @@ namespace Gewaer\Api\Publisher\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\UsersFollowingTags;
+use Phalcon\Http\Response;
 
 /**
  * Class BaseController.
@@ -41,5 +42,25 @@ class UsersFollowingTagsController extends CanvasBaseController
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0']
         ];
+    }
+
+    /**
+     * Delete by users_id and tags_id
+     *
+     * @param int $usersId
+     * @param int $tagsId
+     * @return void
+     */
+    public function delete(int $usersId, int $tagsId): Response
+    {
+        $userTag = $this->model::findFirstOrFail([
+            'conditions'=>'users_id = ?0 and tags_id = ?1 and is_deleted = 0',
+            'bind'=> [$usersId,$tagsId]
+        ]);
+
+        $userTag->delete();
+        
+        return $this->response("Users Tag Removed");
+
     }
 }

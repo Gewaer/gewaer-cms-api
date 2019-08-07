@@ -60,7 +60,8 @@ $routesSite = [
     Route::get('/currencies/{id}')->controller('CurrenciesController')->action('getById'),
     Route::get('/sources')->controller('SourcesController'),
     Route::get('/sources/{id}')->controller('SourcesController')->action('getById'),
-    Route::crud('/users-tags')->controller('UsersFollowingTagsController')
+    Route::crud('/users-tags')->controller('UsersFollowingTagsController'),
+    Route::delete('/users/{id}/tags/{tagsId}')->controller('UsersFollowingTagsController')->action('delete'),
 ];
 
 $routeGroup = RouteGroup::from($routes)
