@@ -240,12 +240,10 @@ class Posts extends BaseModel
      *
      * @return bool
      */
-    public function publish(): bool
+    public function publish(): void
     {
-        $this->status = Status::PUBLISHED;
         $this->published_at = date('Y-m-d H:i:s');
-
-        return $this->updateOrFail();
+        $this->is_published = 1;
     }
 
     /**
@@ -257,6 +255,19 @@ class Posts extends BaseModel
     {
         $this->associateFileSystem();
     }
+
+    /**
+     * Events after save.
+     *
+     * @return void
+     */
+    public function beforeSave()
+    {
+        if ($this->status == Status::PUBLISHED) {
+            $this->publish();
+        }
+    }
+
 
     /**
      * Given an array of tags, add it to the specific post.
