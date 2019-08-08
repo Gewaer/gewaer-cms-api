@@ -74,7 +74,7 @@ class PostsController extends CanvasBaseController
     }
 
     /**
-     * Add or Remove a like from a post
+     * Add or Remove a like from a post.
      *
      * @return Response
      * @throws Exception
@@ -82,16 +82,16 @@ class PostsController extends CanvasBaseController
     public function like(int $id): Response
     {
         $request = $this->processInput($this->request->getPostData());
-        $post =  Posts::findFirstOrFail($id);
+        $post = Posts::findFirstOrFail($id);
 
         $postLike = PostsLikes::findFirst([
             'conditions' => 'posts_id = ?0 and users_id = ?1 and is_deleted = 0',
-            'bind'=>[(int)$post->id,$this->userData->getId()]
+            'bind' => [(int)$post->id, $this->userData->getId()]
         ]);
 
         //If posts like already exists then it counts as an unlike
         if ($postLike) {
-            $post->likes_count  = $post->likes_count != 0 ? $post->likes_count - 1 : 0;
+            $post->likes_count = $post->likes_count != 0 ? $post->likes_count - 1 : 0;
             $post->updateOrFail();
 
             $postLike->is_deleted = 1;
@@ -100,7 +100,7 @@ class PostsController extends CanvasBaseController
             return $this->response($postLike);
         }
 
-        $postLike =  new PostsLikes();
+        $postLike = new PostsLikes();
         $postLike->posts_id = $id;
         $postLike->users_id = 2;
         $postLike->saveOrFail();
@@ -112,7 +112,7 @@ class PostsController extends CanvasBaseController
     }
 
     /**
-     * Get the current live post
+     * Get the current live post.
      * @return Response
      */
     public function getCurrentLivePost(): Response
@@ -120,8 +120,8 @@ class PostsController extends CanvasBaseController
         $livePostArray = [];
 
         $livePost = $this->model::findFirst([
-            'conditions'=> 'is_live = 1',
-            'order'=>'is_live DESC'
+            'conditions' => 'is_live = 1',
+            'order' => 'is_live DESC'
         ]);
 
         $livePostArray['post'] = $livePost;
@@ -139,7 +139,7 @@ class PostsController extends CanvasBaseController
                 $livePostArray['team_a_organization'] = Organizations::findFirst($livePostArray['team_a']->organizations_id);
                 $livePostArray['team_b_organization'] = Organizations::findFirst($livePostArray['team_b']->organizations_id);
             };
-    
+
             $livePostArray['match'] = $tournamentMatch;
         }
         return $this->response($livePostArray);
