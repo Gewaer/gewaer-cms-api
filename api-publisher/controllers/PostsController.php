@@ -7,6 +7,7 @@ namespace Gewaer\Api\Publisher\Controllers;
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Posts;
 use Gewaer\Models\Teams;
+use Gewaer\Models\UsersFollowingTags;
 use Gewaer\Models\Organizations;
 use Gewaer\Dto\PublisherPosts as PostDto;
 use Gewaer\Mapper\PublisherPostMapper;
@@ -159,5 +160,30 @@ class PostsController extends CanvasBaseController
         }
 
         return $request;
+    }
+
+    /**
+     * Retrieve all the posts related to the tags followed by the user
+     *
+     * @return void
+     */
+    public function getAllUsersTagsPosts(): Response
+    {
+        $postsArray = [];
+        // Current user tags
+        $userTags = UsersFollowingTags::findOrFail([
+            'conditions'=> 'users_id = ?0',
+            'bind'=>[$this->userData->getId()]
+        ]);
+
+        foreach ($userTags as $userTag) {
+            $posts = Posts::getPostsByTagsId((int)$userTag->tags_id);
+            foreach ($posts as $post) {
+                $postsArray[] = $post;
+            }
+        }
+
+        return $this->response($this->processOutput($postsArray));
+
     }
 }
