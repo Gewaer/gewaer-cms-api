@@ -349,4 +349,29 @@ class Posts extends BaseModel
 
         return $postsArray;
     }
+
+    /**
+     * Retrieve all the posts related to the tags followed by the user
+     *
+     * @return void
+     */
+    public static function getAllUsersTagsPosts(): array
+    {
+        $postsArray = [];
+        // Current user tags
+        $userTags = UsersFollowingTags::findOrFail([
+            'conditions'=> 'users_id = ?0',
+            'bind'=>[Di::getDefault()->getUserData()->getId()]
+        ]);
+
+        foreach ($userTags as $userTag) {
+            $posts = self::getPostsByTagsId((int)$userTag->tags_id);
+            foreach ($posts as $post) {
+                $postsArray[] = $post;
+            }
+        }
+
+        return $postsArray;
+
+    }
 }

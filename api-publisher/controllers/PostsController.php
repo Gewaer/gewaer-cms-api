@@ -85,7 +85,7 @@ class PostsController extends CanvasBaseController
 
         $postLike = new PostsLikes();
         $postLike->posts_id = $id;
-        $postLike->users_id = 2;
+        $postLike->users_id = $this->userData->getId();
         $postLike->saveOrFail();
 
         $post->likes_count += 1;
