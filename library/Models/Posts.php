@@ -6,6 +6,7 @@ namespace Gewaer\Models;
 use Baka\Support\Arr;
 use Canvas\Traits\FileSystemModelTrait;
 use Gewaer\Models\PostsTypes;
+use Gewaer\Models\PostsTags;
 use Phalcon\Di;
 
 class Posts extends BaseModel
@@ -327,5 +328,25 @@ class Posts extends BaseModel
         }
 
         return true;
+    }
+
+    /**
+     * Get posts by tags id
+     * @param int $tagsId
+     * @return array
+     */
+    public static function getPostsByTagsId(int $tagsId): array
+    {
+        $postsArray = [];
+        $postTags = PostsTags::findOrFail([
+            'conditions'=>'tags_id = ?0',
+            'bind'=>[$tagsId]
+        ]);
+
+        foreach ($postTags as $postTag) {
+            $postsArray[] = $postTag->getPosts();
+        }
+
+        return $postsArray;
     }
 }

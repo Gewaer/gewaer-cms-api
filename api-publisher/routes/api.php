@@ -64,7 +64,8 @@ $routesSite = [
     Route::delete('/users/{id}/tags/{tagsId}')->controller('UsersFollowingTagsController')->action('delete'),
     Route::post('/posts-shares')->controller('PostsSharesController'),
     Route::get('/comments')->action('index'),
-    Route::post('/posts/{id}/comment')->controller('CommentsController')->action('add')
+    Route::post('/posts/{id}/comment')->controller('CommentsController')->action('add'),
+    Route::get('/posts/users')->controller('PostsController')->action('getAllUsersTagsPosts')
 ];
 
 $routeGroup = RouteGroup::from($routes)
