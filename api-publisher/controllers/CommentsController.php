@@ -23,9 +23,8 @@ class CommentsController extends CanvasBaseController
        * @var array
        */
     protected $createFields = [
-        'users_id',
-        'posts_id',
         'content',
+        'approved',
         'comment_parent_id'
     ];
 
@@ -35,9 +34,8 @@ class CommentsController extends CanvasBaseController
      * @var array
      */
     protected $updateFields = [
-        'users_id',
-        'posts_id',
         'content',
+        'approved',
         'comment_parent_id'
     ];
 
@@ -52,12 +50,14 @@ class CommentsController extends CanvasBaseController
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0'],
+            ['sites_id', ':', $this->site->getId()],
         ];
     }
 
     /**
      * Add a new comment to a post.
      *
+     * @throws Exception
      * @param integer $id
      * @return void
      */
@@ -66,11 +66,31 @@ class CommentsController extends CanvasBaseController
         $post = Posts::findFirstOrFail($id);
 
         $request = $this->request->getPostData();
-        $request['posts_id'] = $post->getId();
-        $request['users_id'] = $this->userData->getId();
+        $this->model->posts_id = $post->getId();
+        $this->model->users_id = $this->userData->getId();
+        $this->model->sites_id = $this->site->getId();
+        $this->model->users_ip = $this->request->getClientAddress();
 
         $this->model->saveOrFail($request, $this->createFields);
 
         return $this->response($this->processOutput($this->model));
+    }
+
+    /**
+     * Delete a Record.
+     *
+     * @throws Exception
+     * @return Response
+     */
+    public function delete($id): Response
+    {
+        $record = $this->model::findFirstOrFail([
+            'conditions' => 'id = ?0 and users_id = ?1',
+            'bind' => [$id, $this->userData->getId()]
+        ]);
+
+        $record->softDelete();
+
+        return $this->response(['Delete Successfully']);
     }
 }
