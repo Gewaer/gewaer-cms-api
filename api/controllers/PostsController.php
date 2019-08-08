@@ -11,6 +11,7 @@ use Gewaer\Dto\Posts as PostDto;
 use Gewaer\Mapper\PostMapper;
 use Canvas\Http\Request;
 use Phalcon\Mvc\ModelInterface;
+use Canvas\Contracts\Controllers\ProcessOutputMapperTrait;
 
 /**
  * Class BaseController.
@@ -20,6 +21,8 @@ use Phalcon\Mvc\ModelInterface;
  */
 class PostsController extends CanvasBaseController
 {
+    use ProcessOutputMapperTrait;
+
     /*
        * fields we accept to create
        *
@@ -48,6 +51,8 @@ class PostsController extends CanvasBaseController
     public function onConstruct()
     {
         $this->model = new Posts();
+        $this->dto = PostDto::class;
+        $this->dtoMapper = new PostMapper();
         $this->model->users_id = $this->userData->getId();
         $this->model->companies_id = $this->userData->currentCompanyId();
         $this->model->sites_id = $this->site->getId();
@@ -56,27 +61,5 @@ class PostsController extends CanvasBaseController
             ['is_deleted', ':', '0'],
             ['companies_id', ':', $this->userData->currentCompanyId()],
         ];
-    }
-
-    /**
-     * Format output.
-     *
-     * @param mixed $results
-     * @return void
-     */
-    protected function processOutput($results)
-    {
-        //add a mapper
-        $this->dtoConfig->registerMapping(Posts::class, PostDto::class)
-            ->useCustomMapper(new PostMapper());
-
-        if (is_array($results) && isset($results['data'])) {
-            $results['data'] = $this->mapper->mapMultiple($results['data'], PostDto::class);
-            return  $results;
-        }
-
-        return is_iterable($results) ?
-            $this->mapper->mapMultiple($results, PostDto::class)
-            : $this->mapper->map($results, PostDto::class);
     }
 }

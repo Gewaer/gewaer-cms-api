@@ -344,7 +344,7 @@ class Posts extends BaseModel
         ]);
 
         foreach ($postTags as $postTag) {
-            $postsArray[] = $postTag->getPosts();
+            $postsArray[] = $postTag->getPosts()->id;
         }
 
         return $postsArray;
