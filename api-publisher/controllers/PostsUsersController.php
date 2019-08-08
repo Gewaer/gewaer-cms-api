@@ -53,32 +53,7 @@ class PostsUsersController extends CanvasBaseController
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0'],
-            ['id', ':', implode('|', $this->getAllUsersTagsPosts())],
+            ['id', ':', implode('|', Posts::getAllUsersTagsPosts())],
         ];
-    }
-
-    /**
-     * Retrieve all the posts related to the tags followed by the user
-     *
-     * @return void
-     */
-    public function getAllUsersTagsPosts(): array
-    {
-        $postsArray = [];
-        // Current user tags
-        $userTags = UsersFollowingTags::findOrFail([
-            'conditions'=> 'users_id = ?0',
-            'bind'=>[$this->userData->getId()]
-        ]);
-
-        foreach ($userTags as $userTag) {
-            $posts = Posts::getPostsByTagsId((int)$userTag->tags_id);
-            foreach ($posts as $post) {
-                $postsArray[] = $post;
-            }
-        }
-
-        return $postsArray;
-
     }
 }
