@@ -23,7 +23,7 @@ $routes = [
     Route::get('/organizations/{id}')->controller('OrganizationsController')->action('getById'),
     Route::post('/users')->controller('AuthController')->action('signup'),
     Route::get('/posts-tournament-matches')->controller('PostsTournamentMatchesController')->action('index'),
-    Route::get('/posts-tournament-matches/{id}')->controller('PostsTournamentMatchesController')->action('getById')
+    Route::get('/posts-tournament-matches/{id}')->controller('PostsTournamentMatchesController')->action('getById'),
 ];
 
 $routesSite = [
@@ -62,7 +62,9 @@ $routesSite = [
     Route::get('/sources/{id}')->controller('SourcesController')->action('getById'),
     Route::crud('/users-tags')->controller('UsersFollowingTagsController'),
     Route::delete('/users/{id}/tags/{tagsId}')->controller('UsersFollowingTagsController')->action('delete'),
-    Route::post('/posts-shares')->controller('PostsSharesController')
+    Route::post('/posts-shares')->controller('PostsSharesController'),
+    Route::get('/comments')->action('index'),
+    Route::post('/posts/{id}/comment')->controller('CommentsController')->action('add')
 ];
 
 $routeGroup = RouteGroup::from($routes)

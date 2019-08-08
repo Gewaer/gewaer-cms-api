@@ -222,6 +222,13 @@ class Posts extends BaseModel
             ['alias' => 'postTags']
         );
 
+        $this->hasMany(
+            'id',
+            Comments::class,
+            'posts_id',
+            ['alias' => 'comments']
+        );
+
         $this->belongsTo(
             'users_id',
             Users::class,
@@ -259,7 +266,7 @@ class Posts extends BaseModel
     }
 
     /**
-     * Get Media Source from Media Url
+     * Get Media Source from Media Url.
      *
      * @param string $mediaUrl
      * @return void
@@ -277,7 +284,7 @@ class Posts extends BaseModel
     public function afterCreate()
     {
         $this->associateFileSystem();
-        $this->shares_url = Di::getDefault()->getConfig()->app->frontEndUrl . '/posts/' .$this->id;
+        $this->shares_url = Di::getDefault()->getConfig()->app->frontEndUrl . '/posts/' . $this->id;
         $this->update();
     }
 
@@ -296,7 +303,6 @@ class Posts extends BaseModel
             $this->setMediaSource($this->media_url);
         }
     }
-
 
     /**
      * Given an array of tags, add it to the specific post.
