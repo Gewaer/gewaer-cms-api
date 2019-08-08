@@ -15,6 +15,7 @@ use Gewaer\Models\PostsLikes;
 use Phalcon\Http\Response;
 use Gewaer\Models\PostsTournamentMatches;
 use Gewaer\Models\TournamentMatches;
+use Canvas\Contracts\Controllers\ProcessOutputMapperTrait;
 
 /**
  * Class BaseController.
@@ -24,6 +25,7 @@ use Gewaer\Models\TournamentMatches;
  */
 class PostsController extends CanvasBaseController
 {
+    use ProcessOutputMapperTrait;
     /*
        * fields we accept to create
        *
@@ -46,32 +48,12 @@ class PostsController extends CanvasBaseController
     public function onConstruct()
     {
         $this->model = new Posts();
+        $this->dto = PostDto::class;
+        $this->dtoMapper = new PublisherPostMapper();
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0'],
         ];
-    }
-
-    /**
-     * Format output.
-     *
-     * @param mixed $results
-     * @return void
-     */
-    protected function processOutput($results)
-    {
-        //add a mapper
-        $this->dtoConfig->registerMapping(Posts::class, PostDto::class)
-            ->useCustomMapper(new PublisherPostMapper());
-
-        if (is_array($results) && isset($results['data'])) {
-            $results['data'] = $this->mapper->mapMultiple($results['data'], PostDto::class);
-            return  $results;
-        }
-
-        return is_iterable($results) ?
-            $this->mapper->mapMultiple($results, PostDto::class)
-            : $this->mapper->map($results, PostDto::class);
     }
 
     /**

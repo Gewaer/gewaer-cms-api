@@ -65,7 +65,7 @@ $routesSite = [
     Route::post('/posts-shares')->controller('PostsSharesController'),
     Route::get('/comments')->action('index'),
     Route::post('/posts/{id}/comment')->controller('CommentsController')->action('add'),
-    Route::get('/posts/users')->controller('PostsController')->action('getAllUsersTagsPosts')
+    Route::get('/posts-users')->controller('PostsUsersController')->action('index')
 ];
 
 $routeGroup = RouteGroup::from($routes)
