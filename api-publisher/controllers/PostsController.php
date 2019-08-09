@@ -16,6 +16,8 @@ use Phalcon\Http\Response;
 use Gewaer\Models\PostsTournamentMatches;
 use Gewaer\Models\TournamentMatches;
 use Canvas\Contracts\Controllers\ProcessOutputMapperTrait;
+use Gewaer\Dto\PostsLikes as PostsLikesDto;
+use Gewaer\Mapper\PostsLikesMapper;
 
 /**
  * Class BaseController.
@@ -57,6 +59,25 @@ class PostsController extends CanvasBaseController
     }
 
     /**
+     * Format output Posts Likes
+     *
+     * @param mixed $results
+     * @return void
+     */
+    protected function postsLikesProcessOutput($results)
+    {
+        //add a mapper
+        $this->dtoConfig->registerMapping(PostsLikes::class, PostsLikesDto::class)
+            ->useCustomMapper(new PostsLikesMapper());
+        if (is_array($results) && isset($results['data'])) {
+            $results['data'] = $this->mapper->mapMultiple($results['data'], PostDto::class);
+            return  $results;
+        }
+        return is_iterable($results) ?
+            $this->mapper->mapMultiple($results, PostsLikesDto::class)
+            : $this->mapper->map($results, PostsLikesDto::class);
+    }
+    /**
      * Add or Remove a like from a post.
      *
      * @return Response
@@ -81,7 +102,7 @@ class PostsController extends CanvasBaseController
             $postLike->updated_at = date('Y-m-d H:m:s');
             $postLike->updateOrFail();
 
-            return $this->response($postLike);
+            return $this->response($this->postsLikesProcessOutput($postLike));
         }
 
         $postLike = new PostsLikes();
@@ -94,7 +115,7 @@ class PostsController extends CanvasBaseController
         $post->likes_count += 1;
         $post->updateOrFail();
 
-        return $this->response($postLike);
+        return $this->response($this->postsLikesProcessOutput($postLike));
     }
 
     /**
@@ -168,7 +189,7 @@ class PostsController extends CanvasBaseController
             }
         }
 
-        return $this->response($this->processOutput($postsArray));
+        return $this->response($this->postsLikesProcessOutput($postsArray));
 
     }
 }
