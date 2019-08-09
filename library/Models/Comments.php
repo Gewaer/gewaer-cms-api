@@ -83,6 +83,13 @@ class Comments extends BaseModel
             ['alias' => 'parent']
         );
 
+        $this->belongsTo(
+            'users_id',
+            Users::class,
+            'id',
+            ['alias' => 'users']
+        );
+
         $this->hasMany(
             'id',
             Comments::class,
