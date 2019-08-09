@@ -8,16 +8,19 @@ class StatusSeeder extends AbstractSeed
     {
         $data = [
             [
+                'id' => 1,
                 'title' => 'Draft',
                 'created_at' => date('Y-m-d H:m:s'),
                 'is_deleted'=>0
             ],
             [
+                'id' => 3,
                 'title' => 'Published',
                 'created_at' => date('Y-m-d H:m:s'),
                 'is_deleted'=>0
             ],
             [
+                'id' => 2,
                 'title' => 'Scheduled',
                 'created_at' => date('Y-m-d H:m:s'),
                 'is_deleted'=>0
