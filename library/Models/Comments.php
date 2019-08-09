@@ -41,6 +41,11 @@ class Comments extends BaseModel
     public $users_ip;
 
     /**
+     * @var integer
+     */
+    public $likes_count;
+
+    /**
      * @var string
      */
     public $created_at;

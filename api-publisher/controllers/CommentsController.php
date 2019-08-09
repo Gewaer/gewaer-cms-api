@@ -6,6 +6,7 @@ namespace Gewaer\Api\Publisher\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Comments;
+use Gewaer\Models\CommentsLikes;
 use Phalcon\Http\Response;
 use Gewaer\Models\Posts;
 
@@ -92,5 +93,46 @@ class CommentsController extends CanvasBaseController
         $record->softDelete();
 
         return $this->response(['Delete Successfully']);
+    }
+
+        /**
+     * Add or Remove a like from a post.
+     *
+     * @return Response
+     * @throws Exception
+     */
+    public function like(int $id): Response
+    {
+        $comment = Comments::findFirstOrFail($id);
+
+        $commentLike = CommentsLikes::findFirst([
+            'conditions' => 'posts_id = ?0 and users_id = ?1 and comments_id = ?2 and is_deleted = 0',
+            'bind' => [(int)$comment->posts_id, $this->userData->getId(),(int)$comment->id]
+        ]);
+
+        //If comments like already exists then it counts as an unlike
+        if ($commentLike) {
+            $comment->likes_count = $comment->likes_count != 0 ? $comment->likes_count - 1 : 0;
+            $comment->updateOrFail();
+
+            $commentLike->is_deleted = 1;
+            $commentLike->updated_at = date('Y-m-d H:m:s');
+            $commentLike->updateOrFail();
+
+            return $this->response($commentLike);
+        }
+
+        $commentLike = new CommentsLikes();
+        $commentLike->comments_id = $id;
+        $commentLike->posts_id = $id;
+        $commentLike->users_id = $this->userData->getId();
+        $commentLike->created_at = date('Y-m-d H:m:s');
+        $commentLike->is_deleted = 0;
+        $commentLike->saveOrFail();
+
+        $comment->likes_count += 1;
+        $comment->updateOrFail();
+
+        return $this->response($commentLike);
     }
 }

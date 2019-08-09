@@ -78,6 +78,7 @@ class PostsController extends CanvasBaseController
             $post->updateOrFail();
 
             $postLike->is_deleted = 1;
+            $postLike->updated_at = date('Y-m-d H:m:s');
             $postLike->updateOrFail();
 
             return $this->response($postLike);
@@ -86,6 +87,8 @@ class PostsController extends CanvasBaseController
         $postLike = new PostsLikes();
         $postLike->posts_id = $id;
         $postLike->users_id = $this->userData->getId();
+        $postLike->created_at = date('Y-m-d H:m:s');
+        $postLike->is_deleted = 0;
         $postLike->saveOrFail();
 
         $post->likes_count += 1;
