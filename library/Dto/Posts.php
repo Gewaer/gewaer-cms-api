@@ -24,6 +24,12 @@ class Posts
 
     /**
      *
+     * @var object
+     */
+    public $author_name;
+
+    /**
+     *
      * @var string
      */
     public $sites_id;
