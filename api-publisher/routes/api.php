@@ -25,7 +25,8 @@ $routes = [
     Route::get('/posts-tournament-matches')->controller('PostsTournamentMatchesController')->action('index'),
     Route::get('/posts-tournament-matches/{id}')->controller('PostsTournamentMatchesController')->action('getById'),
     Route::post('/auth/forgot')->controller('AuthController')->action('recover'),
-    Route::post('/auth/reset/{key}')->controller('AuthController')->action('processReset')
+    Route::post('/auth/reset/{key}')->controller('AuthController')->action('processReset'),
+    Route::post('/auth/reset')->controller('AuthController')->action('sendResetEmail')
 ];
 
 $routesSite = [
