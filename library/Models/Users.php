@@ -32,6 +32,13 @@ class Users extends CanvasUsers
             ['alias' => 'userFollowingTags']
         );
 
+        $this->hasMany(
+            'id',
+            Comments::class,
+            'users_id',
+            ['alias' => 'comments']
+        );
+
         $this->hasManyToMany(
             'id',
             UsersFollowingTags::class,

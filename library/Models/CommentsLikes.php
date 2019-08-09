@@ -80,14 +80,14 @@ class CommentsLikes extends BaseModel
 
     /**
      * Get the currents user's post like if it exists
-     * @param int $postsId
+     * @param int $commentsId
      * @return array
      */
-    public static function getCurrentUsersCommentsLike(int $postsId): array
+    public static function getCurrentUsersCommentsLike(int $commentsId): array
     {
         $userPostLike = CommentsLikes::findFirst([
-            'conditions'=>'posts_id = ?0 and users_id = ?1',
-            'bind'=>[$postsId,Di::getDefault()->get('userData')->getId()]
+            'conditions'=>'comments_id = ?0 and users_id = ?1',
+            'bind'=>[$commentsId,Di::getDefault()->get('userData')->getId()]
         ]);
 
         return $userPostLike ? $userPostLike->toArray() : [];

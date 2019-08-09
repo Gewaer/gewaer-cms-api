@@ -9,6 +9,9 @@ use Gewaer\Models\Comments;
 use Gewaer\Models\CommentsLikes;
 use Phalcon\Http\Response;
 use Gewaer\Models\Posts;
+use Canvas\Contracts\Controllers\ProcessOutputMapperTrait;
+use Gewaer\Dto\Comments as CommentsDto;
+use Gewaer\Mapper\CommentsMapper;
 
 /**
  * Class BaseController.
@@ -18,6 +21,8 @@ use Gewaer\Models\Posts;
  */
 class CommentsController extends CanvasBaseController
 {
+    use ProcessOutputMapperTrait;
+
     /*
        * fields we accept to create
        *
@@ -48,6 +53,8 @@ class CommentsController extends CanvasBaseController
     public function onConstruct()
     {
         $this->model = new Comments();
+        $this->dto = CommentsDto::class;
+        $this->dtoMapper = new CommentsMapper();
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0'],
