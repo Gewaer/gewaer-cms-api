@@ -34,6 +34,12 @@ class Posts extends BaseModel
     public $users_id;
 
     /**
+     *
+     * @var object
+     */
+    public $author_name;
+
+    /**
      * @var integer
      */
     public $post_types_id;
