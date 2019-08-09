@@ -17,11 +17,6 @@ class Comments
     /**
      * @var integer
      */
-    public $users_id;
-
-    /**
-     * @var integer
-     */
     public $users;
 
     /**
