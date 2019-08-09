@@ -65,6 +65,7 @@ $routesSite = [
     Route::post('/posts-shares')->controller('PostsSharesController'),
     Route::get('/comments')->action('index'),
     Route::post('/posts/{id}/comment')->controller('CommentsController')->action('add'),
+    Route::post('/comments/{id}/like')->controller('CommentsController')->action('like'),
     Route::get('/posts-users')->controller('PostsUsersController')->action('index')
 ];
 
