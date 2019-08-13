@@ -88,6 +88,11 @@ class TournamentMatches extends BaseModel
     /**
      * @var integer
      */
+    public $is_scheduled;
+
+    /**
+     * @var integer
+     */
     public $games_id;
 
     /**

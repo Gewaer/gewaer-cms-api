@@ -26,14 +26,14 @@ class TournamentMatchesController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['third_party_id','games_id','stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series_id'];
+    protected $createFields = ['third_party_id','games_id','stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series_id','is_scheduled'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['third_party_id','games_id','stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series_id'];
+    protected $updateFields = ['third_party_id','games_id','stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series_id','is_scheduled'];
 
     /**
      * set objects.
@@ -122,11 +122,11 @@ class TournamentMatchesController extends CanvasBaseController
 
         $request['winning_team'] = $teamA->third_party_id == $request['winning_team'] ? $teamA->id : $teamB->id;
 
-        if (!strpos($request['start_time'], '/')) {
+        if (!strpos($request['start_time'], '-')) {
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
         }
 
-        if (!strpos($request['end_time'], '/')) {
+        if (!strpos($request['end_time'], '-')) {
             $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
         }
 
@@ -168,11 +168,11 @@ class TournamentMatchesController extends CanvasBaseController
 
         $request['winning_team'] = $teamA->third_party_id == $request['winning_team'] ? $teamA->id : $teamB->id;
 
-        if (!strpos($request['start_time'], '/')) {
+        if (!strpos($request['start_time'], '-')) {
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
         }
 
-        if (!strpos($request['end_time'], '/')) {
+        if (!strpos($request['end_time'], '-')) {
             $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
         }
 

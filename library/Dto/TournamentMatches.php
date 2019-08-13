@@ -90,6 +90,21 @@ class TournamentMatches
     public $match_series;
 
     /**
+     * @var integer
+     */
+    public $duration;
+
+    /**
+     * @var integer
+     */
+    public $third_party_id;
+
+    /**
+     * @var integer
+     */
+    public $is_scheduled;
+
+    /**
      * @var datetime
      */
     public $created_at;
