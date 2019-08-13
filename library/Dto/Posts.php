@@ -30,6 +30,12 @@ class Posts
 
     /**
      *
+     * @var integer
+     */
+    public $colaborator_id;
+
+    /**
+     *
      * @var string
      */
     public $sites_id;
