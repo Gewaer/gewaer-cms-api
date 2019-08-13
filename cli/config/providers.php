@@ -19,6 +19,7 @@ use Canvas\Providers\FileSystemProvider;
 use Gewaer\Providers\EventsManagerProvider;
 use Canvas\Providers\CliDispatcherProvider;
 use Canvas\Providers\PusherProvider;
+use Gewaer\Providers\DatabaseLocalProvider;
 
 return [
     ConfigProvider::class,
@@ -35,5 +36,6 @@ return [
     AclProvider::class,
     AppProvider::class,
     FileSystemProvider::class,
-    EventsManagerProvider::class
+    EventsManagerProvider::class,
+    DatabaseLocalProvider::class
 ];
