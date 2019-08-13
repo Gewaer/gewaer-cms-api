@@ -42,8 +42,7 @@ class PublisherPostMapper extends CustomMapper
         $postDto->likes_count = $post->likes_count;
         $postDto->users_likes = PostsLikes::getCurrentUsersLike($post->getId());
         $postDto->post_parent_id = $post->post_parent_id;
-        $postDto->shares_count = $post->shares_count;
-        $postDto->shares_url = $post->shares_url;
+        $postDto->share_url = $post->share_url;
         $postDto->views_count = $post->views_count;
         $postDto->comment_count = $post->comment_count;
         $postDto->status = $post->status;

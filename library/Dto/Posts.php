@@ -121,7 +121,7 @@ class Posts
      *
      * @var int
      */
-    public $shares_url;
+    public $share_url;
 
 
     /**
