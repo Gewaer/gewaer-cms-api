@@ -126,8 +126,10 @@ class TournamentMatchesController extends CanvasBaseController
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
         }
 
-        if (!strpos($request['end_time'], '-')) {
-            $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
+        if (isset($request['end_time'])) {
+            if (!strpos($request['end_time'], '-')) {
+                $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
+            }
         }
 
         $record->updateOrFail($request, $this->updateFields);
@@ -172,8 +174,10 @@ class TournamentMatchesController extends CanvasBaseController
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
         }
 
-        if (!strpos($request['end_time'], '-')) {
-            $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
+        if (isset($request['end_time'])) {
+            if (!strpos($request['end_time'], '-')) {
+                $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
+            }
         }
 
         $this->model->saveOrFail($request, $this->createFields);
