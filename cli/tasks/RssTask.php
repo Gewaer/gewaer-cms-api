@@ -18,9 +18,18 @@ use Phalcon\Di;
  */
 class RssTask extends PhTask
 {
-    public function insertAction($params)
+    /**
+     * Insert podcasts episodes by given rss link
+     *
+     * @param array $params
+     * @return void
+     */
+    public function insertAction($params): void
     {
-        $url = $params[0];
+        $usersId = $params[0];
+        $companiesId = $params[1];
+        $sitesId = $params[2];
+        $url = $params[3];
         $reader = new Reader;
         $resource = $reader->download($url);
 
@@ -41,9 +50,9 @@ class RssTask extends PhTask
         foreach ($podcasts as $podcast) {
             
             $newPost =  new Posts();
-            $newPost->users_id = 0; //Get data from default user?
-            $newPost->sites_id = 1;
-            $newPost->companies_id = 28; //Get data from default user?
+            $newPost->users_id = $usersId;
+            $newPost->sites_id = $sitesId;
+            $newPost->companies_id = $companiesId;
             $newPost->post_types_id = 3;
             $newPost->category_id = 1;
             $newPost->title = $podcastTitle . ': ' . $podcast->title;
