@@ -40,6 +40,11 @@ class Comments
     public $comment_parent_id;
 
     /**
+     * @var integer
+     */
+    public $posts_comment_count;
+
+    /**
      * @var string
      */
     public $users_ip;

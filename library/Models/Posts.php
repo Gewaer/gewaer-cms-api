@@ -290,8 +290,9 @@ class Posts extends BaseModel
      */
     public function afterCreate()
     {
+
         $this->associateFileSystem();
-        $this->shares_url = Di::getDefault()->getConfig()->app->frontEndUrl . '/posts/' . $this->id;
+        $this->share_url = Di::getDefault()->getConfig()->app->frontEndUrl . '/posts/' . $this->id;
         $this->update();
     }
 
