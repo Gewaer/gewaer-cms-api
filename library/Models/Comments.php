@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Gewaer\Models;
 
+use Gewaer\Models\Posts;
+
 class Comments extends BaseModel
 {
     /**
@@ -71,9 +73,9 @@ class Comments extends BaseModel
 
         $this->belongsTo(
             'posts_id',
-            Comments::class,
+            Posts::class,
             'id',
-            ['alias' => 'post']
+            ['alias' => 'posts']
         );
 
         $this->belongsTo(
@@ -107,4 +109,19 @@ class Comments extends BaseModel
     {
         return 'comments';
     }
+
+    /**
+     * Events after save.
+     *
+     * @return void
+     */
+    public function afterCreate()
+    {
+        $post = Posts::findFirst($this->posts_id);
+        if ($post) {
+            $post->comment_count += 1;
+            $post->update();
+        }
+    }
+
 }

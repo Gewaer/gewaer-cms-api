@@ -8,6 +8,7 @@ use AutoMapperPlus\CustomMapper\CustomMapper;
 use Phalcon\Mvc\Model\Resultset;
 use Gewaer\Models\Comments;
 use Gewaer\Models\CommentsLikes;
+use Gewaer\Models\Posts;
 
 class CommentsMapper extends CustomMapper
 {
@@ -27,6 +28,7 @@ class CommentsMapper extends CustomMapper
         $commentsDto->likes_count = $comments->likes_count;
         $commentsDto->users_likes = CommentsLikes::getCurrentUsersCommentsLike($comments->getId());
         $commentsDto->content = $comments->content;
+        $commentsDto->posts_comment_count = $comments->getPosts()->comment_count;
         $commentsDto->created_at = $comments->created_at;
         $commentsDto->updated_at = $comments->updated_at;
         $commentsDto->is_deleted = $comments->is_deleted;

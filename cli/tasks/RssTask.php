@@ -41,9 +41,9 @@ class RssTask extends PhTask
         foreach ($podcasts as $podcast) {
             
             $newPost =  new Posts();
-            $newPost->users_id = 0;
+            $newPost->users_id = 0; //Get data from default user?
             $newPost->sites_id = 1;
-            $newPost->companies_id = 28;
+            $newPost->companies_id = 28; //Get data from default user?
             $newPost->post_types_id = 3;
             $newPost->category_id = 1;
             $newPost->title = $podcastTitle . ': ' . $podcast->title;
@@ -53,7 +53,6 @@ class RssTask extends PhTask
             $newPost->saveOrFail();
             echo($newPost->title . "--> Added \n");
         }
-
 
     }
 
