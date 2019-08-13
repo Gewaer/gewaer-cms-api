@@ -41,6 +41,9 @@ class TournamentMatchesMapper extends CustomMapper
         $matchesDto->organization_team_a = $organizationA;
         $matchesDto->organization_team_b = $organizationB;
         $matchesDto->winning_team = $matches->winning_team == $teamA->id ? $teamA : $teamB;
+        $matchesDto->third_party_id = $matches->third_party_id;
+        $matchesDto->is_scheduled = $matches->is_scheduled;
+        $matchesDto->duration = $matches->duration;
         $matchesDto->created_at = $matches->created_at;
         $matchesDto->updated_at = $matches->updated_at;
         $matchesDto->is_deleted = $matches->is_deleted;

@@ -145,6 +145,11 @@ class Posts extends BaseModel
     public $published_at;
 
     /**
+     * @var integer
+     */
+    public $colaborator_id;
+
+    /**
      *
      * @var int
      */
