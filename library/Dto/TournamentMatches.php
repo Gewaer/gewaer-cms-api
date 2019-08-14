@@ -89,6 +89,11 @@ class TournamentMatches
      */
     public $match_series;
 
+     /**
+     * @var integer
+     */
+    public $match_source;
+
     /**
      * @var integer
      */
