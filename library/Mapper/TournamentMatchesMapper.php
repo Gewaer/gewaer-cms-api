@@ -34,6 +34,7 @@ class TournamentMatchesMapper extends CustomMapper
         $matchesDto->is_cancelled = $matches->is_cancelled;
         $matchesDto->match_series_id = $matches->match_series_id;
         $matchesDto->match_series = $matches->getMatchSeries();
+        $matchesDto->match_source = $matches->getMatchSources();
         $matchesDto->team_a = $teamA;
         $matchesDto->team_a_score = $matches->team_a_score;
         $matchesDto->team_b = $teamB;
