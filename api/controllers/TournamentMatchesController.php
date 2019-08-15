@@ -126,9 +126,13 @@ class TournamentMatchesController extends CanvasBaseController
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
         }
 
-        if (isset($request['end_time'])) {
-            if (!strpos($request['end_time'], '-')) {
-                $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
+        if (array_key_exists('end_time', $request)) {
+            if (!empty($request['end_time'])) {
+                if (!strpos($request['end_time'], '-')) {
+                    $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
+                }
+            } else {
+                $request['end_time'] = null;
             }
         }
 
@@ -174,9 +178,13 @@ class TournamentMatchesController extends CanvasBaseController
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
         }
 
-        if (isset($request['end_time'])) {
-            if (!strpos($request['end_time'], '-')) {
-                $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
+        if (array_key_exists('end_time', $request)) {
+            if (!empty($request['end_time'])) {
+                if (!strpos($request['end_time'], '-')) {
+                    $request['end_time'] = date('Y-m-d H:m:s', (int)$request['end_time']);
+                }
+            } else {
+                $request['end_time'] = null;
             }
         }
 
