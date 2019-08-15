@@ -18,46 +18,46 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('groups_id', 'integer', [
+            ->addColumn('groups_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('teams_id', 'integer', [
+            ->addColumn('teams_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'groups_id',
             ])
-            ->changeColumn('wins', 'integer', [
+            ->addColumn('wins', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'teams_id',
             ])
-            ->changeColumn('losses', 'integer', [
+            ->addColumn('losses', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'wins',
             ])
-            ->changeColumn('draws', 'integer', [
+            ->addColumn('draws', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'losses',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'draws',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('games', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -67,65 +67,65 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => true,
                 'limit' => 64,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'id',
             ])
-            ->changeColumn('title', 'string', [
+            ->addColumn('title', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'name',
             ])
-            ->changeColumn('slug', 'string', [
+            ->addColumn('slug', 'string', [
                 'null' => true,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'title',
             ])
-            ->changeColumn('logo', 'string', [
+            ->addColumn('logo', 'string', [
                 'null' => true,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'slug',
             ])
-            ->changeColumn('icon', 'string', [
+            ->addColumn('icon', 'string', [
                 'null' => true,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'logo',
             ])
-            ->changeColumn('release_date', 'date', [
+            ->addColumn('release_date', 'date', [
                 'null' => true,
                 'after' => 'icon',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'release_date',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('tournament_seasons', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -135,38 +135,38 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('games_id', 'integer', [
+            ->addColumn('games_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'games_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'name',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('tags', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -176,39 +176,39 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('title', 'string', [
+            ->addColumn('title', 'string', [
                 'null' => false,
                 'limit' => 200,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'id',
             ])
-            ->changeColumn('sites_id', 'integer', [
+            ->addColumn('sites_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'title',
             ])
-            ->changeColumn('slug', 'string', [
+            ->addColumn('slug', 'string', [
                 'null' => false,
                 'limit' => 200,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'sites_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'slug',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
@@ -223,7 +223,7 @@ class BaseMigration extends AbstractMigration
                 'name' => 'sites_id',
                 'unique' => false,
             ])
-            ->save();
+            ->create();
         $this->table('posts', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -233,177 +233,177 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('users_id', 'integer', [
+            ->addColumn('users_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('sites_id', 'integer', [
+            ->addColumn('sites_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'users_id',
             ])
-            ->changeColumn('companies_id', 'integer', [
+            ->addColumn('companies_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'sites_id',
             ])
-            ->changeColumn('post_types_id', 'integer', [
+            ->addColumn('post_types_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'companies_id',
             ])
-            ->changeColumn('category_id', 'integer', [
+            ->addColumn('category_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'post_types_id',
             ])
-            ->changeColumn('title', 'string', [
+            ->addColumn('title', 'string', [
                 'null' => false,
                 'limit' => 64,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'category_id',
             ])
-            ->changeColumn('slug', 'string', [
+            ->addColumn('slug', 'string', [
                 'null' => false,
                 'limit' => 255,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'title',
             ])
-            ->changeColumn('summary', 'text', [
+            ->addColumn('summary', 'text', [
                 'null' => false,
                 'limit' => 65535,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'slug',
             ])
-            ->changeColumn('content', 'text', [
+            ->addColumn('content', 'text', [
                 'null' => false,
                 'limit' => MysqlAdapter::TEXT_LONG,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'summary',
             ])
-            ->changeColumn('media_url', 'string', [
+            ->addColumn('media_url', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'content',
             ])
-            ->changeColumn('likes_count', 'integer', [
+            ->addColumn('likes_count', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'media_url',
             ])
-            ->changeColumn('post_parent_id', 'integer', [
+            ->addColumn('post_parent_id', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'likes_count',
             ])
-            ->changeColumn('shares_count', 'integer', [
+            ->addColumn('shares_count', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'post_parent_id',
             ])
-            ->changeColumn('views_count', 'integer', [
+            ->addColumn('views_count', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'shares_count',
             ])
-            ->changeColumn('comment_count', 'integer', [
+            ->addColumn('comment_count', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '1',
                 'after' => 'views_count',
             ])
-            ->changeColumn('status', 'integer', [
+            ->addColumn('status', 'integer', [
                 'null' => false,
                 'default' => '1',
                 'limit' => '1',
                 'after' => 'comment_count',
             ])
-            ->changeColumn('comment_status', 'integer', [
+            ->addColumn('comment_status', 'integer', [
                 'null' => false,
                 'default' => '1',
                 'limit' => '3',
                 'after' => 'status',
             ])
-            ->changeColumn('is_published', 'integer', [
+            ->addColumn('is_published', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'comment_status',
             ])
-            ->changeColumn('featured', 'boolean', [
+            ->addColumn('featured', 'boolean', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_TINY,
                 'after' => 'is_published',
             ])
-            ->changeColumn('weight', 'decimal', [
+            ->addColumn('weight', 'decimal', [
                 'null' => false,
                 'default' => '0.00',
                 'precision' => '10',
                 'scale' => '2',
                 'after' => 'featured',
             ])
-            ->changeColumn('premium', 'boolean', [
+            ->addColumn('premium', 'boolean', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_TINY,
                 'after' => 'weight',
             ])
-            ->changeColumn('published_at', 'datetime', [
+            ->addColumn('published_at', 'datetime', [
                 'null' => true,
                 'after' => 'premium',
             ])
-            ->changeColumn('is_live', 'integer', [
+            ->addColumn('is_live', 'integer', [
                 'null' => true,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'published_at',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'is_live',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->changeColumn('share_url', 'string', [
+            ->addColumn('share_url', 'string', [
                 'null' => true,
                 'limit' => 100,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'is_deleted',
             ])
-            ->changeColumn('media_source', 'string', [
+            ->addColumn('media_source', 'string', [
                 'null' => true,
                 'limit' => 32,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'share_url',
             ])
-            ->changeColumn('author_name', 'string', [
+            ->addColumn('author_name', 'string', [
                 'null' => true,
                 'limit' => 100,
                 'collation' => 'utf8mb4_unicode_ci',
@@ -466,7 +466,7 @@ class BaseMigration extends AbstractMigration
                 'name' => 'sites_id_slug',
                 'unique' => false,
             ])
-            ->save();
+            ->create();
         $this->table('tournament_seasons_versions', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -476,36 +476,36 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('seasons_id', 'integer', [
+            ->addColumn('seasons_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('versions_id', 'integer', [
+            ->addColumn('versions_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'seasons_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'versions_id',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('regions', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -515,54 +515,54 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'id',
             ])
-            ->changeColumn('slug', 'string', [
+            ->addColumn('slug', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'name',
             ])
-            ->changeColumn('shortname', 'string', [
+            ->addColumn('shortname', 'string', [
                 'null' => false,
                 'limit' => 8,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'slug',
             ])
-            ->changeColumn('icon', 'string', [
+            ->addColumn('icon', 'string', [
                 'null' => true,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'shortname',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'icon',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('tournament_groups', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -572,43 +572,43 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('versions_id', 'integer', [
+            ->addColumn('versions_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('stages_id', 'integer', [
+            ->addColumn('stages_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'versions_id',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 64,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'stages_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'name',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('tournament_match_series', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -618,37 +618,37 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 32,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'id',
             ])
-            ->changeColumn('game_date', 'datetime', [
+            ->addColumn('game_date', 'datetime', [
                 'null' => false,
                 'after' => 'name',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'game_date',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('countries', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -658,45 +658,45 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('regions_id', 'integer', [
+            ->addColumn('regions_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 64,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'regions_id',
             ])
-            ->changeColumn('flag', 'string', [
+            ->addColumn('flag', 'string', [
                 'null' => true,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'name',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'flag',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('categories', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -706,39 +706,39 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('title', 'string', [
+            ->addColumn('title', 'string', [
                 'null' => false,
                 'limit' => 200,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'id',
             ])
-            ->changeColumn('sites_id', 'integer', [
+            ->addColumn('sites_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'title',
             ])
-            ->changeColumn('slug', 'string', [
+            ->addColumn('slug', 'string', [
                 'null' => false,
                 'limit' => 200,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'sites_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'slug',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
@@ -753,7 +753,7 @@ class BaseMigration extends AbstractMigration
                 'name' => 'sites_id',
                 'unique' => false,
             ])
-            ->save();
+            ->create();
         $this->table('tournament_teams', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -763,42 +763,42 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('versions_id', 'integer', [
+            ->addColumn('versions_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('teams_id', 'integer', [
+            ->addColumn('teams_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'versions_id',
             ])
-            ->changeColumn('is_invited', 'integer', [
+            ->addColumn('is_invited', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'teams_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'is_invited',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('teams', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -808,68 +808,68 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('games_id', 'integer', [
+            ->addColumn('games_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('organizations_id', 'integer', [
+            ->addColumn('organizations_id', 'integer', [
                 'null' => true,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'games_id',
             ])
-            ->changeColumn('leagues_id', 'integer', [
+            ->addColumn('leagues_id', 'integer', [
                 'null' => true,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'organizations_id',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'leagues_id',
             ])
-            ->changeColumn('is_active', 'integer', [
+            ->addColumn('is_active', 'integer', [
                 'null' => false,
                 'default' => '1',
                 'limit' => '3',
                 'after' => 'name',
             ])
-            ->changeColumn('founded_date', 'date', [
+            ->addColumn('founded_date', 'date', [
                 'null' => true,
                 'after' => 'is_active',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'founded_date',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->changeColumn('third_party_id', 'integer', [
+            ->addColumn('third_party_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'is_deleted',
             ])
-            ->changeColumn('regions_id', 'integer', [
+            ->addColumn('regions_id', 'integer', [
                 'null' => true,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'third_party_id',
             ])
-            ->save();
+            ->create();
         $this->table('posts_tournament_matches', [
                 'id' => false,
                 'primary_key' => ['posts_id', 'tournament_matches_id'],
@@ -879,31 +879,31 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('posts_id', 'integer', [
+            ->addColumn('posts_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('tournament_matches_id', 'integer', [
+            ->addColumn('tournament_matches_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'posts_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'tournament_matches_id',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('posts_types', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -913,33 +913,33 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('title', 'string', [
+            ->addColumn('title', 'string', [
                 'null' => false,
                 'limit' => 100,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'title',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('tournament_types', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -949,33 +949,33 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 32,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'name',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('sources', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -985,67 +985,67 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 64,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'id',
             ])
-            ->changeColumn('title', 'string', [
+            ->addColumn('title', 'string', [
                 'null' => false,
                 'limit' => 64,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'name',
             ])
-            ->changeColumn('slug', 'string', [
+            ->addColumn('slug', 'string', [
                 'null' => false,
                 'limit' => 64,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'title',
             ])
-            ->changeColumn('url', 'string', [
+            ->addColumn('url', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'slug',
             ])
-            ->changeColumn('logo', 'string', [
+            ->addColumn('logo', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'url',
             ])
-            ->changeColumn('is_active', 'integer', [
+            ->addColumn('is_active', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'logo',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'is_active',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('users_following_tags', [
                 'id' => false,
                 'primary_key' => ['users_id', 'tags_id'],
@@ -1055,31 +1055,31 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('users_id', 'integer', [
+            ->addColumn('users_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('tags_id', 'integer', [
+            ->addColumn('tags_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'users_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'tags_id',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('organizations', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1089,83 +1089,83 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('countries_id', 'integer', [
+            ->addColumn('countries_id', 'integer', [
                 'null' => true,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'countries_id',
             ])
-            ->changeColumn('slug', 'string', [
+            ->addColumn('slug', 'string', [
                 'null' => true,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'name',
             ])
-            ->changeColumn('shortname', 'string', [
+            ->addColumn('shortname', 'string', [
                 'null' => true,
                 'limit' => 16,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'slug',
             ])
-            ->changeColumn('logo', 'string', [
+            ->addColumn('logo', 'string', [
                 'null' => true,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'shortname',
             ])
-            ->changeColumn('icon', 'string', [
+            ->addColumn('icon', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'logo',
             ])
-            ->changeColumn('is_active', 'integer', [
+            ->addColumn('is_active', 'integer', [
                 'null' => true,
                 'default' => '1',
                 'limit' => '3',
                 'after' => 'icon',
             ])
-            ->changeColumn('founded_date', 'date', [
+            ->addColumn('founded_date', 'date', [
                 'null' => true,
                 'after' => 'is_active',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'founded_date',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->changeColumn('metadata', 'text', [
+            ->addColumn('metadata', 'text', [
                 'null' => true,
                 'limit' => MysqlAdapter::TEXT_LONG,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'is_deleted',
             ])
-            ->save();
+            ->create();
         $this->table('leagues', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1175,54 +1175,54 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('regions_id', 'integer', [
+            ->addColumn('regions_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'regions_id',
             ])
-            ->changeColumn('shortname', 'string', [
+            ->addColumn('shortname', 'string', [
                 'null' => false,
                 'limit' => 8,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'name',
             ])
-            ->changeColumn('is_active', 'integer', [
+            ->addColumn('is_active', 'integer', [
                 'null' => false,
                 'limit' => '3',
                 'after' => 'shortname',
             ])
-            ->changeColumn('founded_date', 'date', [
+            ->addColumn('founded_date', 'date', [
                 'null' => false,
                 'after' => 'is_active',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'founded_date',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('tournament_matches', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1232,107 +1232,107 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('stages_id', 'integer', [
+            ->addColumn('stages_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('groups_id', 'integer', [
+            ->addColumn('groups_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'stages_id',
             ])
-            ->changeColumn('team_a', 'integer', [
+            ->addColumn('team_a', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'groups_id',
             ])
-            ->changeColumn('team_b', 'integer', [
+            ->addColumn('team_b', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'team_a',
             ])
-            ->changeColumn('game_date', 'date', [
+            ->addColumn('game_date', 'date', [
                 'null' => true,
                 'after' => 'team_b',
             ])
-            ->changeColumn('start_time', 'datetime', [
+            ->addColumn('start_time', 'datetime', [
                 'null' => false,
                 'after' => 'game_date',
             ])
-            ->changeColumn('end_time', 'datetime', [
+            ->addColumn('end_time', 'datetime', [
                 'null' => true,
                 'after' => 'start_time',
             ])
-            ->changeColumn('is_tiebreaker', 'integer', [
+            ->addColumn('is_tiebreaker', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'end_time',
             ])
-            ->changeColumn('is_cancelled', 'integer', [
+            ->addColumn('is_cancelled', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'is_tiebreaker',
             ])
-            ->changeColumn('winning_team', 'integer', [
+            ->addColumn('winning_team', 'integer', [
                 'null' => true,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'is_cancelled',
             ])
-            ->changeColumn('match_series_id', 'integer', [
+            ->addColumn('match_series_id', 'integer', [
                 'null' => true,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'winning_team',
             ])
-            ->changeColumn('team_a_score', 'integer', [
+            ->addColumn('team_a_score', 'integer', [
                 'null' => true,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'match_series_id',
             ])
-            ->changeColumn('team_b_score', 'integer', [
+            ->addColumn('team_b_score', 'integer', [
                 'null' => true,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'team_a_score',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'team_b_score',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->changeColumn('duration', 'integer', [
+            ->addColumn('duration', 'integer', [
                 'null' => true,
                 'limit' => MysqlAdapter::INT_SMALL,
                 'after' => 'is_deleted',
             ])
-            ->changeColumn('third_party_id', 'biginteger', [
+            ->addColumn('third_party_id', 'biginteger', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_BIG,
                 'after' => 'duration',
             ])
-            ->changeColumn('games_id', 'integer', [
+            ->addColumn('games_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_MEDIUM,
                 'after' => 'third_party_id',
             ])
-            ->save();
+            ->create();
         $this->table('currencies', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1342,45 +1342,45 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('seasons_id', 'integer', [
+            ->addColumn('seasons_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 64,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'seasons_id',
             ])
-            ->changeColumn('code', 'string', [
+            ->addColumn('code', 'string', [
                 'null' => true,
                 'limit' => 8,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'name',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'code',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('tournament_versions', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1390,97 +1390,97 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('series_id', 'integer', [
+            ->addColumn('series_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'series_id',
             ])
-            ->changeColumn('slug', 'string', [
+            ->addColumn('slug', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'name',
             ])
-            ->changeColumn('start_date', 'date', [
+            ->addColumn('start_date', 'date', [
                 'null' => false,
                 'after' => 'slug',
             ])
-            ->changeColumn('end_date', 'date', [
+            ->addColumn('end_date', 'date', [
                 'null' => false,
                 'after' => 'start_date',
             ])
-            ->changeColumn('start_time', 'time', [
+            ->addColumn('start_time', 'time', [
                 'null' => false,
                 'after' => 'end_date',
             ])
-            ->changeColumn('end_time', 'time', [
+            ->addColumn('end_time', 'time', [
                 'null' => false,
                 'after' => 'start_time',
             ])
-            ->changeColumn('types_id', 'integer', [
+            ->addColumn('types_id', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'end_time',
             ])
-            ->changeColumn('prize_pool', 'decimal', [
+            ->addColumn('prize_pool', 'decimal', [
                 'null' => false,
                 'precision' => '14',
                 'scale' => '2',
                 'after' => 'types_id',
             ])
-            ->changeColumn('currencies_id', 'integer', [
+            ->addColumn('currencies_id', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'prize_pool',
             ])
-            ->changeColumn('total_teams', 'integer', [
+            ->addColumn('total_teams', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'currencies_id',
             ])
-            ->changeColumn('is_cancelled', 'integer', [
+            ->addColumn('is_cancelled', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'total_teams',
             ])
-            ->changeColumn('is_published', 'integer', [
+            ->addColumn('is_published', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'is_cancelled',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'is_published',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('users_following_teams', [
                 'id' => false,
                 'primary_key' => ['users_id', 'teams_id'],
@@ -1490,31 +1490,31 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('users_id', 'integer', [
+            ->addColumn('users_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('teams_id', 'integer', [
+            ->addColumn('teams_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'users_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'teams_id',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('tournament_series', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1524,55 +1524,55 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('games_id', 'integer', [
+            ->addColumn('games_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'games_id',
             ])
-            ->changeColumn('slug', 'string', [
+            ->addColumn('slug', 'string', [
                 'null' => true,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'name',
             ])
-            ->changeColumn('founded_at', 'datetime', [
+            ->addColumn('founded_at', 'datetime', [
                 'null' => false,
                 'after' => 'slug',
             ])
-            ->changeColumn('is_active', 'integer', [
+            ->addColumn('is_active', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'founded_at',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'is_active',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('tournament_stages', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1582,44 +1582,44 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('versions_id', 'integer', [
+            ->addColumn('versions_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('name', 'string', [
+            ->addColumn('name', 'string', [
                 'null' => false,
                 'limit' => 64,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'versions_id',
             ])
-            ->changeColumn('best_of', 'integer', [
+            ->addColumn('best_of', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'name',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'best_of',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('tournament_matches_sources', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1629,43 +1629,43 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('matches_id', 'integer', [
+            ->addColumn('matches_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('sources_id', 'integer', [
+            ->addColumn('sources_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'matches_id',
             ])
-            ->changeColumn('url', 'string', [
+            ->addColumn('url', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'sources_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'url',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('posts_tags', [
                 'id' => false,
                 'primary_key' => ['posts_id', 'tags_id'],
@@ -1675,24 +1675,24 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('posts_id', 'integer', [
+            ->addColumn('posts_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
             ])
-            ->changeColumn('tags_id', 'integer', [
+            ->addColumn('tags_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'posts_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'tags_id',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
@@ -1710,7 +1710,7 @@ class BaseMigration extends AbstractMigration
                 'name' => 'posts_id_tags_id',
                 'unique' => false,
             ])
-            ->save();
+            ->create();
         $this->table('posts_shares', [
                 'id' => false,
                 'primary_key' => ['posts_id', 'users_id'],
@@ -1720,30 +1720,30 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('posts_id', 'integer', [
+            ->addColumn('posts_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
             ])
-            ->changeColumn('users_id', 'integer', [
+            ->addColumn('users_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'posts_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'users_id',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
                 'after' => 'updated_at',
             ])
-            ->changeColumn('shares_url', 'string', [
+            ->addColumn('shares_url', 'string', [
                 'null' => true,
                 'limit' => 100,
                 'collation' => 'utf8mb4_unicode_ci',
@@ -1762,7 +1762,7 @@ class BaseMigration extends AbstractMigration
                 'name' => 'users_id',
                 'unique' => false,
             ])
-            ->save();
+            ->create();
         $this->table('posts_likes', [
                 'id' => false,
                 'primary_key' => ['posts_id', 'users_id'],
@@ -1772,24 +1772,24 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('posts_id', 'integer', [
+            ->addColumn('posts_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
             ])
-            ->changeColumn('users_id', 'integer', [
+            ->addColumn('users_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'posts_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'users_id',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '3',
@@ -1807,7 +1807,7 @@ class BaseMigration extends AbstractMigration
                 'name' => 'users_id',
                 'unique' => false,
             ])
-            ->save();
+            ->create();
         $this->table('comments_likes', [
                 'id' => false,
                 'primary_key' => ['posts_id', 'users_id', 'comments_id'],
@@ -1817,35 +1817,35 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('posts_id', 'integer', [
+            ->addColumn('posts_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
             ])
-            ->changeColumn('users_id', 'integer', [
+            ->addColumn('users_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'posts_id',
             ])
-            ->changeColumn('comments_id', 'integer', [
+            ->addColumn('comments_id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'users_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => true,
                 'after' => 'comments_id',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => '1',
                 'after' => 'updated_at',
             ])
-            ->save();
+            ->create();
         $this->table('status', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1855,33 +1855,33 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('title', 'string', [
+            ->addColumn('title', 'string', [
                 'null' => false,
                 'limit' => 50,
                 'collation' => 'utf8mb4_unicode_520_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'title',
             ])
-            ->changeColumn('update_at', 'datetime', [
+            ->addColumn('update_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_TINY,
                 'after' => 'update_at',
             ])
-            ->save();
+            ->create();
         $this->table('sites', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1891,66 +1891,66 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'integer', [
+            ->addColumn('id', 'integer', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'identity' => 'enable',
             ])
-            ->changeColumn('users_id', 'integer', [
+            ->addColumn('users_id', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'id',
             ])
-            ->changeColumn('companies_id', 'integer', [
+            ->addColumn('companies_id', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'users_id',
             ])
-            ->changeColumn('title', 'string', [
+            ->addColumn('title', 'string', [
                 'null' => false,
                 'limit' => 200,
                 'collation' => 'utf8mb4_unicode_520_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'companies_id',
             ])
-            ->changeColumn('key', 'string', [
+            ->addColumn('key', 'string', [
                 'null' => false,
                 'limit' => 128,
                 'collation' => 'utf8mb4_unicode_520_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'title',
             ])
-            ->changeColumn('description', 'text', [
+            ->addColumn('description', 'text', [
                 'null' => true,
                 'limit' => 65535,
                 'collation' => 'utf8mb4_unicode_520_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'key',
             ])
-            ->changeColumn('domain', 'string', [
+            ->addColumn('domain', 'string', [
                 'null' => true,
                 'limit' => 200,
                 'collation' => 'utf8mb4_unicode_520_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'description',
             ])
-            ->changeColumn('status', 'integer', [
+            ->addColumn('status', 'integer', [
                 'null' => false,
                 'default' => '1',
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'domain',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'status',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'boolean', [
+            ->addColumn('is_deleted', 'boolean', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_TINY,
@@ -1976,7 +1976,7 @@ class BaseMigration extends AbstractMigration
                 'name' => 'key',
                 'unique' => false,
             ])
-            ->save();
+            ->create();
         $this->table('comments', [
                 'id' => false,
                 'primary_key' => ['id'],
@@ -1986,67 +1986,67 @@ class BaseMigration extends AbstractMigration
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->changeColumn('id', 'biginteger', [
+            ->addColumn('id', 'biginteger', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_BIG,
                 'identity' => 'enable',
             ])
-            ->changeColumn('posts_id', 'biginteger', [
+            ->addColumn('posts_id', 'biginteger', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_BIG,
                 'after' => 'id',
             ])
-            ->changeColumn('sites_id', 'biginteger', [
+            ->addColumn('sites_id', 'biginteger', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_BIG,
                 'after' => 'posts_id',
             ])
-            ->changeColumn('users_id', 'biginteger', [
+            ->addColumn('users_id', 'biginteger', [
                 'null' => false,
                 'limit' => MysqlAdapter::INT_BIG,
                 'after' => 'sites_id',
             ])
-            ->changeColumn('content', 'text', [
+            ->addColumn('content', 'text', [
                 'null' => false,
                 'limit' => 65535,
                 'collation' => 'utf8mb4_unicode_520_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'users_id',
             ])
-            ->changeColumn('approved', 'boolean', [
+            ->addColumn('approved', 'boolean', [
                 'null' => false,
                 'default' => '1',
                 'limit' => MysqlAdapter::INT_TINY,
                 'after' => 'content',
             ])
-            ->changeColumn('comment_parent_id', 'biginteger', [
+            ->addColumn('comment_parent_id', 'biginteger', [
                 'null' => true,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_BIG,
                 'after' => 'approved',
             ])
-            ->changeColumn('users_ip', 'string', [
+            ->addColumn('users_ip', 'string', [
                 'null' => true,
                 'limit' => 100,
                 'collation' => 'utf8mb4_unicode_520_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'comment_parent_id',
             ])
-            ->changeColumn('created_at', 'datetime', [
+            ->addColumn('created_at', 'datetime', [
                 'null' => false,
                 'after' => 'users_ip',
             ])
-            ->changeColumn('updated_at', 'datetime', [
+            ->addColumn('updated_at', 'datetime', [
                 'null' => true,
                 'after' => 'created_at',
             ])
-            ->changeColumn('is_deleted', 'integer', [
+            ->addColumn('is_deleted', 'integer', [
                 'null' => false,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_TINY,
                 'after' => 'updated_at',
             ])
-            ->changeColumn('likes_count', 'integer', [
+            ->addColumn('likes_count', 'integer', [
                 'null' => true,
                 'default' => '0',
                 'limit' => MysqlAdapter::INT_MEDIUM,
@@ -2080,6 +2080,6 @@ class BaseMigration extends AbstractMigration
                 'name' => 'sites_id',
                 'unique' => false,
             ])
-            ->save();
+            ->create();
     }
 }
