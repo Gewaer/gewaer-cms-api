@@ -6,6 +6,8 @@ namespace Gewaer\Api\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\Teams;
+use Canvas\Http\Request;
+use Phalcon\Mvc\ModelInterface;
 
 /**
  * Class BaseController.
