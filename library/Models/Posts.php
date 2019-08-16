@@ -295,10 +295,18 @@ class Posts extends BaseModel
      */
     public function afterCreate()
     {
-
-        $this->associateFileSystem();
         $this->share_url = Di::getDefault()->getConfig()->app->frontEndUrl . '/posts/' . $this->id;
         $this->update();
+    }
+
+    /**
+     * After Create / Update entity.
+     *
+     * @return void
+     */
+    public function afterSave()
+    {
+        $this->associateFileSystem();
     }
 
     /**
@@ -343,7 +351,7 @@ class Posts extends BaseModel
     }
 
     /**
-     * Get posts by tags id
+     * Get posts by tags id.
      * @param int $tagsId
      * @return array
      */
@@ -351,8 +359,8 @@ class Posts extends BaseModel
     {
         $postsArray = [];
         $postTags = PostsTags::findOrFail([
-            'conditions'=>'tags_id = ?0',
-            'bind'=>[$tagsId]
+            'conditions' => 'tags_id = ?0',
+            'bind' => [$tagsId]
         ]);
 
         foreach ($postTags as $postTag) {
@@ -363,7 +371,7 @@ class Posts extends BaseModel
     }
 
     /**
-     * Retrieve all the posts related to the tags followed by the user
+     * Retrieve all the posts related to the tags followed by the user.
      *
      * @return void
      */
@@ -372,8 +380,8 @@ class Posts extends BaseModel
         $postsArray = [];
         // Current user tags
         $userTags = UsersFollowingTags::findOrFail([
-            'conditions'=> 'users_id = ?0',
-            'bind'=>[Di::getDefault()->getUserData()->getId()]
+            'conditions' => 'users_id = ?0',
+            'bind' => [Di::getDefault()->getUserData()->getId()]
         ]);
 
         foreach ($userTags as $userTag) {
@@ -384,6 +392,5 @@ class Posts extends BaseModel
         }
 
         return $postsArray;
-
     }
 }

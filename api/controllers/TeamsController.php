@@ -20,14 +20,14 @@ class TeamsController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['regions_id','games_id','organizations_id','leagues_id','third_party_id','name','founded_date','is_active'];
+    protected $createFields = ['regions_id', 'games_id', 'organizations_id', 'leagues_id', 'third_party_id', 'name', 'founded_date', 'is_active'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['regions_id','games_id','organizations_id','leagues_id','third_party_id','name','founded_date','is_active'];
+    protected $updateFields = ['regions_id', 'games_id', 'organizations_id', 'leagues_id', 'third_party_id', 'name', 'founded_date', 'is_active'];
 
     /**
      * set objects.
@@ -41,5 +41,28 @@ class TeamsController extends CanvasBaseController
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0']
         ];
+    }
+
+    /**
+    * Process the update request and return the object.
+    *
+    * @param Request $request
+    * @param ModelInterface $record
+    * @throws Exception
+    * @return ModelInterface
+    */
+    protected function processEdit(Request $request, ModelInterface $record): ModelInterface
+    {
+        $team = parent::processEdit($request, $record);
+        $data = $request->getPutData();
+
+        /**
+         * @todo move this to filesystem , you know why we did this hack -_-
+         */
+        if (isset($data['logo'])) {
+            $this->redis->set('team_logo_' . $team->getId(), $data['logo']);
+        }
+
+        return $team;
     }
 }
