@@ -3,8 +3,12 @@ declare(strict_types=1);
 
 namespace Gewaer\Models;
 
+use Canvas\Traits\FileSystemModelTrait;
+
 class Teams extends BaseModel
 {
+    use FileSystemModelTrait;
+
     /**
      * @var integer
      */
@@ -20,12 +24,12 @@ class Teams extends BaseModel
      */
     public $games_id;
 
-        /**
+    /**
      * @var integer
      */
     public $organizations_id;
 
-        /**
+    /**
      * @var integer
      */
     public $leagues_id;
@@ -40,7 +44,7 @@ class Teams extends BaseModel
      */
     public $founded_date;
 
-        /**
+    /**
      * @var integer
      */
     public $is_active;
@@ -66,7 +70,7 @@ class Teams extends BaseModel
     public function initialize()
     {
         parent::initialize();
-        
+
         $this->setSource('teams');
 
         $this->belongsTo(
@@ -96,10 +100,8 @@ class Teams extends BaseModel
             'winning_team',
             ['alias' => 'matchesWin']
         );
-
-
-
     }
+
     /**
      * Returns table name mapped in the model.
      *
@@ -110,4 +112,13 @@ class Teams extends BaseModel
         return 'teams';
     }
 
+    /**
+     * After Create / Update entity.
+     *
+     * @return void
+     */
+    public function afterSave()
+    {
+        $this->associateFileSystem();
+    }
 }

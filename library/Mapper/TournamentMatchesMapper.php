@@ -9,6 +9,7 @@ use Phalcon\Mvc\Model\Resultset;
 use Gewaer\Models\TournamentMatchSeries;
 use Gewaer\Models\Teams;
 use Gewaer\Models\Organizations;
+use Phalcon\Di;
 
 class TournamentMatchesMapper extends CustomMapper
 {
@@ -23,6 +24,10 @@ class TournamentMatchesMapper extends CustomMapper
         $teamB = Teams::findFirst($matches->team_b);
         $organizationA = Organizations::findFirst($teamA->organizations_id);
         $organizationB = Organizations::findFirst($teamB->organizations_id);
+
+        $redis = Di::getDefault()->getRedis();
+        $organizationA->icon = $redis->get('team_logo_' . $teamA->getId()) ?: $organizationA->icon;
+        $organizationB->icon = $redis->get('team_logo_' . $teamB->getId()) ?: $organizationB->icon;
 
         $matchesDto->id = $matches->getId();
         $matchesDto->stages_id = $matches->stages_id;
