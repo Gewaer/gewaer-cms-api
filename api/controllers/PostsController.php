@@ -30,7 +30,7 @@ class PostsController extends CanvasBaseController
        */
     protected $createFields = [
         'sites_id', 'post_types_id', 'category_id', 'title', 'slug', 'summary', 'content', 'media_url', 'likes_count', 'post_parent_id',
-        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at','is_live','author_name','colaborator_id'
+        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at', 'is_live', 'author_name', 'colaborator_id'
     ];
 
     /*
@@ -40,7 +40,7 @@ class PostsController extends CanvasBaseController
      */
     protected $updateFields = [
         'sites_id', 'post_types_id', 'category_id', 'title', 'slug', 'summary', 'content', 'media_url', 'likes_count', 'post_parent_id',
-        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at','is_live','author_name','colaborator_id'
+        'shares_count', 'comment_count', 'status', 'is_published', 'comment_status', 'featured', 'weight', 'premium', 'published_at', 'is_live', 'author_name', 'colaborator_id'
     ];
 
     /**
@@ -78,6 +78,7 @@ class PostsController extends CanvasBaseController
         $post->addTags($request['tags']);
         return $post;
     }
+
     /**
      * Process the create request and trecurd the boject.
      *
@@ -88,7 +89,7 @@ class PostsController extends CanvasBaseController
     {
         $post = parent::processCreate($request);
         $request = $this->processInput($request->getPostData());
-        
+
         $post->addTags($request['tags']);
         return $post;
     }

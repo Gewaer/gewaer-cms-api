@@ -46,6 +46,27 @@ class TeamsController extends CanvasBaseController
     }
 
     /**
+    * Process the create request and trecurd the boject.
+    *
+    * @return ModelInterface
+    * @throws Exception
+    */
+    protected function processCreate(Request $request): ModelInterface
+    {
+        $team = parent::processCreate($request);
+        $data = $request->getPostData();
+
+        /**
+         * @todo move this to filesystem , you know why we did this hack -_-
+         */
+        if (isset($data['logo'])) {
+            $this->redis->set('team_logo_' . $team->getId(), $data['logo']);
+        }
+
+        return $team;
+    }
+
+    /**
     * Process the update request and return the object.
     *
     * @param Request $request
