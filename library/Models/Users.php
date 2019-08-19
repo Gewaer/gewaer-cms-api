@@ -48,5 +48,19 @@ class Users extends CanvasUsers
             'id',
             ['alias' => 'tags']
         );
+
+        $this->hasMany(
+            'id',
+            Posts::class,
+            'author_id',
+            ['alias' => 'authorPosts']
+        );
+
+        $this->hasMany(
+            'id',
+            Posts::class,
+            'collaborator_id',
+            ['alias' => 'collaboratorPosts']
+        );
     }
 }

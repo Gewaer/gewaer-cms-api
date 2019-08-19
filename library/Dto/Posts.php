@@ -26,13 +26,13 @@ class Posts
      *
      * @var object
      */
-    public $author_name;
+    public $author;
 
     /**
      *
      * @var integer
      */
-    public $colaborator_id;
+    public $collaborator;
 
     /**
      *

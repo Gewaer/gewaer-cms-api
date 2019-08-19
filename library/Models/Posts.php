@@ -34,12 +34,6 @@ class Posts extends BaseModel
     public $users_id;
 
     /**
-     *
-     * @var object
-     */
-    public $author_name;
-
-    /**
      * @var integer
      */
     public $post_types_id;
@@ -147,7 +141,13 @@ class Posts extends BaseModel
     /**
      * @var integer
      */
-    public $colaborator_id;
+    public $collaborator_id;
+
+    /**
+     *
+     * @var object
+     */
+    public $author_id;
 
     /**
      *
@@ -246,6 +246,20 @@ class Posts extends BaseModel
             Users::class,
             'id',
             ['alias' => 'user']
+        );
+
+        $this->belongsTo(
+            'collaborator_id',
+            Users::class,
+            'id',
+            ['alias' => 'collaborator']
+        );
+
+        $this->belongsTo(
+            'author_id',
+            Users::class,
+            'id',
+            ['alias' => 'author']
         );
 
         $this->belongsTo(
