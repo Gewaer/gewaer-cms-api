@@ -25,13 +25,14 @@ $routes = [
     Route::get('/posts-tournament-matches')->controller('PostsTournamentMatchesController')->action('index'),
     Route::get('/posts-tournament-matches/{id}')->controller('PostsTournamentMatchesController')->action('getById'),
     Route::post('/auth/forgot')->controller('AuthController')->action('recover'),
-    Route::post('/auth/reset/{key}')->controller('AuthController')->action('reset')
+    Route::post('/auth/reset/{key}')->controller('AuthController')->action('reset'),
+    Route::get('/posts/{id}')->controller('PostsController')->action('getById'),
 ];
 
 $routesSite = [
     Route::get('/users/{id}')->controller('UsersController')->action('getById'),
     Route::get('/posts')->action('index'),
-    Route::get('/posts/{id}')->action('getById'),
+    Route::get('/posts/{id}')->controller('PostsController')->action('getById'),
     Route::post('/posts/{id}/like')->controller('PostsController')->action('like'),
     Route::get('/posts/live')->controller('PostsController')->action('getCurrentLivePost'),
     Route::get('/tournaments-groups')->controller('TournamentGroupsController')->action('index'),
