@@ -273,7 +273,7 @@ class Posts extends BaseModel
      */
     public function publish(): void
     {
-        $this->published_at = date('Y-m-d H:i:s');
+        $this->published_at = $this->published_at ?: date('Y-m-d H:i:s');
         $this->is_published = 1;
     }
 
