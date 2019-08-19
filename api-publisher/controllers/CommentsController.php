@@ -74,6 +74,7 @@ class CommentsController extends CanvasBaseController
         $post = Posts::findFirstOrFail($id);
 
         $request = $this->request->getPostData();
+        $request['content'] = trim($request['content']);
         $this->model->posts_id = $post->getId();
         $this->model->users_id = $this->userData->getId();
         $this->model->sites_id = $this->site->getId();
