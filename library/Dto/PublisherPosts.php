@@ -26,7 +26,13 @@ class PublisherPosts
      *
      * @var object
      */
-    public $author_name;
+    public $author;
+
+    /**
+     *
+     * @var object
+     */
+    public $collaborator;
 
     /**
      *

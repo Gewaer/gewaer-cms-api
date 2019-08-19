@@ -28,8 +28,8 @@ class PublisherPostMapper extends CustomMapper
             'lastname' => $user->lastname,
         ];
 
-        $postDto->author_name = $post->author_name;
-        $postDto->colaborator_id = $post->colaborator_id;
+        $postDto->author = $post->getAuthor();
+        $postDto->collaborator = $post->getCollaborator();
         $postDto->sites_id = $post->sites_id;
         $postDto->type = $post->getTypes(['columns' => 'id, title']);
         $postDto->category = $post->getCategory(['columns' => 'id, title']);
