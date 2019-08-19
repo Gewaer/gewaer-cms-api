@@ -69,7 +69,8 @@ $routesSite = [
     Route::get('/comments')->action('index'),
     Route::post('/posts/{id}/comment')->controller('CommentsController')->action('add'),
     Route::post('/comments/{id}/like')->controller('CommentsController')->action('like'),
-    Route::get('/posts-users')->controller('PostsUsersController')->action('index')
+    Route::get('/posts-users')->controller('PostsUsersController')->action('index'),
+    Route::delete('/comments/{id}')->controller('CommentsController')->action('delete')
 ];
 
 $routeGroup = RouteGroup::from($routes)

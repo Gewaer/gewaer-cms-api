@@ -86,18 +86,21 @@ class CommentsController extends CanvasBaseController
 
     /**
      * Delete a Record.
-     *
      * @throws Exception
      * @return Response
      */
     public function delete($id): Response
     {
         $record = $this->model::findFirstOrFail([
-            'conditions' => 'id = ?0 and users_id = ?1',
+            'conditions' => 'id = ?0 and users_id = ?1 and is_deleted = 0',
             'bind' => [$id, $this->userData->getId()]
         ]);
 
-        $record->softDelete();
+        if ($record->softDelete()) {
+            $post = Posts::findFirstOrFail($record->posts_id);
+            $post->comment_count -= 1;
+            $post->update();
+        }
 
         return $this->response(['Delete Successfully']);
     }
