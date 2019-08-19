@@ -1817,11 +1817,11 @@ return array (
           'IS_GENERATED' => 'NEVER',
           'GENERATION_EXPRESSION' => NULL,
         ),
-        'author_name' => 
+        'author_id' => 
         array (
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'posts',
-          'COLUMN_NAME' => 'author_name',
+          'COLUMN_NAME' => 'author_id',
           'ORDINAL_POSITION' => '30',
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
@@ -1841,11 +1841,11 @@ return array (
           'IS_GENERATED' => 'NEVER',
           'GENERATION_EXPRESSION' => NULL,
         ),
-        'colaborator_id' => 
+        'collaborator_id' => 
         array (
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'posts',
-          'COLUMN_NAME' => 'colaborator_id',
+          'COLUMN_NAME' => 'collaborator_id',
           'ORDINAL_POSITION' => '31',
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
