@@ -20,7 +20,7 @@ class Comments
     public $users;
 
     /**
-     * @var string
+     * @var integer
      */
     public $users_avatar;
 
