@@ -21,7 +21,8 @@ class CommentsMapper extends CustomMapper
     {
         $commentsDto->id = $comments->id;
         $commentsDto->posts_id = $comments->posts_id;
-        $commentsDto->users = $comments->getUsers(['columns' => 'id,displayname,profile_image']);
+        $commentsDto->users = $comments->getUsers(['columns' => 'id,displayname']);
+        $commentsDto->users_avatar = $comments->getUsers()->profile_image ?: 'https://blink-cms-upload.s3.amazonaws.com/media/q5crnI.png';
         $commentsDto->content = $comments->content;
         $commentsDto->comment_parent_id = $comments->comment_parent_id;
         $commentsDto->users_ip = $comments->users_ip;

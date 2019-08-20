@@ -20,6 +20,11 @@ class Comments
     public $users;
 
     /**
+     * @var string
+     */
+    public $users_avatar;
+
+    /**
      * @var integer
      */
     public $users_likes;
