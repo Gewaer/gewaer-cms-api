@@ -64,6 +64,20 @@ class PostsController extends CanvasBaseController
     }
 
     /**
+     * Process the input data.
+     *
+     * @param array $request
+     * @return array
+     */
+    protected function processInput(array $request): array
+    {
+        //Remove empty empty html paragraph tags from summary and content
+        $request['content'] = preg_replace("/<p[^>]*><\/p[^>]*>/", '', $request['content']);
+        $request['summary'] = preg_replace("/<p[^>]*><\/p[^>]*>/", '', $request['summary']);
+        return $request;
+    }
+
+    /**
      * Process the update request and return the object.
      *
      * @param Request $request
