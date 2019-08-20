@@ -35,7 +35,8 @@ return [
             'defaultPlan' => [
                 'name' => 'default-free-trial'
             ]
-        ]
+        ],
+        'usersDefaultAvatar' => envValue('USERS_DEFAULT_AVATAR')
     ],
     'filesystem' => [
         //temp directoy where we will upload our files before moving them to the final location

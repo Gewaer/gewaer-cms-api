@@ -22,6 +22,11 @@ class Comments
     /**
      * @var integer
      */
+    public $users_avatar;
+
+    /**
+     * @var integer
+     */
     public $users_likes;
 
     /**
