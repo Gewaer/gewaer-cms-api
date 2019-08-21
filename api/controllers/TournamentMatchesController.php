@@ -120,8 +120,6 @@ class TournamentMatchesController extends CanvasBaseController
             $request['team_b'] = $teamB->id;
         }
 
-        $request['winning_team'] = $teamA->third_party_id == $request['winning_team'] ? $teamA->id : $teamB->id;
-
         if (!strpos($request['start_time'], '-')) {
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
         }
@@ -171,8 +169,6 @@ class TournamentMatchesController extends CanvasBaseController
         if ($teamB) {
             $request['team_b'] = $teamB->id;
         }
-
-        $request['winning_team'] = $teamA->third_party_id == $request['winning_team'] ? $teamA->id : $teamB->id;
 
         if (!strpos($request['start_time'], '-')) {
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
