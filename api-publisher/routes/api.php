@@ -30,6 +30,8 @@ $routes = [
 ];
 
 $routesSite = [
+    Route::get('/tags')->controller('TagsController')->action('index'),
+    Route::get('/tags/{id}')->controller('TagsController')->action('getById'),
     Route::get('/users/{id}')->controller('UsersController')->action('getById'),
     Route::get('/posts')->action('index'),
     Route::get('/posts/{id}')->controller('PostsController')->action('getById'),
