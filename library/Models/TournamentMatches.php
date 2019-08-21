@@ -73,6 +73,11 @@ class TournamentMatches extends BaseModel
     /**
      * @var integer
      */
+    public $match_source_url;
+
+    /**
+     * @var integer
+     */
     public $game_date;
 
     /**

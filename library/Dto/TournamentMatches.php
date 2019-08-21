@@ -92,7 +92,7 @@ class TournamentMatches
      /**
      * @var integer
      */
-    public $match_source;
+    public $match_source_url;
 
     /**
      * @var integer
