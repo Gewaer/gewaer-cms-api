@@ -51,9 +51,39 @@ class PostsUsersController extends CanvasBaseController
         $this->dto = PostDto::class;
         $this->dtoMapper = new PublisherPostMapper();
 
+        
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0'],
             ['id', ':', implode('|', Posts::getAllUsersTagsPosts())],
         ];
+    }
+
+     /**
+     * body of the index function to simply extending methods.
+     *
+     * @return void
+     */
+    protected function processIndex()
+    {
+        //conver the request to sql
+        $processedRequest = $this->processRequest($this->request);
+        $records = $this->getRecords($processedRequest);
+
+        //get the results and append its relationships
+        $results = $this->appendRelationshipsToResult($this->request, $records['results']);
+
+        //this means the want the response in a vuejs format
+        if ($this->request->hasQuery('format')) {
+            $limit = (int) $this->request->getQuery('limit', 'int', 25);
+
+            $results = [
+                'data' => $results,
+                'limit' => $limit,
+                'page' => $this->request->getQuery('page', 'int', 1),
+                'total_pages' => ceil($records['total'] / $limit),
+            ];
+        }
+
+        return empty(implode('|', Posts::getAllUsersTagsPosts())) ? [] : $this->processOutput($results);
     }
 }

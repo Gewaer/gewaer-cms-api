@@ -405,11 +405,7 @@ class Posts extends BaseModel
                 $postsArray[] = $post;
             }
         }
-
-        if (sizeof($postsArray) == 0) {
-            throw new ModelException('No Posts found');
-        }
-
+        
         return $postsArray;
     }
 }
