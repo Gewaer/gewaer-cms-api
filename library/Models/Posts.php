@@ -8,6 +8,7 @@ use Canvas\Traits\FileSystemModelTrait;
 use Gewaer\Models\PostsTypes;
 use Gewaer\Models\PostsTags;
 use Phalcon\Di;
+use Canvas\Exception\ModelException;
 
 class Posts extends BaseModel
 {
@@ -393,7 +394,7 @@ class Posts extends BaseModel
     {
         $postsArray = [];
         // Current user tags
-        $userTags = UsersFollowingTags::findOrFail([
+        $userTags = UsersFollowingTags::find([
             'conditions' => 'users_id = ?0',
             'bind' => [Di::getDefault()->getUserData()->getId()]
         ]);
@@ -403,6 +404,10 @@ class Posts extends BaseModel
             foreach ($posts as $post) {
                 $postsArray[] = $post;
             }
+        }
+
+        if (sizeof($postsArray) == 0) {
+            throw new ModelException('No Posts found');
         }
 
         return $postsArray;
