@@ -58,7 +58,8 @@ class RssTask extends PhTask
             $newPost->title = $podcastTitle . ': ' . $podcast->title;
             $newPost->summary = $podcast->content ?: 'No Summary Available';
             $newPost->media_url = $podcast->enclosureUrl ?: 'Podcast not Available';
-            $newPost->created_at = $podcast->date->format('Y-m-d H:i:s');
+            $newPost->published_at = $podcast->date->format('Y-m-d H:i:s');
+            $newPost->is_published = 1;
             $newPost->saveOrFail();
             echo($newPost->title . "--> Added \n");
         }

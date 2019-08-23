@@ -26,14 +26,14 @@ class TournamentMatchesController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['third_party_id','games_id','stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series_id','is_scheduled'];
+    protected $createFields = ['third_party_id','games_id','stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series_id','is_scheduled','match_source_url'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['third_party_id','games_id','stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series_id','is_scheduled'];
+    protected $updateFields = ['third_party_id','games_id','stages_id','groups_id','team_a','team_b','team_a_score','team_b_score','game_date','start_time','end_time','is_tiebreaker','is_cancelled','winning_team','match_series_id','is_scheduled','match_source_url'];
 
     /**
      * set objects.
@@ -120,8 +120,6 @@ class TournamentMatchesController extends CanvasBaseController
             $request['team_b'] = $teamB->id;
         }
 
-        $request['winning_team'] = $teamA->third_party_id == $request['winning_team'] ? $teamA->id : $teamB->id;
-
         if (!strpos($request['start_time'], '-')) {
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
         }
@@ -171,8 +169,6 @@ class TournamentMatchesController extends CanvasBaseController
         if ($teamB) {
             $request['team_b'] = $teamB->id;
         }
-
-        $request['winning_team'] = $teamA->third_party_id == $request['winning_team'] ? $teamA->id : $teamB->id;
 
         if (!strpos($request['start_time'], '-')) {
             $request['start_time'] = date('Y-m-d H:m:s', (int)$request['start_time']);
