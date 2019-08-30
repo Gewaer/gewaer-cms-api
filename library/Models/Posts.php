@@ -152,6 +152,12 @@ class Posts extends BaseModel
 
     /**
      *
+     * @var integer
+     */
+    public $third_party_media_id;
+
+    /**
+     *
      * @var int
      */
     public $is_live;
