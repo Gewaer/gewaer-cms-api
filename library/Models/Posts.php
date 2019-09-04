@@ -337,6 +337,8 @@ class Posts extends BaseModel
      */
     public function beforeSave()
     {
+        $this->is_published = 0;
+        
         if ($this->status == Status::PUBLISHED) {
             $this->publish();
         }
