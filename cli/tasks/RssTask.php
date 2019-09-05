@@ -48,20 +48,31 @@ class RssTask extends PhTask
 
         // Lets get each episode of the feed
         foreach ($podcasts as $podcast) {
-            
-            $newPost =  new Posts();
-            $newPost->users_id = $usersId;
-            $newPost->sites_id = $sitesId;
-            $newPost->companies_id = $companiesId;
-            $newPost->post_types_id = 3;
-            $newPost->category_id = 1;
-            $newPost->title = $podcastTitle . ': ' . $podcast->title;
-            $newPost->summary = $podcast->content ?: 'No Summary Available';
-            $newPost->media_url = $podcast->enclosureUrl ?: 'Podcast not Available';
-            $newPost->published_at = $podcast->date->format('Y-m-d H:i:s');
-            $newPost->is_published = 1;
-            $newPost->saveOrFail();
-            echo($newPost->title . "--> Added \n");
+
+            //Check if podcast episode already exists in our database
+            $savedPodcast =  Posts::findFirst([
+                'conditions'=>'third_party_media_id = ?0 and users_id = ?1 and companies_id = ?2 and sites_id = ?3 and is_deleted = 0',
+                'bind'=>[$podcast->id,$usersId,$companiesId,$sitesId]
+            ]);
+
+            if (!empty($podcast->enclosureUrl) && !$savedPodcast) {
+                $newPost =  new Posts();
+                $newPost->users_id = $usersId;
+                $newPost->sites_id = $sitesId;
+                $newPost->companies_id = $companiesId;
+                $newPost->post_types_id = 3;
+                $newPost->category_id = 1;
+                $newPost->title = $podcastTitle . ': ' . $podcast->title;
+                $newPost->summary = $podcast->content ?: 'No Summary Available';
+                $newPost->media_url = $podcast->enclosureUrl;
+                $newPost->published_at = $podcast->date->format('Y-m-d H:i:s');
+                $newPost->is_published = 1;
+                $newPost->third_party_media_id = $podcast->id;
+                $newPost->saveOrFail();
+                echo($newPost->title . "--> Added \n");
+            } else {
+                echo($podcast->title . "--> Not added because media url is empty or podcast episode already exists on database  \n");
+            }
         }
 
     }

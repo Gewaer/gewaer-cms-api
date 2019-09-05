@@ -22,6 +22,7 @@ class TournamentMatchesMapper extends CustomMapper
     {
         $teamA = Teams::findFirst($matches->team_a);
         $teamB = Teams::findFirst($matches->team_b);
+        $winningTeam = Teams::findFirst($matches->winning_team);
         $organizationA = Organizations::findFirst($teamA->organizations_id);
         $organizationB = Organizations::findFirst($teamB->organizations_id);
 
@@ -46,7 +47,7 @@ class TournamentMatchesMapper extends CustomMapper
         $matchesDto->team_b_score = $matches->team_b_score;
         $matchesDto->organization_team_a = $organizationA;
         $matchesDto->organization_team_b = $organizationB;
-        $matchesDto->winning_team = $matches->winning_team;
+        $matchesDto->winning_team = $winningTeam;
         $matchesDto->third_party_id = $matches->third_party_id;
         $matchesDto->is_scheduled = $matches->is_scheduled;
         $matchesDto->duration = $matches->duration;

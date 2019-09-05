@@ -152,6 +152,12 @@ class Posts extends BaseModel
 
     /**
      *
+     * @var integer
+     */
+    public $third_party_media_id;
+
+    /**
+     *
      * @var int
      */
     public $is_live;
@@ -331,6 +337,8 @@ class Posts extends BaseModel
      */
     public function beforeSave()
     {
+        $this->is_published = 0;
+        
         if ($this->status == Status::PUBLISHED) {
             $this->publish();
         }
