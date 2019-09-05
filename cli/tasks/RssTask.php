@@ -5,6 +5,8 @@ namespace Gewaer\Cli\Tasks;
 use Phalcon\Cli\Task as PhTask;
 use PicoFeed\Reader\Reader;
 use Gewaer\Models\Posts;
+use Gewaer\Models\Rss;
+use Gewaer\Models\Status;
 use Phalcon\Di;
 
 /**
@@ -26,12 +28,23 @@ class RssTask extends PhTask
      */
     public function insertAction($params): void
     {
-        $usersId = $params[0];
-        $companiesId = $params[1];
-        $sitesId = $params[2];
-        $url = $params[3];
+        $rssRecords = Rss::findOrFail();
+
+        foreach ($rssRecords as $rssRecord) {
+            $this->addPodcastEpisode($rssRecord);
+        }
+    }
+
+    /**
+     * Add new Podcasts from Rss URL
+     * @param Rss $rss
+     * @return void
+     */
+    private function addPodcastEpisode(Rss $rss): void
+    {
+
         $reader = new Reader;
-        $resource = $reader->download($url);
+        $resource = $reader->download($rss->rss_url);
 
         $parser = $reader->getParser(
             $resource->getUrl(),
@@ -52,21 +65,20 @@ class RssTask extends PhTask
             //Check if podcast episode already exists in our database
             $savedPodcast =  Posts::findFirst([
                 'conditions'=>'third_party_media_id = ?0 and users_id = ?1 and companies_id = ?2 and sites_id = ?3 and is_deleted = 0',
-                'bind'=>[$podcast->id,$usersId,$companiesId,$sitesId]
+                'bind'=>[$podcast->id,$rss->users_id,$rss->companies_id,$rss->sites_id]
             ]);
 
             if (!empty($podcast->enclosureUrl) && !$savedPodcast) {
                 $newPost =  new Posts();
-                $newPost->users_id = $usersId;
-                $newPost->sites_id = $sitesId;
-                $newPost->companies_id = $companiesId;
+                $newPost->users_id = $rss->users_id;
+                $newPost->sites_id = $rss->sites_id;
+                $newPost->companies_id = $rss->companies_id;
                 $newPost->post_types_id = 3;
                 $newPost->category_id = 1;
                 $newPost->title = $podcastTitle . ': ' . $podcast->title;
                 $newPost->summary = $podcast->content ?: 'No Summary Available';
                 $newPost->media_url = $podcast->enclosureUrl;
-                $newPost->published_at = $podcast->date->format('Y-m-d H:i:s');
-                $newPost->is_published = 1;
+                $newPost->status = Status::PUBLISHED;
                 $newPost->third_party_media_id = $podcast->id;
                 $newPost->saveOrFail();
                 echo($newPost->title . "--> Added \n");
@@ -74,7 +86,5 @@ class RssTask extends PhTask
                 echo($podcast->title . "--> Not added because media url is empty or podcast episode already exists on database  \n");
             }
         }
-
     }
-
 }
