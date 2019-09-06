@@ -13,7 +13,10 @@ echo "<title>Blinked</title>\n";
 echo "<description>Blinked Posts</description>\n";
 echo "<link>https://blinked.gg</link>\n";
 
-$posts = Posts::find(['order'=> 'id DESC']);
+$posts = Posts::find([
+    'order'=> 'id DESC',
+    'limit'=> 200
+]);
 
 foreach ($posts as $post) {
 
