@@ -1,25 +1,23 @@
 <?php
 
-require 'api/public/index.php';
-
 use Gewaer\Models\Posts;
+use function Canvas\Core\envValue;
 
 header('Content-type: application/xml');
 
 echo "<rss version='2.0' xmlns:atom='http://www.w3.org/2005/Atom'>\n";
 echo "<channel>\n";
 
-echo "<title>Blinked</title>\n";
+echo '<title>' . envValue('APP_NAME') . "</title>\n";
 echo "<description>Blinked Posts</description>\n";
-echo "<link>https://blinked.gg</link>\n";
+echo '<link>' . envValue('APP_URL') . "</link>\n";
 
 $posts = Posts::find([
-    'order'=> 'id DESC',
-    'limit'=> 200
+    'order' => 'id DESC',
+    'limit' => 200
 ]);
 
 foreach ($posts as $post) {
-
     $authorFullName = $post->getAuthor()->firstname . ' ' . $post->getAuthor()->lastname;
     $category = $post->getCategory()->title;
 
