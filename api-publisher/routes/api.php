@@ -74,6 +74,7 @@ $routesSite = [
     Route::get('/posts-users')->controller('PostsUsersController')->action('index'),
     Route::delete('/comments/{id}')->controller('CommentsController')->action('delete'),
     Route::post('/users/{id}/devices')->controller('UserLinkedSourcesController')->action('devices'),
+    Route::delete('/users/{id}/devices/{deviceId}')->controller('UserLinkedSourcesController')->action('detachDevice')
 ];
 
 $routeGroup = RouteGroup::from($routes)
