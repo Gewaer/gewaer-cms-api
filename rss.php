@@ -23,7 +23,7 @@ foreach ($posts as $post) {
 
     echo "<item>\n";
     echo "<id>$post->id</id>\n";
-    echo "<title>$post->title</title>\n";
+    echo "<title><![CDATA[$post->title]]></title>\n";
     echo "<summary><![CDATA[$post->summary]]></summary>\n";
     echo "<content><![CDATA[$post->content]]></content>\n";
     echo "<link>$post->media_url</link>\n";
