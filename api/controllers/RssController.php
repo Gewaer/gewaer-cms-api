@@ -41,7 +41,8 @@ class RssController extends BaseController
         $this->model->sites_id = $this->site->getId();
 
         $this->additionalSearchFields = [
-            ['is_deleted', ':', '0']
+            ['is_deleted', ':', '0'],
+            ['companies_id', ':', $this->userData->currentCompanyId()]
         ];
     }
 }
