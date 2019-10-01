@@ -25,6 +25,7 @@ class PostMapper extends CustomMapper
             'firstname' => $user->firstname,
             'lastname' => $user->lastname,
         ];
+        $postDto->game = $post->getGame(['columns' => 'name, icon']);
         $postDto->author = $post->getAuthor();
         $postDto->collaborator = $post->getCollaborator();
         $postDto->sites_id = $post->sites_id;
