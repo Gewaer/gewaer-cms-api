@@ -10,7 +10,7 @@ class Games extends BaseModel
      */
     public $id;
 
-        /**
+    /**
      * @var string
      */
     public $name;
@@ -25,17 +25,17 @@ class Games extends BaseModel
      */
     public $slug;
 
-        /**
+    /**
      * @var string
      */
     public $logo;
 
-        /**
+    /**
      * @var string
      */
     public $icon;
 
-        /**
+    /**
      * @var datetime
      */
     public $release_date;
@@ -61,7 +61,7 @@ class Games extends BaseModel
     public function initialize()
     {
         parent::initialize();
-    
+
         $this->setSource('games');
 
         $this->hasMany(
@@ -77,7 +77,15 @@ class Games extends BaseModel
             'games_id',
             ['alias' => 'series']
         );
+
+        $this->hasMany(
+            'id',
+            Posts::class,
+            'games_id',
+            ['alias' => 'posts']
+        );
     }
+
     /**
      * Returns table name mapped in the model.
      *
@@ -87,5 +95,4 @@ class Games extends BaseModel
     {
         return 'games';
     }
-
 }
