@@ -47,7 +47,7 @@ class PublisherPostMapper extends CustomMapper
         $postDto->views_count = $post->views_count;
         $postDto->comment_count = $post->comment_count;
         $postDto->status = $post->status;
-        // $postDto->files = $post->getFiles();
+        $postDto->files = $post->getFiles();
         $postDto->comment_status = $post->comment_status;
         $postDto->is_published = $post->is_published;
         $postDto->featured = $post->featured;
