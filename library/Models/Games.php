@@ -84,6 +84,13 @@ class Games extends BaseModel
             'games_id',
             ['alias' => 'posts']
         );
+
+        $this->hasMany(
+            'id',
+            TournamentMatches::class,
+            'games_id',
+            ['alias' => 'matches']
+        );
     }
 
     /**
