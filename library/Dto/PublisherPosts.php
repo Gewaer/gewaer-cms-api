@@ -26,6 +26,12 @@ class PublisherPosts
      *
      * @var object
      */
+    public $game;
+
+    /**
+     *
+     * @var object
+     */
     public $author;
 
     /**
@@ -236,5 +242,4 @@ class PublisherPosts
      * @var string
      */
     public $is_deleted;
-
 }

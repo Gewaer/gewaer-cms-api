@@ -27,7 +27,7 @@ class PublisherPostMapper extends CustomMapper
             'firstname' => $user->firstname,
             'lastname' => $user->lastname,
         ];
-
+        $postDto->game = $post->getGame(['columns' => 'name, icon']);
         $postDto->author = $post->getAuthor();
         $postDto->collaborator = $post->getCollaborator();
         $postDto->sites_id = $post->sites_id;
@@ -47,7 +47,7 @@ class PublisherPostMapper extends CustomMapper
         $postDto->views_count = $post->views_count;
         $postDto->comment_count = $post->comment_count;
         $postDto->status = $post->status;
-        $postDto->files = $post->getFiles();
+        // $postDto->files = $post->getFiles();
         $postDto->comment_status = $post->comment_status;
         $postDto->is_published = $post->is_published;
         $postDto->featured = $post->featured;
