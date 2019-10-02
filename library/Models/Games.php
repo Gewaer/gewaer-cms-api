@@ -41,6 +41,11 @@ class Games extends BaseModel
     public $release_date;
 
     /**
+     * @var integer
+     */
+    public $is_featured;
+
+    /**
      * @var datetime
      */
     public $created_at;
@@ -83,6 +88,13 @@ class Games extends BaseModel
             Posts::class,
             'games_id',
             ['alias' => 'posts']
+        );
+
+        $this->hasMany(
+            'id',
+            TournamentMatches::class,
+            'games_id',
+            ['alias' => 'matches']
         );
     }
 

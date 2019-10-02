@@ -176,7 +176,14 @@ class TournamentMatches extends BaseModel
             ['alias' => 'winningTeam']
         );
 
+        $this->belongsTo(
+            'games_id',
+            Games::class,
+            'id',
+            ['alias' => 'game']
+        );
     }
+
     /**
      * Returns table name mapped in the model.
      *
@@ -187,7 +194,6 @@ class TournamentMatches extends BaseModel
         return 'tournament_matches';
     }
 
-
     /**
      * Events after save.
      *
@@ -197,5 +203,4 @@ class TournamentMatches extends BaseModel
     {
         $this->game_date = date('Y-m-d', strtotime($this->start_time));
     }
-
 }
