@@ -22,6 +22,11 @@ class TournamentMatches
     /**
      * @var integer
      */
+    public $game;
+
+    /**
+     * @var integer
+     */
     public $team_a;
 
     /**
@@ -49,7 +54,7 @@ class TournamentMatches
      */
     public $organization_team_b;
 
-        /**
+    /**
      * @var date
      */
     public $game_date;
@@ -89,9 +94,9 @@ class TournamentMatches
      */
     public $match_series;
 
-     /**
-     * @var integer
-     */
+    /**
+    * @var integer
+    */
     public $match_source_url;
 
     /**
@@ -123,5 +128,4 @@ class TournamentMatches
      * @var integer
      */
     public $is_deleted;
-
 }

@@ -22,6 +22,11 @@ class Posts extends BaseModel
     /**
      * @var integer
      */
+    public $games_id;
+
+    /**
+     * @var integer
+     */
     public $sites_id;
 
     /**
@@ -275,6 +280,13 @@ class Posts extends BaseModel
             'id',
             ['alias' => 'category']
         );
+
+        $this->belongsTo(
+            'games_id',
+            Games::class,
+            'id',
+            ['alias' => 'game']
+        );
     }
 
     /**
@@ -338,7 +350,7 @@ class Posts extends BaseModel
     public function beforeSave()
     {
         $this->is_published = 0;
-        
+
         if ($this->status == Status::PUBLISHED) {
             $this->publish();
         }
@@ -413,7 +425,7 @@ class Posts extends BaseModel
                 $postsArray[] = $post;
             }
         }
-        
+
         return $postsArray;
     }
 }

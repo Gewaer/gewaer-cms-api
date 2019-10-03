@@ -26,6 +26,12 @@ class Posts
      *
      * @var object
      */
+    public $game;
+
+    /**
+     *
+     * @var object
+     */
     public $author;
 
     /**
@@ -128,7 +134,6 @@ class Posts
      * @var int
      */
     public $share_url;
-
 
     /**
      *
