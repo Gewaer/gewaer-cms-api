@@ -17,6 +17,11 @@ class TournamentMatches
     /**
      * @var integer
      */
+    public $games_id;
+
+    /**
+     * @var integer
+     */
     public $groups_id;
 
     /**
