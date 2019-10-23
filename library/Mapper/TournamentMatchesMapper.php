@@ -31,6 +31,7 @@ class TournamentMatchesMapper extends CustomMapper
         $organizationB->icon = $redis->get('team_logo_' . $teamB->getId()) ?: $organizationB->icon;
 
         $matchesDto->id = $matches->getId();
+        $matchesDto->games_id = $matches->games_id;
         $matchesDto->stages_id = $matches->stages_id;
         $matchesDto->groups_id = $matches->groups_id;
         $matchesDto->game = $matches->getGame(['columns' => 'name']);
