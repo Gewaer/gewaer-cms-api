@@ -63,16 +63,6 @@ class UsersFollowingTags extends BaseModel
     }
 
     /**
-     * Process before creating a new item
-     *
-     * @return void
-     */
-    public function beforeCreate()
-    {
-        $this->created_at = date('Y-m-d H:i:s');
-    }
-
-    /**
      * Returns table name mapped in the model.
      *
      * @return string
