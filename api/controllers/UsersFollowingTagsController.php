@@ -20,14 +20,14 @@ class UsersFollowingTagsController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['users_id','tags_id'];
+    protected $createFields = ['users_id', 'tags_id'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['users_id','tags_id'];
+    protected $updateFields = ['users_id', 'tags_id'];
 
     /**
      * set objects.
@@ -38,6 +38,7 @@ class UsersFollowingTagsController extends CanvasBaseController
     {
         $this->model = new UsersFollowingTags();
         $this->model->created_at = date('Y-m-d H:i:s');
+        $this->model->is_deleted = 0;
 
         $this->additionalSearchFields = [
             ['is_deleted', ':', '0']
