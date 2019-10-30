@@ -42,6 +42,7 @@ class UsersFollowingTagsController extends CanvasBaseController
     public function onConstruct()
     {
         $this->model = new UsersFollowingTags();
+        $this->model->created_at = date('Y-m-d H:i:s');
         $this->dto = UsersFollowingTagsDto::class;
         $this->dtoMapper = new UsersFollowingTagsMapper();
 
