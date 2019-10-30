@@ -25,14 +25,14 @@ class UsersFollowingTagsController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['users_id','tags_id'];
+    protected $createFields = ['users_id', 'tags_id'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['users_id','tags_id'];
+    protected $updateFields = ['users_id', 'tags_id'];
 
     /**
      * set objects.
@@ -43,6 +43,7 @@ class UsersFollowingTagsController extends CanvasBaseController
     {
         $this->model = new UsersFollowingTags();
         $this->model->created_at = date('Y-m-d H:i:s');
+        $this->model->is_deleted = 0;
         $this->dto = UsersFollowingTagsDto::class;
         $this->dtoMapper = new UsersFollowingTagsMapper();
 
@@ -52,7 +53,7 @@ class UsersFollowingTagsController extends CanvasBaseController
     }
 
     /**
-     * Delete by users_id and tags_id
+     * Delete by users_id and tags_id.
      *
      * @param int $usersId
      * @param int $tagsId
@@ -61,13 +62,12 @@ class UsersFollowingTagsController extends CanvasBaseController
     public function delete(int $usersId, int $tagsId): Response
     {
         $userTag = $this->model::findFirstOrFail([
-            'conditions'=>'users_id = ?0 and tags_id = ?1 and is_deleted = 0',
-            'bind'=> [$usersId,$tagsId]
+            'conditions' => 'users_id = ?0 and tags_id = ?1 and is_deleted = 0',
+            'bind' => [$usersId, $tagsId]
         ]);
 
         $userTag->delete();
-        
-        return $this->response("Users Tag Removed");
 
+        return $this->response('Users Tag Removed');
     }
 }
