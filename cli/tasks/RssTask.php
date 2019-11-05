@@ -10,7 +10,7 @@ use Gewaer\Models\Status;
 use Phalcon\Di;
 
 /**
- * CLI to handle RSS feeds
+ * CLI to handle RSS feeds.
  *
  * @package Gewaer\Cli\Tasks
  *
@@ -21,14 +21,14 @@ use Phalcon\Di;
 class RssTask extends PhTask
 {
     /**
-     * Insert podcasts episodes by given rss link
+     * Insert podcasts episodes by given rss link.
      *
      * @param array $params
      * @return void
      */
     public function insertAction($params): void
     {
-        $rssRecords = Rss::findOrFail();
+        $rssRecords = Rss::findOrFail(['conditions' => 'is_deleted = 0']);
 
         foreach ($rssRecords as $rssRecord) {
             $this->addPodcastEpisode($rssRecord);
@@ -36,13 +36,12 @@ class RssTask extends PhTask
     }
 
     /**
-     * Add new Podcasts from Rss URL
+     * Add new Podcasts from Rss URL.
      * @param Rss $rss
      * @return void
      */
     private function addPodcastEpisode(Rss $rss): void
     {
-
         $reader = new Reader;
         $resource = $reader->download($rss->rss_url);
 
@@ -51,7 +50,7 @@ class RssTask extends PhTask
             $resource->getContent(),
             $resource->getEncoding()
         );
-    
+
         $feed = $parser->execute();
 
         //Get feed title
@@ -61,15 +60,14 @@ class RssTask extends PhTask
 
         // Lets get each episode of the feed
         foreach ($podcasts as $podcast) {
-
             //Check if podcast episode already exists in our database
-            $savedPodcast =  Posts::findFirst([
-                'conditions'=>'third_party_media_id = ?0 and users_id = ?1 and companies_id = ?2 and sites_id = ?3 and is_deleted = 0',
-                'bind'=>[$podcast->id,$rss->users_id,$rss->companies_id,$rss->sites_id]
+            $savedPodcast = Posts::findFirst([
+                'conditions' => 'third_party_media_id = ?0 and users_id = ?1 and companies_id = ?2 and sites_id = ?3 and is_deleted = 0',
+                'bind' => [$podcast->id, $rss->users_id, $rss->companies_id, $rss->sites_id]
             ]);
 
             if (!empty($podcast->enclosureUrl) && !$savedPodcast) {
-                $newPost =  new Posts();
+                $newPost = new Posts();
                 $newPost->users_id = $rss->users_id;
                 $newPost->sites_id = $rss->sites_id;
                 $newPost->companies_id = $rss->companies_id;
