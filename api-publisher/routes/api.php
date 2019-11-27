@@ -28,6 +28,7 @@ $routes = [
     Route::post('/auth/reset/{key}')->controller('AuthController')->action('reset'),
     Route::get('/posts/{id}')->controller('PostsController')->action('getById'),
     Route::get('/rss.xml')->controller('RssController')->action('getRss'),
+    Route::get('/posts-types')->controller('PostsTypesController')->action('index')
 ];
 
 $routesSite = [
