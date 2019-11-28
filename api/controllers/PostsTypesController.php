@@ -20,14 +20,14 @@ class PostsTypesController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['title'];
+    protected $createFields = ['title', 'slug'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['title'];
+    protected $updateFields = ['title', 'slug'];
 
     /**
      * set objects.

@@ -20,6 +20,11 @@ class PostsTypes extends BaseModel
     public $title;
 
     /**
+     * @var string
+     */
+    public $slug;
+
+    /**
      * @var datetime
      */
     public $created_at;
@@ -50,6 +55,7 @@ class PostsTypes extends BaseModel
             ['alias' => 'posts']
         );
     }
+
     /**
      * Returns table name mapped in the model.
      *
@@ -59,5 +65,4 @@ class PostsTypes extends BaseModel
     {
         return 'posts_types';
     }
-
 }
