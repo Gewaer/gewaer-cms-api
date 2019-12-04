@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gewaer\Api\Controllers;
+namespace Gewaer\Api\Publisher\Controllers;
 
 use Canvas\Api\Controllers\BaseController as CanvasBaseController;
 use Gewaer\Models\PostsTypes;
@@ -20,14 +20,14 @@ class PostsTypesController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['title', 'slug'];
+    protected $createFields = [];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['title', 'slug'];
+    protected $updateFields = [];
 
     /**
      * set objects.
