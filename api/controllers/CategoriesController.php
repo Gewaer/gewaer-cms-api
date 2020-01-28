@@ -20,14 +20,14 @@ class CategoriesController extends CanvasBaseController
        *
        * @var array
        */
-    protected $createFields = ['title','slug'];
+    protected $createFields = ['title', 'slug'];
 
     /*
      * fields we accept to create
      *
      * @var array
      */
-    protected $updateFields = ['posts_id','slug'];
+    protected $updateFields = ['title', 'slug'];
 
     /**
      * set objects.
