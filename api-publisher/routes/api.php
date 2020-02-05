@@ -78,7 +78,9 @@ $routesSite = [
     Route::post('/users/{id}/devices')->controller('UserLinkedSourcesController')->action('devices'),
     Route::delete('/users/{id}/devices/{deviceId}')->controller('UserLinkedSourcesController')->action('detachDevice'),
     Route::crud('/users-games')->controller('UsersFollowingGamesController'),
-    Route::delete('/users/{id}/games/{gamesId}')->controller('UsersFollowingGamesController')->action('delete')
+    Route::delete('/users/{id}/games/{gamesId}')->controller('UsersFollowingGamesController')->action('delete'),
+    Route::get('/categories')->controller('CategoriesController')->action('index'),
+    Route::get('/categories/{id}')->controller('CategoriesController')->action('getById')
 ];
 
 $routeGroup = RouteGroup::from($routes)
