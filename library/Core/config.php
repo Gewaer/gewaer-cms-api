@@ -1,7 +1,7 @@
 <?php
 
-use function Canvas\Core\appPath;
-use function Canvas\Core\envValue;
+use function Baka\appPath;
+use function Baka\envValue;
 
 return [
     'application' => [ //@todo migration to app
@@ -159,17 +159,16 @@ return [
             'secret' => getenv('SOCIAL_FACEBOOK_SECRET'),
         ]
     ],
-    'pushNotifications'=>[
-        'android'=>[
-            'appId'=>getenv('CANVAS_ANDROID_APP_ID'),
-            'authKey'=> getenv('CANVAS_ANDROID_AUTH_KEY'),
-            'userAuthKey'=> getenv('CANVAS_ANDROID_APP_USER_AUTH_KEY')
+    'pushNotifications' => [
+        'android' => [
+            'appId' => getenv('CANVAS_ANDROID_APP_ID'),
+            'authKey' => getenv('CANVAS_ANDROID_AUTH_KEY'),
+            'userAuthKey' => getenv('CANVAS_ANDROID_APP_USER_AUTH_KEY')
         ],
-        'ios'=>[
-            'appId'=>getenv('CANVAS_IOS_APP_ID'),
-            'authKey'=> getenv('CANVAS_IOS_AUTH_KEY'),
-            'userAuthKey'=> getenv('CANVAS_IOS_APP_USER_AUTH_KEY')
+        'ios' => [
+            'appId' => getenv('CANVAS_IOS_APP_ID'),
+            'authKey' => getenv('CANVAS_IOS_AUTH_KEY'),
+            'userAuthKey' => getenv('CANVAS_IOS_APP_USER_AUTH_KEY')
         ]
     ]
-
 ];
