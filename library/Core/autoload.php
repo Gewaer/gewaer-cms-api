@@ -1,11 +1,10 @@
 <?php
 
+require __DIR__ . '/../../vendor/autoload.php';
+
 use function Baka\appPath;
 use Dotenv\Dotenv;
 use Phalcon\Loader;
-
-// Register the auto loader
-require dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'vendor/baka/baka/src/functions.php';
 
 $loader = new Loader();
 $namespaces = [
