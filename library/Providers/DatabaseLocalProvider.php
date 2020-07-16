@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Gewaer\Providers;
 
-use function Canvas\Core\envValue;
-use Phalcon\Db\Adapter\Pdo\Mysql;
-use Phalcon\Di\ServiceProviderInterface;
-use Phalcon\DiInterface;
-use PDOException;
+use function Baka\envValue;
 use Canvas\Exception\ServerErrorHttpException;
 use PDO;
+use PDOException;
+use Phalcon\Db\Adapter\Pdo\Mysql;
+use Phalcon\Di\DiInterface;
+use Phalcon\Di\ServiceProviderInterface;
 
 class DatabaseLocalProvider implements ServiceProviderInterface
 {
     /**
      * @param DiInterface $container
      */
-    public function register(DiInterface $container)
+    public function register(DiInterface $container) : void
     {
         $container->setShared(
             'dblocal',
