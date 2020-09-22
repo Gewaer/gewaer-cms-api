@@ -58,6 +58,7 @@ class PostMapper extends CustomMapper
         $postDto->created_at = $post->created_at;
         $postDto->updated_at = $post->updated_at;
         $postDto->is_deleted = $post->is_deleted;
+        $postDto->show_form = $post->show_form;
 
         return $postDto;
     }
