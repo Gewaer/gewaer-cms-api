@@ -212,4 +212,6 @@ class Posts
      * @var string
      */
     public $is_deleted;
+    
+    public $show_form;
 }
